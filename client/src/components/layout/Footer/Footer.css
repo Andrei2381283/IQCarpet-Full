@@ -1,0 +1,281 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  background: #111d31;
+  width: 100%;
+}
+
+.footerContent1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerContent1Block1 {
+  margin-top: 33px;
+  margin-left: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footerHeaderDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerContent1Block2 {
+  margin-top: 46px;
+  margin-right: 43px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footerLine {
+  margin-top: 33px;
+  width: 100%;
+  background: #c6c6c6;
+  height: 1px;
+  box-sizing: border-box;
+}
+
+.footerContent2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerContent2Block1 {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  margin-top: 35px;
+  margin-left: 35px;
+  margin-bottom: 40px;
+  align-items: center;
+}
+
+.footerContent2Block2 {
+  display: flex;
+  margin-top: 35px;
+  margin-right: 35px;
+  margin-bottom: 40px;
+}
+
+.footerNavigationText {
+  font-family: Montserrat;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 17px;
+  font-weight: 400;
+  color: white;
+  height: 17px;
+  text-decoration: none;
+}
+
+.footerCommunityLinks {
+  margin-top: 30px;
+  display: flex;
+}
+
+.footerCommunityLink {
+  margin-right: 19px;
+}
+
+.footerCommunityLink1 {
+  width: 24.47px;
+  height: 21.3px;
+  background: url('../../../img1/footerLink1Image.png') no-repeat center
+    center/cover;
+}
+
+.footerCommunityLink2 {
+  width: 14.41px;
+  height: 22.56px;
+  background: url('../../../img1/footerLink2Image.png') no-repeat center
+    center/cover;
+}
+
+.footerCommunityLink3 {
+  width: 22.56px;
+  height: 22.56px;
+  background: url('../../../img1/footerLink3Image.png') no-repeat center
+    center/cover;
+}
+
+.footerHeaderImage {
+  width: 194px;
+  height: 45px;
+}
+
+.footerText {
+  max-width: 40vw;
+  margin: 0px;
+  margin-top: 33px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 39px;
+  color: #f8f9fa;
+  position: relative;
+}
+
+.footerSubText {
+  margin: 0px;
+  margin-top: 21px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 39px;
+  color: #f8f9fa;
+}
+
+.signUpForMessages {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+  color: #f8f9fa;
+  margin: 0px;
+}
+
+.signUpForMessagesEmail {
+  border: 1px solid #dedede;
+  box-sizing: border-box;
+  border-radius: 6px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 35px;
+  color: #f8f9fa;
+  background-color: transparent;
+  padding-left: 16px;
+  padding-right: 116px;
+  height: 39px;
+  margin-top: 1px;
+  width: 313px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.sendEmailButton {
+  width: 137px;
+  height: 41px;
+  padding: 3px 44px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 35px;
+  color: #ffffff;
+  background: #5282c3;
+  border-radius: 6px;
+  margin-left: -100px;
+  border-width: 0px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.sendEmailDiv {
+  margin-top: 40px;
+  display: flex;
+}
+
+.companyEmail {
+  margin-right: 13px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(248, 249, 250, 0.28);
+}
+
+.copyrights {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #f8f9fa;
+}
+
+@media (max-width: 700px) {
+  .footerContent1 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footerSubText {
+    margin-top: -10px;
+  }
+
+  .footerContent1Block1 {
+    margin: 24px 16px 0px;
+  }
+
+  .footerHeaderDiv {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .footerText {
+    display: none;
+  }
+
+  .footerHeaderImage {
+    width: 86.22px;
+    height: 20px;
+  }
+
+  .footerCommunityLinks {
+    margin-top: 4;
+    justify-content: flex-end;
+  }
+
+  .footerContent1Block2 {
+    margin: 32px auto 0 16px;
+  }
+
+  .sendEmailDiv {
+    margin-top: 16px;
+  }
+
+  .signUpForMessagesEmail {
+    width: 286px;
+  }
+
+  .signUpForMessagesEmail::placeholder {
+    color: #f8f9fa;
+  }
+
+  .footerLine {
+    display: none;
+  }
+
+  .footerContent2 {
+    margin: 54px 16px 19px;
+    flex-direction: column;
+  }
+
+  .footerContent2Block1 {
+    width: 100%;
+    margin: 0;
+  }
+
+  .footerNavigationText {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .footerContent2Block2 {
+    margin: 8px 0 0;
+    justify-content: flex-end;
+  }
+
+  .companyEmail {
+    margin-right: 16px;
+  }
+}

@@ -1,0 +1,223 @@
+.helpContent {
+  margin: 32px 80px 105px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.helpHeader {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 41px;
+  color: #1d1d1d;
+}
+
+.helpSubHeader {
+  text-align: center;
+  margin-top: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 182%;
+  color: #1d1d1d;
+}
+
+.contactLinksDiv {
+  margin-top: 32px;
+  width: 432px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contactLink {
+  width: 32px;
+  height: 32px;
+}
+
+.helpContactsTextDiv {
+  margin-top: 24px;
+  width: 432px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.helpPhone {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.helpLink {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.feedBackFormDiv {
+  box-sizing: border-box;
+  margin-top: 32px;
+  background: #f3f5fb;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  padding: 19px 32px 32px;
+}
+
+.formHeader {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+  margin-bottom: 2px;
+}
+
+.feedBackFieldHeader {
+  margin-top: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #7a7d80;
+}
+
+.feedBackFieldInput {
+  background-color: transparent;
+  border-width: 0;
+  padding: 0;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.feedBackFieldInput:focus {
+  background-color: white;
+}
+
+.formTextarea {
+  box-sizing: border-box;
+  padding: 8px;
+  margin-top: 4px;
+  width: 370px;
+  height: 131px;
+  border-width: 0;
+  outline: none;
+  resize: none;
+  border-radius: 12px;
+}
+
+.addAttach {
+  display: inline-block;
+  margin: -36px 12px 0 auto;
+}
+
+.addAttach > div {
+  width: 21px;
+  background: url("../../img1/helpAddAttachImage.png") no-repeat center
+    center/cover;
+  height: 24px;
+  z-index: 100;
+}
+
+.sendFormDiv {
+  margin-top: 46px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.sendFormDiv > button {
+  background: #5282c3;
+  border-radius: 16px;
+  padding: 4px 16px;
+  min-width: 241px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #ffffff;
+  border-width: 0;
+}
+
+@media (max-width: 700px) {
+  .addAttach > div {
+    background: url("../../img1/helpAddAttachImageM.png") no-repeat center
+      center/cover;
+  }
+
+  .helpContent {
+    margin: 16px 16px 55px;
+  }
+
+  .formHeader {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 16px;
+  }
+
+  .helpHeader {
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .helpSubHeader {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .contactLinksDiv {
+    width: 224px;
+  }
+
+  .contactLink {
+    width: 24px;
+    height: 24px;
+  }
+
+  .helpContactsTextDiv {
+    margin-top: 16px;
+    width: auto;
+    display: flex;
+    justify-content: initial;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .helpPhone {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .helpLink {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .feedBackFormDiv {
+    width: 100%;
+    padding: 24px 16px 30px;
+  }
+
+  .formTextarea {
+    width: 100%;
+    margin-right: 16px;
+  }
+}

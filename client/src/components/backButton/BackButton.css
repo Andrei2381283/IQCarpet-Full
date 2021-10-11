@@ -1,0 +1,41 @@
+.backButton {
+  display: inline-block;
+  margin-left: 40px;
+  margin-top: 32px;
+}
+
+.backButton > button {
+  border: 1px solid #5282c3;
+  box-sizing: border-box;
+  border-radius: 16px;
+  padding: 0 22px 0 40px;
+  height: 38px;
+  min-width: 108px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #5282c3;
+  background: url(../../img1/buttonBackArrow.png) left 16px center / 8px
+    no-repeat transparent;
+}
+
+@media (max-width: 700px) {
+  .backButton {
+    display: inline-block;
+    margin-left: 16px;
+    margin-top: 20px;
+  }
+
+  .backButton > button {
+    padding: 0 10px 0 23px;
+    height: 24px;
+    min-width: 64px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+    background: url(../../img1/buttonBackArrow.png) left 11px center / 4px
+      no-repeat transparent;
+  }
+}

@@ -1,0 +1,99 @@
+.whyUsBlock {
+    width: 100%;
+    display: flex;
+    margin-top: 213px;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(90deg, #5384C6 1.15%, #244578 100%);
+}
+
+.whyUsBlockHeader {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 41px;
+    color: #FFFFFF;
+    margin-top: 29px;
+}
+
+.whyusReasons {
+    margin-top: 23px;
+    display: flex;
+    width: 84.791666666%;
+    max-width: 1221px;
+    margin-bottom: 50px;
+}
+
+.whyusReasonsBlock {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+}
+
+.whyusReasonText {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 40px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.whyusReasonValue {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 45px;
+    line-height: 55px;
+    color: #FFFFFF;
+    margin: 0;
+    text-align: center;
+}
+
+.whyusReason {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 700px) {
+    .whyUsBlock {
+        margin-top: 120px;
+    }
+
+    .whyusReasonsBlock:nth-child(1) {
+        flex-direction: column-reverse
+    }
+
+    .whyusReasonsBlock {
+        flex-direction: column
+    }
+
+    .whyusReasonValue {
+        margin-top: 22px;
+    }
+
+    .whyUsBlockHeader {
+        font-size: 24px;
+        line-height: 29px;
+        margin-top: 23px;
+    }
+
+    .whyusReasons {
+        margin-top: 17px;
+        margin-bottom: 35px;
+    }
+
+    .whyusReasonValue {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .whyusReasonText {
+        font-size: 18px;
+        line-height: 24px;
+    }
+}

@@ -1,0 +1,179 @@
+.homePageIntroBlock {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto 148px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.homePageIntroImage1 {
+  width: 42vw;
+  max-width: 605px;
+  height: calc(42vw * 0.73057851239);
+  max-height: 442px;
+  margin-top: 86px;
+  margin-left: 76px;
+  position: relative;
+  background: url('../../../img1/homepageIntroImage.png') no-repeat center
+    center/cover;
+}
+
+.homePageIntroImage1M {
+  display: none;
+}
+
+.slogDiv {
+  position: relative;
+  margin-top: 108px;
+  max-width: 625px;
+  min-width: 40%;
+  /* height: 415; */
+  margin: 109px 41px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.slogtext1 {
+  position: relative;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 82px;
+  line-height: 139px;
+  color: #000000;
+}
+
+.slogtext2 {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 68px;
+  color: #000000;
+}
+
+.registerBuyer,
+.registerSeller {
+  background: #5282c3;
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 24px;
+  color: white;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 12px 34px;
+  text-decoration: none;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.registerBuyer {
+  margin-right: 41px;
+}
+
+.registerButtonsDiv {
+  position: relative;
+  margin-bottom: 0px;
+  margin-top: 41px;
+  width: 100%;
+}
+
+.authButtonsDiv {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .homePageIntroBlock {
+    margin-bottom: 104px;
+  }
+
+  .homePageIntroImage1 {
+    display: none;
+  }
+
+  .homePageIntroImage1M {
+    display: block;
+    width: 82vw;
+    max-width: 512px;
+    height: calc(82vw * 0.78778135048);
+    max-height: 403.344051446px;
+    margin: -20px 0 0 auto;
+    z-index: -100;
+    background: url('../../../img1/homepageIntroImageM.png') no-repeat center
+      center/cover;
+  }
+
+  .slogDiv {
+    margin: 0;
+    max-width: none;
+    min-width: none;
+    width: 100%;
+  }
+
+  .slogtext1 {
+    margin: 24px 20% 0 16px;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+  }
+
+  .slogtext2 {
+    margin: 4px 20% 0 16px;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 32px;
+    color: #000000;
+  }
+
+  .registerButtonsDiv {
+    display: none;
+  }
+
+  .authButtonsDiv {
+    display: initial;
+    margin: 44px 8px 0;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .logInButton {
+    width: 40%;
+    background: #5282c3;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 31px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #ffffff;
+    border-width: 0;
+    padding: 6.5px 16px;
+    min-width: 100px;
+    max-width: 200px;
+  }
+
+  .signUpButton {
+    width: 40%;
+    background: #ffffff;
+    border: 1px solid #5282c3;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 31px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #335991;
+    padding: 6.5px 16px;
+    min-width: 100px;
+    max-width: 200px;
+  }
+}

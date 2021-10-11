@@ -1,0 +1,118 @@
+.orderCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f3f5fb;
+  border-radius: 12px;
+  width: 240px;
+  height: 310px;
+  margin-left: 28px;
+  margin-top: 28px;
+}
+
+.sentedOrderCard {
+  background: #5282c3;
+}
+
+.orderImage {
+  margin-top: 16px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.orderSellerName {
+  margin-top: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.orderStatus {
+  margin-top: 24px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #a4a4a4;
+}
+
+.orderSendMessageButton {
+  margin-top: 16px;
+  background: #5282c3;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  width: 179px;
+  height: 24px;
+}
+
+.orderDeleteOrderButton {
+  margin-top: 8px;
+  background: #f3f5fb;
+  border: 1px solid #5282c3;
+  box-sizing: border-box;
+  border-radius: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #5282c3;
+  width: 179px;
+  height: 24px;
+}
+
+.sentedOrderCard > .orderSellerName {
+  color: #ffffff;
+}
+
+.sentedOrderCard > .orderStatus {
+  color: #c0cfe5;
+}
+
+@media (max-width: 700px) {
+  .orderCard {
+    width: 166px;
+    height: 243px;
+    margin-left: 8px;
+    margin-top: 8px;
+  }
+
+  .orderImage {
+    margin-top: 24px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
+  .orderSellerName {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .orderStatus {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .orderSendMessageButton {
+    width: 152px;
+  }
+
+  .orderDeleteOrderButton {
+    width: 152px;
+  }
+}

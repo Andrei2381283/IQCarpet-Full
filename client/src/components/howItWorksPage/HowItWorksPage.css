@@ -1,0 +1,29 @@
+.newOrderButton {
+  display: flex;
+  justify-content: center;
+  margin: 40px auto 73px;
+}
+
+.newOrderButton > a > button {
+  background: #5282c3;
+  border-radius: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #ffffff;
+  min-width: 241px;
+  padding: 4px 16px;
+  border-width: 0;
+}
+
+@media (max-width: 700px) {
+  .newOrderButton {
+    display: none;
+  }
+
+  .hiw_backButtonDiv {
+    display: none;
+  }
+}

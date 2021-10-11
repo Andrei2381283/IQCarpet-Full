@@ -1,0 +1,103 @@
+.sellerCardBlock {
+  display: flex;
+  background: #f3f5fb;
+  border-radius: 12px;
+  flex-direction: column;
+  align-items: center;
+  width: 240px;
+  margin: 14px;
+}
+
+.sellerCardImg {
+  margin-top: 16px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.sellerCardName {
+  margin-top: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.sellerCardCountry {
+  margin-top: 4px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #7a7d80;
+}
+
+.sellerCardPrice {
+  margin-top: 20px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #263238;
+}
+
+.sellerCardButton {
+  box-sizing: border-box;
+  margin-top: 28px;
+  margin-bottom: 24px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  background: #5282c3;
+  border-radius: 16px;
+  min-width: 152px;
+  padding: 4px 16px;
+  text-align: center;
+  text-decoration: none;
+  border-width: 0;
+}
+
+@media (max-width: 700px) {
+  .sellerCardBlock {
+    width: 166px;
+    margin: 6px;
+  }
+
+  .sellerCardImg {
+    margin-top: 24px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
+  .sellerCardName {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .sellerCardCountry {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .sellerCardPrice {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .sellerCardButton {
+    margin-top: 24px;
+    margin-bottom: 8px;
+    padding: 4px 4px;
+  }
+}

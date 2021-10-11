@@ -1,0 +1,185 @@
+.profileMoreInfo {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.profEmailHowLogin > input[type="checkbox"] {
+  margin: 0;
+  outline: none;
+  border: 2px solid #ffffff;
+  border-radius: 25%;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 75% 75%;
+  width: 16px;
+  height: 16px;
+}
+
+.profEmailHowLogin > input[type="checkbox"]:checked {
+  border-color: #0b76ef;
+  background-color: #0b76ef;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.profMoreInfoBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.profMoreInfoBlock2 {
+  margin-top: 24px;
+}
+
+.profInfoHeader {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #7a7d80;
+}
+
+/* .profInfoHeader2 {
+    margin-top: 24px;
+} */
+
+.profInfoContent {
+  margin-top: 4px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.profEmailHowLogin {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.profEmailHowLogin > span {
+  margin-left: 8px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 12px;
+  color: #000000;
+}
+
+.profileMoreInfoDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.passwordContentDiv {
+  margin-left: 7.7%;
+}
+
+.passwordText {
+  box-sizing: border-box;
+  min-width: 241px;
+  margin-top: 4px;
+  background: #ffffff;
+  border-radius: 16px;
+  outline: none;
+  border-width: 0;
+  padding: 8px 16px 0;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 24px;
+  color: #5282c3;
+  text-align: center;
+  height: 32px;
+}
+
+.profChangePassButton {
+  box-sizing: border-box;
+  margin-top: 24px;
+  min-width: 241px;
+  background: #5282c3;
+  border-radius: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  padding: 4px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #ffffff;
+  border-width: 0;
+}
+
+@media (max-width: 700px) {
+  .profInfoHeader {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .profInfoContent {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .profMobileHiddenBlock1 {
+    margin: 0;
+    position: absolute;
+    top: 314px;
+    left: 16px;
+  }
+
+  .profMobileHiddenBlock2 {
+    margin: 0;
+    position: absolute;
+    top: 370px;
+    left: 16px;
+  }
+
+  .passwordContentDiv {
+    margin: 0;
+    position: absolute;
+    top: 459px;
+    left: 14px;
+  }
+
+  .profMoreInfoBlock[active="false"],
+  .passwordContentDiv[active="false"] {
+    display: none;
+  }
+
+  .passwordText {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 16px;
+    height: 24px;
+    width: 100%;
+    min-width: 154px;
+    background: #dae5f6;
+  }
+
+  .profChangePassButton {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    height: 24px;
+    width: 100%;
+    min-width: 154px;
+    margin-top: 4px;
+  }
+
+  .profEmailHowLogin > input[type="checkbox"] {
+    border: 2px solid #5282c3;
+    width: 12px;
+    height: 12px;
+  }
+}

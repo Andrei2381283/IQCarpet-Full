@@ -1,0 +1,73 @@
+.sellersHeader {
+  margin-top: 24px;
+  margin-left: 35px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.sellersContentDiv {
+  margin: 32px 0 79px 40px;
+  display: flex;
+}
+
+.sellersListDiv {
+  margin-left: 38px;
+  margin-top: -14px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: auto;
+}
+
+.sellersPagesDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  margin-bottom: 32px;
+}
+
+.sellersPagesDiv > a,
+.sellersPagesDiv > span {
+  margin: auto 4px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #7a7d80;
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .sellersContentDiv {
+    margin: 20px 0 32px 16px;
+    display: flex;
+  }
+
+  .sellersListDiv {
+    margin: -6px -6px 0 0;
+  }
+
+  .sellersPagesDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32;
+    margin-bottom: 22;
+  }
+
+  .sellersPagesDiv > a {
+    margin: auto 4;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #7a7d80;
+    text-decoration: none;
+  }
+}

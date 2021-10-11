@@ -1,0 +1,171 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 79px;
+  align-items: center;
+  background: #5384c6;
+  position: relative;
+}
+
+span {
+  display: block;
+}
+
+.headerLeftSide,
+.headerRightSide {
+  display: flex;
+  align-items: center;
+}
+
+.headerLogo {
+  margin-left: 28px;
+  width: 194px;
+  height: 45px;
+}
+
+.headerChapter {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  margin-left: 64px;
+  text-decoration: none;
+}
+
+.languageSelection {
+  background-color: transparent;
+  color: white;
+  border-radius: 0;
+  border-width: 0;
+  height: 17px;
+  width: 65px;
+  outline: none;
+  margin-right: 31px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.languageSelection > option {
+  color: black;
+}
+
+.headerNavigation {
+  display: none;
+}
+
+.signupbutton {
+  margin-right: 25px;
+  min-width: 150px;
+  height: 40px;
+  background-color: white;
+  color: #335991;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 31px;
+  border-width: 0;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 10px 6px;
+  text-decoration: none;
+}
+
+.loginbutton {
+  margin-right: 40px;
+  background: #5282c3;
+  border: 1px solid #ffffff;
+  border-radius: 31px;
+  min-width: 150px;
+  height: 40px;
+  color: white;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 10px 6px;
+  text-decoration: none;
+}
+
+.headerUserMenu {
+  display: flex;
+  align-items: center;
+  margin-right: 72px;
+}
+
+.headerUserName {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 12px;
+  color: #ffffff;
+}
+
+.headerUserImage {
+  margin-left: 8px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+}
+
+.headerUserArrow {
+  margin-left: 13px;
+  width: 12px;
+  height: 6px;
+  background: url('../../../img1/headerUserMenuArrow.png') no-repeat center
+    center/cover;
+}
+
+@media (max-width: 700px) {
+  .headerChapter,
+  .signupbutton,
+  .loginbutton,
+  .headerUserMenu {
+    display: none;
+  }
+
+  .header {
+    height: 64px;
+  }
+
+  .headerLogo {
+    margin-left: 16px;
+    width: 86.22px;
+    height: 20px;
+  }
+
+  .languageSelection {
+    height: 17px;
+    width: 55px;
+    margin-right: 16px;
+  }
+
+  .headerNavigation {
+    text-align: center;
+    display: block;
+    background-color: transparent;
+    border-width: 0;
+    outline: none;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #ffffff;
+  }
+
+  .headerNavigation > option {
+    color: black;
+  }
+}
