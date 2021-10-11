@@ -1,0 +1,128 @@
+.authIllustration {
+  margin-top: 143px;
+  margin-left: 71px;
+  width: 699px;
+  height: 678px;
+}
+
+.authBlock {
+  position: absolute;
+  left: auto;
+  right: 40px;
+  top: 119px;
+  display: flex;
+  flex-direction: column;
+}
+
+.authorizingBlock {
+  display: flex;
+  flex-direction: column;
+  background: #f3f5fb;
+  border-radius: 16px;
+  padding: 30px 40px 52px;
+}
+
+/* .authField {
+} */
+
+.authFieldName {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 12px;
+}
+
+.authFieldSubName {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 12px;
+  margin-top: 4px;
+}
+
+.authFieldInput {
+  margin-top: 8px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 16px;
+  width: 353px;
+  height: 32px;
+  padding: 0 16px;
+  border-width: 0;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  outline: none;
+}
+
+.authFieldSelect {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -o-appearance: none;
+  padding: 0 35px 0 16px;
+  border-radius: 16px;
+  border-width: 0;
+  outline: none;
+  height: 32px;
+  background: url(../../img1/selectArrow.png) right 12px center / 12px no-repeat
+    #ffffff;
+}
+
+.submitButtonDiv {
+  cursor: pointer;
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.submitButtonDiv > button {
+  cursor: pointer;
+  background: #5282c3;
+  border-radius: 16px;
+  border-width: 0;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #ffffff;
+  width: 240px;
+  height: 32px;
+}
+
+@media (max-width: 700px) {
+  .authField,
+  .authFieldInput {
+    width: 100%;
+  }
+
+  .authorizingBlock {
+    display: flex;
+    flex-direction: column;
+    background: #f3f5fb;
+    border-radius: 16px;
+    margin: 16px 16px 50px;
+    padding: 24px 21px;
+  }
+
+  .authIllustration {
+    display: none;
+  }
+
+  .authBlock {
+    position: relative;
+    left: initial;
+    right: initial;
+    top: initial;
+  }
+
+  .submitButtonDiv {
+    margin-top: 64px;
+  }
+}

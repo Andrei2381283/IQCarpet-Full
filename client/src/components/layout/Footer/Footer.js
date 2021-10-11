@@ -1,9 +1,10 @@
 // Import Engine
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 // Import Styles
-import iQcarpetLogo from '../../../img1/iQcarpet.png';
-import './Footer.css';
+import iQcarpetLogo from "../../../img1/iQcarpet.png";
+import "./Footer.css";
 
 const Footer = () => {
   return (
@@ -38,18 +39,19 @@ const Footer = () => {
       <div className="footerLine"></div>
       <div className="footerContent2">
         <div className="footerContent2Block1">
-          <a href="" className="footerNavigationText">
+          {/* TODO: Разобраться с тем, чтобы при переходах из Footer страница полностью поднималась вверх */}
+          <Link to="/" className="footerNavigationText">
             Home
-          </a>
-          <a href="" className="footerNavigationText">
+          </Link>
+          <Link to="/sellers" className="footerNavigationText">
             Sellers
-          </a>
-          <a href="" className="footerNavigationText">
+          </Link>
+          <Link to="/how-it-works" className="footerNavigationText">
             How it works
-          </a>
-          <a href="" className="footerNavigationText">
+          </Link>
+          <Link to="/support" className="footerNavigationText">
             Support
-          </a>
+          </Link>
         </div>
         <div className="footerContent2Block2">
           <span className="companyEmail">Meil@kom.iuo</span>

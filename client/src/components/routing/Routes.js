@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Register from "../auth/Register";
-import Login from "../auth/Login";
+import Register from "../auth/Register/Register";
+import Login from "../auth/Login/Login";
 import Alert from "../layout/Alert";
-import Dashboard from "../dashboard/Dashboard";
+import MyProfile from "../dashboard/MyProfile";
 import ProfileForm from "../profile-forms/ProfileForm";
 import AddExperience from "../profile-forms/AddExperience";
 import AddEducation from "../profile-forms/AddEducation";
@@ -20,16 +20,20 @@ import Support from "../support/Support";
 import Chats from "../chats/Chats";
 import Orders from "../orders/Orders";
 
+import Auth from "../auth/Auth";
+
 const Routes = () => {
   return (
     <section className="container">
       <Alert />
       <Switch>
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Auth} />
+        <Route exact path="/login" component={Auth} />
+        <Route exact path="/password_recovery" component={Auth} />
+        <Route exact path="/new_password" component={Auth} />
         <Route exact path="/profiles" component={Profiles} />
         <Route exact path="/profile/:id" component={Profile} />
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/dashboard" component={MyProfile} />
         <Route exact path="/how-it-works" component={HowItWorksPage} />
         <Route exact path="/sellers" component={Sellers} />
         <Route exact path="/support" component={Support} />

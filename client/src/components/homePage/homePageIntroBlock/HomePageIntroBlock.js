@@ -1,13 +1,15 @@
 // Import Engine
-import React from 'react';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import './HomePageIntroBlock.css';
+// Import Styles
+import "./HomePageIntroBlock.css";
+import HomePageIntroImage from "../../../img1/homepageIntroImage.png";
+import HomePageIntroImageM from "../../../img1/homepageIntroImageM.png";
 
-import HomePageIntroImage from '../../../img1/homepageIntroImage.png';
-import HomePageIntroImageM from '../../../img1/homepageIntroImageM.png';
-import { Link } from 'react-router-dom';
-
-function HomePageIntroBlock() {
+function HomePageIntroBlock({ isAuthenticated, auth: { user } }) {
   return (
     <div className="homePageIntroBlock">
       <img className="homePageIntroImage1" src={HomePageIntroImage} />
@@ -18,12 +20,18 @@ function HomePageIntroBlock() {
         </span>
         <img className="homePageIntroImage1M" src={HomePageIntroImageM} />
         <div className="registerButtonsDiv">
-          <Link to="/register" className="registerBuyer">
-            Register as a buyer
-          </Link>
-          <Link to="/register" className="registerSeller">
-            Register as a seller
-          </Link>
+          {isAuthenticated ? (
+            <h1>Welcome {user && user.login}</h1>
+          ) : (
+            <Fragment>
+              <Link to="/register" className="registerBuyer">
+                Register as a buyer
+              </Link>
+              <Link to="/register" className="registerSeller">
+                Register as a seller
+              </Link>
+            </Fragment>
+          )}
         </div>
         <div className="authButtonsDiv">
           <Link to="/login" className="logInButton">
@@ -38,4 +46,14 @@ function HomePageIntroBlock() {
   );
 }
 
-export default HomePageIntroBlock;
+HomePageIntroBlock.propTypes = {
+  auth: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(HomePageIntroBlock);
