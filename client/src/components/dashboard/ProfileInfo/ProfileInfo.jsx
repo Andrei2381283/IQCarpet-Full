@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import "./ProfileInfo.css";
 import ProfileMoreInfo from "./ProfileMoreInfo/ProfileMoreInfo";
@@ -21,15 +23,7 @@ const ProfileInfo = ({
   const openProfileSettings = () => toggleEditProfile(!displayEditProfile);
 
   const editProfile = (
-    <ProfileMoreInfoSettings
-      fullname={fullname}
-      login={login}
-      birthDay={birthDay}
-      email={email}
-      location={location}
-      phoneNumber={phoneNumber}
-      mobileInfoHidden={mobileInfoHidden}
-    />
+    <ProfileMoreInfoSettings mobileInfoHidden={mobileInfoHidden} />
   );
 
   const myProfile = (

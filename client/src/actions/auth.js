@@ -37,9 +37,7 @@ export const editUserProfile = (formData) => async (dispatch) => {
       payload: res.data
     });
 
-    dispatch(setAlert("Profile Updated", "success"));
-
-    // history.push("/dashboard");
+    dispatch(setAlert("User Profile Updated", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
 

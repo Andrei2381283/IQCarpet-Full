@@ -1,14 +1,14 @@
+// Import Engine
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-// import { createProfile, getCurrentProfile } from "../../actions/profile";
 import { editUserProfile, loadUser } from "../../../../actions/auth";
 
+// Import Styles
 import "./ProfileMoreInfo.css";
 
 const initialState = {
   fullname: "",
-  login: "",
   birthDay: "",
   email: "",
   location: "",
@@ -18,6 +18,7 @@ const initialState = {
 const ProfileMoreInfoSettings = ({
   auth: { user, loading },
   loadUser,
+  editUserProfile,
   mobileInfoHidden = true
 }) => {
   //   console.log(mobileInfoHidden);
@@ -35,7 +36,7 @@ const ProfileMoreInfoSettings = ({
     }
   }, [loading, loadUser, user]);
 
-  const { fullname, login, birthDay, email, location, phoneNumber } = formData;
+  const { fullname, birthDay, email, location, phoneNumber } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,7 +44,7 @@ const ProfileMoreInfoSettings = ({
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    console.log(editUserProfile());
+    console.log(editUserProfile);
     editUserProfile(formData);
   };
 
@@ -52,7 +53,6 @@ const ProfileMoreInfoSettings = ({
       <div className="profileMoreInfoDiv">
         <div className="profMoreInfoBlock">
           <span className="profInfoHeader">Fullname</span>
-          <span className="profInfoContent">{fullname}</span>
           <input
             className="authFieldInput"
             type="text"
@@ -64,19 +64,17 @@ const ProfileMoreInfoSettings = ({
         </div>
         <div className="profMoreInfoBlock">
           <span className="profInfoHeader">Login</span>
-          <span className="profInfoContent">{login}</span>
-          <input
+          {/* <input
             className="authFieldInput"
             type="text"
             placeholder="login"
             name="login"
             value={login}
             onChange={onChange}
-          />
+          /> */}
         </div>
         <div className="profMoreInfoBlock">
           <span className="profInfoHeader">Birthday111</span>
-          <span className="profInfoContent">{birthDay}</span>
           <input
             className="authFieldInput"
             type="text"
@@ -91,7 +89,6 @@ const ProfileMoreInfoSettings = ({
           active={!mobileInfoHidden + ""}
         >
           <span className="profInfoHeader">E-mail</span>
-          <span className="profInfoContent">{email}</span>
           <input
             className="authFieldInput"
             type="text"
@@ -109,7 +106,6 @@ const ProfileMoreInfoSettings = ({
       <div className="profileMoreInfoDiv">
         <div className="profMoreInfoBlock">
           <span className="profInfoHeader">Country</span>
-          <span className="profInfoContent">{location}</span>
           <input
             className="authFieldInput"
             type="text"
@@ -124,7 +120,6 @@ const ProfileMoreInfoSettings = ({
           active={!mobileInfoHidden + ""}
         >
           <span className="profInfoHeader">Mobile number</span>
-          <span className="profInfoContent">{phoneNumber}</span>
           <input
             className="authFieldInput"
             type="text"
@@ -134,31 +129,33 @@ const ProfileMoreInfoSettings = ({
             onChange={onChange}
           />
         </div>
+        <button type="submit" className="submitButton">
+          Change Settings
+        </button>
       </div>
-      <button type="submit" className="submitButton">
-        Change Settings
-      </button>
       <div
         className="profileMoreInfoDiv passwordContentDiv"
         active={!mobileInfoHidden + ""}
       >
-        {/* <span className="profInfoHeader">Password</span>
+        <span className="profInfoHeader">Password</span>
         <input className="passwordText" readOnly value="* * * * * * *" />
-        <button className="profChangePassButton">Change your Password</button> */}
+        <button className="profChangePassButton">Change your Password</button>
       </div>
     </form>
   );
 };
 
 ProfileMoreInfoSettings.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  editUserProfile: PropTypes.func.isRequired,
+  loadUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
-  loadUser: PropTypes.func.isRequired
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { editUserProfile, loadUser })(
-  ProfileMoreInfoSettings
-);
+export default connect(mapStateToProps, {
+  editUserProfile,
+  loadUser
+})(ProfileMoreInfoSettings);

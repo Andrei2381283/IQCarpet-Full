@@ -25,8 +25,8 @@ const MyProfile = ({
   // profile: { profile }
 }) => {
   useEffect(() => {
-    getCurrentProfile();
-  }, [getCurrentProfile]);
+    loadUser();
+  }, [loadUser]);
 
   return (
     <Fragment>
