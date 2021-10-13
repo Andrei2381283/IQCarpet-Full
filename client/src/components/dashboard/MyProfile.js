@@ -7,6 +7,7 @@ import DashboardActions from "./DashboardActions";
 import Experience from "./Experience";
 import Education from "./Education";
 import { getCurrentProfile, deleteAccount } from "../../actions/profile";
+import { loadUser } from "../../actions/auth";
 
 import BackButton from "../backButton/BackButton";
 import ChatsButton from "../chatsButton/ChatsButton";
@@ -17,10 +18,11 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import "./MyProfile.css";
 
 const MyProfile = ({
-  getCurrentProfile,
-  deleteAccount,
-  auth: { user },
-  profile: { profile }
+  // getCurrentProfile,
+  loadUser,
+  // deleteAccount,
+  auth: { user }
+  // profile: { profile }
 }) => {
   useEffect(() => {
     getCurrentProfile();
@@ -28,10 +30,6 @@ const MyProfile = ({
 
   return (
     <Fragment>
-      {/* <h1 className="large text-primary">Dashboard</h1>
-      <p className="lead">
-        <i className="fas fa-user" /> Welcome {user && user.fullname}
-      </p> */}
       <div className="contentHeaderButtonsDiv">
         <BackButton />
         <ChatsButton />
@@ -58,7 +56,7 @@ const MyProfile = ({
         <OrderCard img="" name="Favorit-Capret" />
         <OrderCard img="" name="Favorit-Capret" />
       </div>
-      {profile !== null ? (
+      {/* {profile !== null ? (
         <Fragment>
           <DashboardActions />
           <Experience experience={profile.experience} />
@@ -77,23 +75,21 @@ const MyProfile = ({
             Create Profile
           </Link>
         </Fragment>
-      )}
+      )} */}
     </Fragment>
   );
 };
 
 MyProfile.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
-  deleteAccount: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  loadUser: PropTypes.func.isRequired,
+  // deleteAccount: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+  // profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
-  profile: state.profile
+  auth: state.auth
+  // profile: state.profile
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
-  MyProfile
-);
+export default connect(mapStateToProps, { loadUser })(MyProfile);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import "./ProfileInfo.css";
 import ProfileMoreInfo from "./ProfileMoreInfo/ProfileMoreInfo";
+import ProfileMoreInfoSettings from "./ProfileMoreInfo/ProfileMoreInfoSettings";
 import ButtonBackArrow from "../../../img1/buttonBackArrow.png";
 
 const ProfileInfo = ({
@@ -15,6 +16,32 @@ const ProfileInfo = ({
 }) => {
   const [mobileInfoHidden, setMobileInfoHidden] = useState(false);
 
+  const [displayEditProfile, toggleEditProfile] = useState(false);
+
+  const openProfileSettings = () => toggleEditProfile(!displayEditProfile);
+
+  const editProfile = (
+    <ProfileMoreInfoSettings
+      fullname={fullname}
+      login={login}
+      birthDay={birthDay}
+      email={email}
+      location={location}
+      phoneNumber={phoneNumber}
+      mobileInfoHidden={mobileInfoHidden}
+    />
+  );
+
+  const myProfile = (
+    <ProfileMoreInfo
+      birthDay={birthDay}
+      email={email}
+      location={location}
+      phoneNumber={phoneNumber}
+      mobileInfoHidden={mobileInfoHidden}
+    />
+  );
+
   return (
     <div className="profileInfo" active={!mobileInfoHidden + ""}>
       <img className="profileImage" src="" />
@@ -23,7 +50,7 @@ const ProfileInfo = ({
           <div className="nameAndRoleDiv">
             <span className="profileNameText">{fullname}</span>
             <span className="profileRoleText">
-              {iAmSeller === false ? "Customer" : "Buyer"}
+              {iAmSeller === false ? "Buyer" : "Seller"}
             </span>
           </div>
           <span
@@ -35,18 +62,14 @@ const ProfileInfo = ({
             <img src={ButtonBackArrow} />
           </span>
           <div className="editExitButtonsDiv">
-            <button className="editButton">Edit</button>
+            <button onClick={openProfileSettings} className="editButton">
+              Edit
+            </button>
             <button className="exitButton">Exit</button>
           </div>
         </div>
         <span className="profileLogin">{login}</span>
-        <ProfileMoreInfo
-          birthDay={birthDay}
-          email={email}
-          location={location}
-          phoneNumber={phoneNumber}
-          mobileInfoHidden={mobileInfoHidden}
-        />
+        {displayEditProfile ? editProfile : myProfile}
       </div>
     </div>
   );

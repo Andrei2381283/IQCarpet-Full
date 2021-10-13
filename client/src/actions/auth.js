@@ -1,5 +1,5 @@
-import api from '../utils/api';
-import { setAlert } from './alert';
+import api from "../utils/api";
+import { setAlert } from "./alert";
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -7,13 +7,15 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
-} from './types';
+  LOGOUT,
+  UPDATE_USER,
+  USER_ERROR
+} from "./types";
 
 // Load User
-export const loadUser = () => async dispatch => {
+export const loadUser = () => async (dispatch) => {
   try {
-    const res = await api.get('/auth');
+    const res = await api.get("/auth");
 
     dispatch({
       type: USER_LOADED,
@@ -26,10 +28,36 @@ export const loadUser = () => async dispatch => {
   }
 };
 
-// Register User
-export const register = formData => async dispatch => {
+export const editUserProfile = (formData) => async (dispatch) => {
   try {
-    const res = await api.post('/users', formData);
+    const res = await api.put("/auth/settings", formData);
+
+    dispatch({
+      type: UPDATE_USER,
+      payload: res.data
+    });
+
+    dispatch(setAlert("Profile Updated", "success"));
+
+    // history.push("/dashboard");
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+    }
+
+    dispatch({
+      type: USER_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Register User
+export const register = (formData) => async (dispatch) => {
+  try {
+    const res = await api.post("/users", formData);
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -40,7 +68,7 @@ export const register = formData => async dispatch => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     }
 
     dispatch({
@@ -50,11 +78,11 @@ export const register = formData => async dispatch => {
 };
 
 // Login User
-export const login = (email, password) => async dispatch => {
+export const login = (email, password) => async (dispatch) => {
   const body = { email, password };
 
   try {
-    const res = await api.post('/auth', body);
+    const res = await api.post("/auth", body);
 
     dispatch({
       type: LOGIN_SUCCESS,
@@ -66,7 +94,7 @@ export const login = (email, password) => async dispatch => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     }
 
     dispatch({
