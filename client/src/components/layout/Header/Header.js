@@ -12,18 +12,20 @@ import "./Header.css";
 const Header = ({ auth: { isAuthenticated, user }, logout }) => {
   const authLinks = (
     <div className="headerUserMenu">
-      <Link to="/profiles">Developers</Link>
-      <Link to="/dashboard">
+      {/* <Link to="/profiles">Developers</Link> */}
+      {/* <Link to="/dashboard">
         <i className="fas fa-user" /> <span className="hide-sm">Dashboard</span>
+      </Link> */}
+      {/* <Link to="/posts">Posts</Link> */}
+      <Link to="/dashboard">
+        <span className="headerUserName">{user && user.login}</span>
+        <img className="headerUserImage" src="" />
+        <div className="headerUserArrow" src="" />
       </Link>
-      <Link to="/posts">Posts</Link>
-      <span className="headerUserName">{user && user.login}</span>
-      <img className="headerUserImage" src="" />
-      <div className="headerUserArrow" src="" />
-      <a onClick={logout} href="#!">
+      {/* <a onClick={logout} href="#!">
         <i className="fas fa-sign-out-alt" /> //{" "}
         <span className="hide-sm">Logout</span>{" "}
-      </a>
+      </a> */}
     </div>
   );
 

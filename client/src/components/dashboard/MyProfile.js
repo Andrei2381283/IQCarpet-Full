@@ -9,6 +9,7 @@ import Education from "./Education";
 // import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 // import { loadUser } from "../../actions/auth";
 import { getMySellerCard } from "../../actions/profile";
+import { logout } from "../../actions/auth";
 
 import BackButton from "../backButton/BackButton";
 import ChatsButton from "../chatsButton/ChatsButton";
@@ -25,7 +26,8 @@ const MyProfile = ({
   // sellerCard: { sellerCard },
   // deleteAccount,
   auth: { user },
-  profile: { profile }
+  profile: { profile },
+  logout
 }) => {
   useEffect(() => {
     getMySellerCard();
@@ -50,6 +52,7 @@ const MyProfile = ({
         profileCompanyName={profile && profile.companyName}
         profileEmailOne={profile && profile.emailOne}
         profilePhoneNumberOne={profile && profile.phoneNumberOne}
+        logout={logout}
       />
       {/* {user.iAmSeller && } */}
       <div className="profileHeaderDiv">
@@ -91,6 +94,7 @@ const MyProfile = ({
 MyProfile.propTypes = {
   // loadUser: PropTypes.func.isRequired,
   getMySellerCard: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
   // deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
@@ -102,6 +106,8 @@ const mapStateToProps = (state) => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { getMySellerCard, getMySellerCard })(
-  MyProfile
-);
+export default connect(mapStateToProps, {
+  getMySellerCard,
+  getMySellerCard,
+  logout
+})(MyProfile);

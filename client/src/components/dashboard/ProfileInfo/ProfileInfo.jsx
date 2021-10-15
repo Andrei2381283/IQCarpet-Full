@@ -22,7 +22,8 @@ const ProfileInfo = ({
   user,
   profileCompanyName,
   profileEmailOne,
-  profilePhoneNumberOne
+  profilePhoneNumberOne,
+  logout
 }) => {
   const [mobileInfoHidden, setMobileInfoHidden] = useState(false);
 
@@ -86,7 +87,7 @@ const ProfileInfo = ({
               <button onClick={openProfileSettings} className="editButton">
                 Edit
               </button>
-              <button className="exitButton">Exit</button>
+              <button onClick={logout} className="exitButton">Exit</button>
             </div>
           </div>
           <span className="profileLogin">{login}</span>
@@ -116,7 +117,7 @@ const ProfileInfo = ({
                 <button onClick={openCompanySettings} className="editButton">
                   Edit
                 </button>
-                <button className="exitButton">Exit</button>
+                <button onClick={logout} className="exitButton">Exit</button>
               </div>
             </div>
             <span className="profileLogin">{login}</span>
