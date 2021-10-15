@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import "./ProfileInfo.css";
 import ProfileMoreInfo from "./ProfileMoreInfo/ProfileMoreInfo";
 import ProfileMoreInfoSettings from "./ProfileMoreInfo/ProfileMoreInfoSettings";
 import ButtonBackArrow from "../../../img1/buttonBackArrow.png";
+
+import CompanyMoreInfo from "./CompanyInfo/CompanyMoreInfo";
+import CompanyMoreInfoSettings from "./CompanyInfo/CompanyMoreInfoSettings";
+
+import "./ProfileInfo.css";
 
 const ProfileInfo = ({
   fullname,
@@ -14,7 +18,11 @@ const ProfileInfo = ({
   email,
   location,
   phoneNumber,
-  iAmSeller
+  iAmSeller,
+  user,
+  profileCompanyName,
+  profileEmailOne,
+  profilePhoneNumberOne
 }) => {
   const [mobileInfoHidden, setMobileInfoHidden] = useState(false);
 
@@ -22,8 +30,17 @@ const ProfileInfo = ({
 
   const openProfileSettings = () => toggleEditProfile(!displayEditProfile);
 
+  const [displayEditCompanyInfo, toggleEditCompanyInfo] = useState(false);
+
+  const openCompanySettings = () =>
+    toggleEditCompanyInfo(!displayEditCompanyInfo);
+
   const editProfile = (
     <ProfileMoreInfoSettings mobileInfoHidden={mobileInfoHidden} />
+  );
+
+  const editCompanyInfo = (
+    <CompanyMoreInfoSettings mobileInfoHidden={mobileInfoHidden} />
   );
 
   const myProfile = (
@@ -36,36 +53,78 @@ const ProfileInfo = ({
     />
   );
 
+  const infoCompany = (
+    <CompanyMoreInfo
+      companyName={profileCompanyName}
+      emailOne={profileEmailOne}
+      phoneNumberOne={profilePhoneNumberOne}
+      mobileInfoHidden={mobileInfoHidden}
+    />
+  );
+
   return (
-    <div className="profileInfo" active={!mobileInfoHidden + ""}>
-      <img className="profileImage" src="" />
-      <div className="profileInfoContent">
-        <div className="nameAndButtonsDiv">
-          <div className="nameAndRoleDiv">
-            <span className="profileNameText">{fullname}</span>
-            <span className="profileRoleText">
-              {iAmSeller === false ? "Buyer" : "Seller"}
+    <Fragment>
+      <div className="profileInfo" active={!mobileInfoHidden + ""}>
+        <img className="profileImage" src="" />
+        <div className="profileInfoContent">
+          <div className="nameAndButtonsDiv">
+            <div className="nameAndRoleDiv">
+              <span className="profileNameText">{fullname}</span>
+              <span className="profileRoleText">
+                {iAmSeller === false ? "Buyer" : "Seller"}
+              </span>
+            </div>
+            <span
+              className="moreDetailsText"
+              active={!mobileInfoHidden + ""}
+              onClick={() => setMobileInfoHidden(!mobileInfoHidden)}
+            >
+              More details
+              <img src={ButtonBackArrow} />
             </span>
+            <div className="editExitButtonsDiv">
+              <button onClick={openProfileSettings} className="editButton">
+                Edit
+              </button>
+              <button className="exitButton">Exit</button>
+            </div>
           </div>
-          <span
-            className="moreDetailsText"
-            active={!mobileInfoHidden + ""}
-            onClick={() => setMobileInfoHidden(!mobileInfoHidden)}
-          >
-            More details
-            <img src={ButtonBackArrow} />
-          </span>
-          <div className="editExitButtonsDiv">
-            <button onClick={openProfileSettings} className="editButton">
-              Edit
-            </button>
-            <button className="exitButton">Exit</button>
+          <span className="profileLogin">{login}</span>
+          {displayEditProfile ? editProfile : myProfile}
+        </div>
+      </div>
+      {iAmSeller && (
+        <div className="profileInfo" active={!mobileInfoHidden + ""}>
+          <img className="profileImage" src="" />
+          <div className="profileInfoContent">
+            <div className="nameAndButtonsDiv">
+              <div className="nameAndRoleDiv">
+                <span className="profileNameText">{profileCompanyName}</span>
+                <span className="profileRoleText">
+                  {/* {profile.iAmSeller && "Company"} */}
+                </span>
+              </div>
+              <span
+                className="moreDetailsText"
+                active={!mobileInfoHidden + ""}
+                onClick={() => setMobileInfoHidden(!mobileInfoHidden)}
+              >
+                More details
+                <img src={ButtonBackArrow} />
+              </span>
+              <div className="editExitButtonsDiv">
+                <button onClick={openCompanySettings} className="editButton">
+                  Edit
+                </button>
+                <button className="exitButton">Exit</button>
+              </div>
+            </div>
+            <span className="profileLogin">{login}</span>
+            {displayEditProfile ? editCompanyInfo : infoCompany}
           </div>
         </div>
-        <span className="profileLogin">{login}</span>
-        {displayEditProfile ? editProfile : myProfile}
-      </div>
-    </div>
+      )}
+    </Fragment>
   );
 };
 

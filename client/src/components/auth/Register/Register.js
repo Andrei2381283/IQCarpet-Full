@@ -13,8 +13,8 @@ import showPasswordImage from "../../../img1/showPassword.png";
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     fullname: "",
-    // iAmSeller: "",
-    // companyName: "",
+    iAmSeller: "",
+    companyName: "",
     birthDay: "",
     location: "",
     phoneNumber: "",
@@ -24,14 +24,14 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     password2: ""
   });
 
-  const [isSeller, setIsSeller] = useState(false);
+  // const [iAmSeller, setiAmSeller] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
 
   const {
     fullname,
-    // iAmSeller,
-    // companyName,
+    iAmSeller,
+    companyName,
     birthDay,
     location,
     phoneNumber,
@@ -51,7 +51,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     } else {
       register({
         fullname,
-        // companyName,
+        iAmSeller,
+        companyName,
         birthDay,
         location,
         phoneNumber,
@@ -65,7 +66,15 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const companyField = (
     <div className="authField">
       <span className="authFieldName">Enter a Company's name</span>
-      <input className="authFieldInput" placeholder="Company's name"></input>
+      {/* <input className="authFieldInput" placeholder="Company's name"></input> */}
+      <input
+        className="authFieldInput"
+        type="text"
+        placeholder="companyName"
+        name="companyName"
+        value={companyName}
+        onChange={onChange}
+      />
     </div>
   );
 
@@ -100,7 +109,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     <Fragment>
       <form className="authorizingBlock" onSubmit={onSubmit}>
         <div className="regFieldsBlock">
-          <div className="regLeftBlock" isseller={isSeller.toString()}>
+          <div className="regLeftBlock" iAmSeller={iAmSeller.toString()}>
             <div className="authField">
               <span className="authFieldName">
                 Enter a your surname&name&patronymic
@@ -117,12 +126,20 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <label className="checkBoxDiv">
                 <input
                   type="checkbox"
-                  onChange={(event) => setIsSeller(event.target.checked)}
+                  name="iAmSeller"
+                  onChange={(event) => {
+                    setFormData({
+                      ...formData,
+                      [event.target.name]: event.target.checked
+                    });
+                    // console.log(setFormData({ iAmSeller: true }));
+                    console.log(event.target.checked);
+                  }}
                 />
                 <span>I am seller</span>
               </label>
             </div>
-            {isSeller && companyField}
+            {iAmSeller && companyField}
             <div className="authField">
               <span className="authFieldName">Enter a your BirthDay</span>
               <div className="regBirthDaySelectDiv">
@@ -159,7 +176,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 onChange={onChange}
               />
             </div>
-            {!isSeller && phoneField}
+            {!iAmSeller && phoneField}
             <div className="authField">
               <span className="authFieldName">Download a your photo</span>
               <span className="authFieldSubName">Png/Jpeg & up to 10 MB</span>
@@ -173,8 +190,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               </label> */}
             </div>
           </div>
-          <div className="regRightBlock" isseller={isSeller.toString()}>
-            {isSeller && phoneField}
+          <div className="regRightBlock" iAmSeller={iAmSeller.toString()}>
+            {iAmSeller && phoneField}
             <div className="authField">
               <span className="authFieldName">Make a your login</span>
               <span className="authFieldSubName">

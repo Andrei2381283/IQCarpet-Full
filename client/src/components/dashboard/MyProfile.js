@@ -6,8 +6,9 @@ import { connect } from "react-redux";
 import DashboardActions from "./DashboardActions";
 import Experience from "./Experience";
 import Education from "./Education";
-import { getCurrentProfile, deleteAccount } from "../../actions/profile";
-import { loadUser } from "../../actions/auth";
+// import { getCurrentProfile, deleteAccount } from "../../actions/profile";
+// import { loadUser } from "../../actions/auth";
+import { getMySellerCard } from "../../actions/profile";
 
 import BackButton from "../backButton/BackButton";
 import ChatsButton from "../chatsButton/ChatsButton";
@@ -19,14 +20,16 @@ import "./MyProfile.css";
 
 const MyProfile = ({
   // getCurrentProfile,
-  loadUser,
+  // loadUser,
+  getMySellerCard,
+  // sellerCard: { sellerCard },
   // deleteAccount,
-  auth: { user }
-  // profile: { profile }
+  auth: { user },
+  profile: { profile }
 }) => {
   useEffect(() => {
-    loadUser();
-  }, [loadUser]);
+    getMySellerCard();
+  }, [getMySellerCard]);
 
   return (
     <Fragment>
@@ -34,7 +37,7 @@ const MyProfile = ({
         <BackButton />
         <ChatsButton />
       </div>
-      <span className="profileHeader profileAboutMeText">About me</span>
+      <span className="profileHeader profileAboutMeText">About me1</span>
       <ProfileInfo
         fullname={user && user.fullname}
         login={user && user.login}
@@ -43,7 +46,12 @@ const MyProfile = ({
         location={user && user.location}
         phoneNumber={user && user.phoneNumber}
         iAmSeller={user && user.iAmSeller}
+        user={user && user}
+        profileCompanyName={profile && profile.companyName}
+        profileEmailOne={profile && profile.emailOne}
+        profilePhoneNumberOne={profile && profile.phoneNumberOne}
       />
+      {/* {user.iAmSeller && } */}
       <div className="profileHeaderDiv">
         <span className="profOrdersText">My orders(4)</span>
         <Link className="profOrdersLink" to="/orders">
@@ -81,15 +89,19 @@ const MyProfile = ({
 };
 
 MyProfile.propTypes = {
-  loadUser: PropTypes.func.isRequired,
+  // loadUser: PropTypes.func.isRequired,
+  getMySellerCard: PropTypes.func.isRequired,
   // deleteAccount: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-  // profile: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth
-  // profile: state.profile
+  auth: state.auth,
+  // sellerCard: state.
+  profile: state.profile
 });
 
-export default connect(mapStateToProps, { loadUser })(MyProfile);
+export default connect(mapStateToProps, { getMySellerCard, getMySellerCard })(
+  MyProfile
+);

@@ -1,15 +1,15 @@
 // Import Engine
-const config = require('config');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const config = require("config");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 // Import Models
-const UserModel = require('../models/User');
-const RoleModel = require('../models/Role');
-const SellerCardModel = require('../models/SellerCard');
+const UserModel = require("../models/User");
+const RoleModel = require("../models/Role");
+const SellerCardModel = require("../models/SellerCard");
 
 // Import Validate
-const { validationResult } = require('express-validator');
+const { validationResult } = require("express-validator");
 
 const registration = async (req, res) => {
   const errors = validationResult(req);
@@ -36,19 +36,19 @@ const registration = async (req, res) => {
     if (userCandidate) {
       return res.status(400).json({
         statusCode: 400,
-        stringStatus: 'Error',
-        message: 'Пользователь с таким email уже существует!'
+        stringStatus: "Error",
+        message: "Пользователь с таким email уже существует!"
       });
     }
 
     // Если регистрируется покупатель, то регистрируем покупателя
-    if (!iAmSeller || iAmSeller === '' || iAmSeller === null) {
+    if (!iAmSeller || iAmSeller === "" || iAmSeller === null) {
       // Находим роль "USER", которая явялется базовой для всех пользователей,
       // чтобы присвоить ее нвоому пользователю
-      const userRoleCustomerUSER = await RoleModel.findOne({ value: 'USER' });
+      const userRoleCustomerUSER = await RoleModel.findOne({ value: "USER" });
       // TODO: Оптимизировать
       const userRoleCustomerCUSTOMER = await RoleModel.findOne({
-        value: 'CUSTOMER'
+        value: "BUYER"
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -59,7 +59,7 @@ const registration = async (req, res) => {
       const newUserCustomer = await UserModel.create({
         fullname: fullname,
         iAmSeller:
-          !iAmSeller || iAmSeller === '' || iAmSeller === null ? false : true,
+          !iAmSeller || iAmSeller === "" || iAmSeller === null ? false : true,
         birthDay: birthDay,
         location: location,
         phoneNumber: phoneNumber,
@@ -78,8 +78,8 @@ const registration = async (req, res) => {
       // Возвращаем успешный статус с ответом от сервера и данными о пользователе
       jwt.sign(
         payloadCustomer,
-        config.get('jwtSecret'),
-        { expiresIn: '5 days' },
+        config.get("jwtSecret"),
+        { expiresIn: "5 days" },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
@@ -89,10 +89,10 @@ const registration = async (req, res) => {
       // Если регистрируется продавец(Компания), то регистрируем продавца(Компанию)
       // Находим роль "USER", которая явялется базовой для всех пользователей,
       // чтобы присвоить ее нвоому пользователю
-      const userRoleSellerrUSER = await RoleModel.findOne({ value: 'USER' });
+      const userRoleSellerrUSER = await RoleModel.findOne({ value: "USER" });
       // TODO: Оптимизировать
       const userRoleSellerCUSTOMER = await RoleModel.findOne({
-        value: 'SELLER'
+        value: "SELLER"
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -132,8 +132,8 @@ const registration = async (req, res) => {
 
       jwt.sign(
         payloadSeller,
-        config.get('jwtSecret'),
-        { expiresIn: '5 days' },
+        config.get("jwtSecret"),
+        { expiresIn: "5 days" },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
@@ -141,8 +141,16 @@ const registration = async (req, res) => {
       );
     }
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).json({
+      statusCode: 500,
+      stringStatus: "Error",
+      message: `Something went wrong! ${err}`
+    });
+    console.log({
+      statusCode: 500,
+      stringStatus: "Error",
+      message: `Something went wrong! ${err}`
+    });
   }
 };
 

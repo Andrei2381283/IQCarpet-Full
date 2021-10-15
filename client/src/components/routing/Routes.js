@@ -4,7 +4,7 @@ import Register from "../auth/Register/Register";
 import Login from "../auth/Login/Login";
 import Alert from "../layout/Alert";
 import MyProfile from "../dashboard/MyProfile";
-import ProfileForm from "../profile-forms/ProfileForm";
+// import ProfileForm from "../profile-forms/ProfileForm";
 import AddExperience from "../profile-forms/AddExperience";
 import AddEducation from "../profile-forms/AddEducation";
 import Profiles from "../profiles/Profiles";
@@ -39,8 +39,8 @@ const Routes = () => {
         <Route exact path="/support" component={Support} />
         <Route exact path="/chats" component={Chats} />
         <Route exact path="/orders" component={Orders} />
-        <PrivateRoute exact path="/create-profile" component={ProfileForm} />
-        <PrivateRoute exact path="/edit-profile" component={ProfileForm} />
+        {/* <PrivateRoute exact path="/create-profile" component={ProfileForm} /> */}
+        {/* <PrivateRoute exact path="/edit-profile" component={ProfileForm} /> */}
         <PrivateRoute exact path="/add-experience" component={AddExperience} />
         <PrivateRoute exact path="/add-education" component={AddEducation} />
         <PrivateRoute exact path="/posts" component={Posts} />
