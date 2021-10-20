@@ -2,12 +2,12 @@ import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import CompanyMoreInfo from "./CompanyInfo/CompanyMoreInfo";
+import CompanyMoreInfoSettings from "./CompanyInfo/CompanyMoreInfoSettings";
+
 import ProfileMoreInfo from "./ProfileMoreInfo/ProfileMoreInfo";
 import ProfileMoreInfoSettings from "./ProfileMoreInfo/ProfileMoreInfoSettings";
 import ButtonBackArrow from "../../../img1/buttonBackArrow.png";
-
-import CompanyMoreInfo from "./CompanyInfo/CompanyMoreInfo";
-import CompanyMoreInfoSettings from "./CompanyInfo/CompanyMoreInfoSettings";
 
 import "./ProfileInfo.css";
 
@@ -65,9 +65,9 @@ const ProfileInfo = ({
 
   return (
     <Fragment>
-      <div className="profileInfo" active={!mobileInfoHidden + ""}>
+      <div className={"profileInfo " + (displayEditProfile ? "displayEditProfile" : "")} active={!mobileInfoHidden + ""}>
         <img className="profileImage" src="" />
-        <div className="profileInfoContent">
+        <div className="profileInfoContent ">
           <div className="nameAndButtonsDiv">
             <div className="nameAndRoleDiv">
               <span className="profileNameText">{fullname}</span>

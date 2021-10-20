@@ -182,4 +182,8 @@
   .profileInfo[active="true"] {
     height: 377px;
   }
+
+  .profileInfo[active="true"].displayEditProfile {
+    height: 443px;
+  }
 }

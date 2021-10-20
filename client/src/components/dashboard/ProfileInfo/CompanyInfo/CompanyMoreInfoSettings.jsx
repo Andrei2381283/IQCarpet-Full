@@ -133,14 +133,14 @@ const CompanyMoreInfoSettings = ({
           Change Settings
         </button>
       </div>
-      <div
+      {/* <div
         className="profileMoreInfoDiv passwordContentDiv"
         active={!mobileInfoHidden + ""}
       >
         <span className="profInfoHeader">Password</span>
         <input className="passwordText" readOnly value="* * * * * * *" />
         <button className="profChangePassButton">Change your Password</button>
-      </div>
+      </div> */}
     </form>
   );
 };

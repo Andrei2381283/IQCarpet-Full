@@ -54,7 +54,7 @@ const ProfileMoreInfoSettings = ({
         <div className="profMoreInfoBlock">
           <span className="profInfoHeader">Fullname</span>
           <input
-            className="authFieldInput"
+            className="profInfoInput"
             type="text"
             placeholder="FullName"
             name="fullname"
@@ -62,21 +62,21 @@ const ProfileMoreInfoSettings = ({
             onChange={onChange}
           />
         </div>
-        <div className="profMoreInfoBlock">
+        {/* <div className="profMoreInfoBlock">
           <span className="profInfoHeader">Login</span>
-          {/* <input
-            className="authFieldInput"
+          <input
+            className="profInfoInput"
             type="text"
             placeholder="login"
             name="login"
             value={login}
             onChange={onChange}
-          /> */}
-        </div>
-        <div className="profMoreInfoBlock">
+          />
+        </div> */}
+        <div className="profMoreInfoBlock profMoreInfoBlock2 profMobileHiddenBlock1" active={!mobileInfoHidden + ""}>
           <span className="profInfoHeader">Birthday111</span>
           <input
-            className="authFieldInput"
+            className="profInfoInput"
             type="text"
             placeholder="birthDay"
             name="birthDay"
@@ -85,29 +85,29 @@ const ProfileMoreInfoSettings = ({
           />
         </div>
         <div
-          className="profMoreInfoBlock profMoreInfoBlock2 profMobileHiddenBlock2"
+          className="profMoreInfoBlock profMoreInfoBlock2 profMobileHiddenBlock3"
           active={!mobileInfoHidden + ""}
         >
           <span className="profInfoHeader">E-mail</span>
           <input
-            className="authFieldInput"
+            className="profInfoInput"
             type="text"
             placeholder="email"
             name="email"
             value={email}
             onChange={onChange}
           />
-          <div className="profEmailHowLogin">
+          <label className="profEmailHowLogin">
             <input type="checkbox" />
             <span>Use how login</span>
-          </div>
+          </label>
         </div>
       </div>
       <div className="profileMoreInfoDiv">
         <div className="profMoreInfoBlock">
           <span className="profInfoHeader">Country</span>
           <input
-            className="authFieldInput"
+            className="profInfoInput"
             type="text"
             placeholder="location"
             name="location"
@@ -116,12 +116,12 @@ const ProfileMoreInfoSettings = ({
           />
         </div>
         <div
-          className="profMoreInfoBlock profMoreInfoBlock2 profMobileHiddenBlock1"
+          className="profMoreInfoBlock profMoreInfoBlock2 profMobileHiddenBlock2"
           active={!mobileInfoHidden + ""}
         >
           <span className="profInfoHeader">Mobile number</span>
           <input
-            className="authFieldInput"
+            className="profInfoInput"
             type="text"
             placeholder="phoneNumber"
             name="phoneNumber"
@@ -129,12 +129,12 @@ const ProfileMoreInfoSettings = ({
             onChange={onChange}
           />
         </div>
-        <button type="submit" className="submitButton">
+        <button type="submit" className="submitButton profMobileHiddenBlock4" active={!mobileInfoHidden + ""}>
           Change Settings
         </button>
       </div>
       <div
-        className="profileMoreInfoDiv passwordContentDiv"
+        className="profileMoreInfoDiv passwordContentDiv displayEditProfile"
         active={!mobileInfoHidden + ""}
       >
         <span className="profInfoHeader">Password</span>
