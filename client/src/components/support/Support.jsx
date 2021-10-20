@@ -65,7 +65,7 @@ const Support = () => {
         <textarea className="formTextarea"></textarea>
         <label className="addAttach">
           <div src={AddAttachImage} />
-          <input type="file" className="hiden" />
+          <input type="file" />
         </label>
         <div className="sendFormDiv">
           <button>Send the Form</button>

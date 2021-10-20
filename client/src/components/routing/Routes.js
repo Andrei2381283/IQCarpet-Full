@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Register from "../auth/Register/Register";
-import Login from "../auth/Login/Login";
+/* import Register from "../auth/Register/Register";
+import Login from "../auth/Login/Login"; */
 import Alert from "../layout/Alert";
 import MyProfile from "../dashboard/MyProfile";
 // import ProfileForm from "../profile-forms/ProfileForm";

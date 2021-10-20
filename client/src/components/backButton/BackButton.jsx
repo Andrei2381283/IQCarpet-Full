@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 import "./BackButton.css";
 
-const BackButton = ({ className = "", link }) => (
-  <Link to={link} className={"backButton " + className}>
+const BackButton = ({ className = "" }) => (
+  <Link to="../" className={"backButton " + className}>
     <button>Back</button>
   </Link>
 );
