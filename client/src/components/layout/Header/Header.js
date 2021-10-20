@@ -5,35 +5,33 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../../actions/auth";
 
-import HeaderMobileMenu from "./HeaderMobileMenu";
-
 // Import Styles
 import iQcarpetLogo from "../../../img1/iQcarpet.png";
 import "./Header.css";
 
 const Header = ({ auth: { isAuthenticated, user }, logout }) => {
   const authLinks = (
-    <Link className="headerUserMenu" to="/dashboard">
+    <div className="headerUserMenu">
       {/* <Link to="/profiles">Developers</Link> */}
       {/* <Link to="/dashboard">
         <i className="fas fa-user" /> <span className="hide-sm">Dashboard</span>
       </Link> */}
       {/* <Link to="/posts">Posts</Link> */}
-      {/* <Link className="headerUserMenu" to="/dashboard"> */}
+      <Link to="/dashboard">
         <span className="headerUserName">{user && user.login}</span>
         <img className="headerUserImage" src="" />
         <div className="headerUserArrow" src="" />
-      {/* </Link> */}
+      </Link>
       {/* <a onClick={logout} href="#!">
         <i className="fas fa-sign-out-alt" /> //{" "}
         <span className="hide-sm">Logout</span>{" "}
       </a> */}
-    </Link>
+    </div>
   );
 
   const guestLinks = (
     <Fragment>
-      {/* <Link to="/profiles">Developers</Link> */}
+      <Link to="/profiles">Developers</Link>
 
       <Link to="/register" className="signupbutton">
         Sign Up
@@ -71,7 +69,17 @@ const Header = ({ auth: { isAuthenticated, user }, logout }) => {
         </Link>
       </div>
       <div className="headerCentre">
-        <HeaderMobileMenu />
+        <select className="headerNavigation">
+          <option>Home</option>
+          <option>Sellers</option>
+          <option>How it works</option>
+          <option>Support</option>
+          <option>My Profile</option>
+          <option>Chats</option>
+          <option>Terms of use</option>
+          <option>Privacy Policy</option>
+          <option>Help</option>
+        </select>
       </div>
       <div className="headerRightSide">
         {isAuthenticated ? authLinks : guestLinks}

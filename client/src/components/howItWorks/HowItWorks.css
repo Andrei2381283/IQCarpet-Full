@@ -1,214 +1,209 @@
 .howItWorksBlock {
-    width: 90%;
-    max-width: 1440px;
-    margin: 32px auto 0;
-    display: flex;
-    justify-content: space-between;
+  width: 90%;
+  max-width: 1440px;
+  margin: 32px auto 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .howItWorksLeftSideContent {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column; 
-    align-items: flex-start; 
-    width: 20%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 20%;
 }
 
 .howItWorksCentreSideContent {
-    display: flex;
-    justify-content: center;
-    flex-direction: column; 
-    width: 70%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 70%;
 }
 
 .howItWorksRightSideContent {
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-end; 
-    justify-content: flex-start; 
-    width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  width: 20%;
 }
 
-.howItWorksHeader, .howItWorksSubHeader {
-    margin: 0;
-    text-align: center;
+.howItWorksHeader,
+.howItWorksSubHeader {
+  margin: 0;
+  text-align: center;
 }
 
 .howItWorksHeader {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 34px;
-    line-height: 41px;
-    color: #1D1D1D;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 41px;
+  color: #1d1d1d;
 }
 
 .howItWorksSubHeader {
-    margin-top: 16px;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 33px;
-    text-align: center;
-    color: #1D1D1D;
-    min-height: 72px;
-    max-height: 72px;
+  margin-top: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 33px;
+  text-align: center;
+  color: #1d1d1d;
+  min-height: 72px;
+  max-height: 72px;
 }
 
 .howItWorksInfoDiv {
-    display: flex;
-    width: 100%;
-    margin-top: 64px;
+  display: flex;
+  width: 100%;
+  margin-top: 64px;
 }
 
-.howItWorksLineTextLeft, .howItWorksLineTextRight {
-    width: 45%;
-    display: flex;
-    flex-direction: column;
+.howItWorksLineTextLeft,
+.howItWorksLineTextRight {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
 }
 
 .howWorksStep {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 22px;
-    color: #1D1D1D;
-    margin: 0 20px;
-    max-height: 22px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #1d1d1d;
+  margin: 0 20px;
+  max-height: 22px;
 }
 
 .howWorksStepRight {
-    text-align: start;
+  text-align: start;
 }
 
 .howWorksStepLeft {
-    text-align: end;
+  text-align: end;
 }
 
 .howWorksStep1 {
-    margin-top: 46px;
+  margin-top: 46px;
 }
 
 .howWorksStep2 {
-    margin-top: 190px;
+  margin-top: 190px;
 }
 
-.howWorksStep3, .howWorksStep4, .howWorksStep5, .howWorksStep6 {
-    margin-top: 266px;
+.howWorksStep3,
+.howWorksStep4,
+.howWorksStep5,
+.howWorksStep6 {
+  margin-top: 266px;
 }
 
 .howItWorksImage1 {
-    margin-top: 174px;
-    width: 178px;
+  margin-top: 174px;
+  width: 178px;
 }
 
 .howItWorksImage2 {
-    margin-top: 276px;
-    width: 212px;
+  margin-top: 276px;
+  width: 212px;
 }
 
 .howItWorksImage3 {
-    margin-top: 100px;
-    width: 207px;
+  margin-top: 100px;
+  width: 207px;
 }
 
 .howItWorksImage4 {
-    margin-top: 99px;
-    width: 200px;
+  margin-top: 99px;
+  width: 200px;
 }
 
 .howItWorksImage5 {
-    margin-top: 77px;
-    width: 169px;
+  margin-top: 77px;
+  width: 169px;
 }
 
 .howItWorksImage6 {
-    margin-top: 126px;
-    width: 219px;
+  margin-top: 126px;
+  width: 219px;
 }
 
 .howItWorksLine {
-    width: 44px;
-    height: 834px;
-    background: url('../../img1/howItWorksLineImage.png') no-repeat center center/cover;
+  width: 44px;
+  height: 834px;
+  background: url('../../img1/howItWorksLineImage.png') no-repeat center
+    center/cover;
+}
+
+.howWorksStepMobile {
+  display: none;
 }
 
 @media (max-width: 700px) {
-    .howItWorksBlock {
-        margin: 16px 16px 49px;
-        width: auto;
-    }
+  .howItWorksBlock {
+    margin: 16px 16px 49px;
+    width: auto;
+  }
 
-    .howItWorksRightSideContent, .howItWorksLeftSideContent {
-        display: none;
-    }
-    
-    .howItWorksLine {
-        width: 24px;
-        height: 304px;
-        background: url('../../img1/howItWorksLineImageM.png') no-repeat center center/ 34px 314px;
-    }
+  .howItWorksRightSideContent,
+  .howItWorksLeftSideContent {
+    display: none;
+  }
 
-    .howWorksStep {
-        font-size: 14px;
-        line-height: 17px;
-        margin: 39px 0 0 16px;
-        height: 17px;
-        position: absolute;
-    }
+  .howItWorksLine {
+    width: 24px;
+    height: 304px;
+    background: url('../../img1/howItWorksLineImageM.png') no-repeat center
+      center/ 34px 314px;
+  }
 
-    .howWorksStep1 {
-        margin-top: 4px;
-    }
+  .howWorksStep {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 39px 0 0 16px;
+    height: 17px;
+  }
 
-    .howWorksStep2 {
-        margin-top: 60px;
-    }
-    
-    .howWorksStep3 {
-        margin-top: 116px;
-    }
-    
-    .howWorksStep4 {
-        margin-top: 172px;
-    }
-    
-    .howWorksStep5 {
-        margin-top: 228px;
-    }
-    
-    .howWorksStep6 {
-        margin-top: 284px;
-    }
+  .howWorksStep1 {
+    margin-top: 4px;
+  }
 
-    .howItWorksLineTextRight {
-        width: 90%;
-    }
-    
-    .howItWorksCentreSideContent {
-        width: 100%;
-    }
-    
-    .howWorksStepLeft {
-        text-align: start;
-    }
+  .howItWorksLineTextRight {
+    width: 90%;
+  }
 
-    .howItWorksLineTextLeft {
-        width: calc(90% - 32px);
-        position: absolute;
-        margin-left: 24px;
-    }
+  .howItWorksCentreSideContent {
+    width: 100%;
+  }
 
-    .howItWorksHeader {
-        text-align: start;
-        font-size: 24px;
-        line-height: 29px;
-    }
+  .howWorksStepLeft {
+    text-align: start;
+  }
 
-    .howItWorksSubHeader {
-        text-align: start;
-        margin-top: 12px;
-    }
+  .howWorksStepMobile {
+    display: initial;
+  }
+
+  .howItWorksLineTextLeft {
+    display: none;
+    position: absolute;
+    margin-left: 24px;
+  }
+
+  .howItWorksHeader {
+    text-align: start;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .howItWorksSubHeader {
+    text-align: start;
+    margin-top: 12px;
+  }
 }

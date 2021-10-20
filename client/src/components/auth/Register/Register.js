@@ -9,18 +9,14 @@ import PropTypes from "prop-types";
 // Import Styles
 import "./Register.css";
 import showPasswordImage from "../../../img1/showPassword.png";
-import AuthSwitchBar from "../AuthSwitchBar";
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     fullname: "",
     iAmSeller: "",
     companyName: "",
-    birthDay: "1",
-    birthMonth: "1",
-    birthYear: "1920",
+    birthDay: "",
     location: "",
-    phoneMask: "",
     phoneNumber: "",
     login: "",
     email: "",
@@ -37,10 +33,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     iAmSeller,
     companyName,
     birthDay,
-    birthMonth,
-    birthYear,
     location,
-    phoneMask,
     phoneNumber,
     login,
     email,
@@ -60,9 +53,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         fullname,
         iAmSeller,
         companyName,
-        birthDay: `${("0" + birthDay).slice(-2)}.${("0" + birthMonth).slice(-2)}.${birthYear}`,
+        birthDay,
         location,
-        phoneNumber: phoneMask + phoneNumber,
+        phoneNumber,
         login,
         email,
         password
@@ -89,15 +82,14 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     <div className="authField">
       <span className="authFieldName">Enter a phone number</span>
       <div className="phoneFieldDiv">
+        {/* <input
+          className="authFieldInput phoneMask"
+          placeholder="Company's name"
+          size="1"
+          defaultValue="+7"
+        ></input> */}
         <input
           className="authFieldInput phoneMask"
-          name="phoneMask"
-          size={phoneMask ? phoneMask.length - 1 || 1 : 1}
-          value={phoneMask}
-          onChange={onChange}
-        ></input>
-        <input
-          className="authFieldInput phoneNum"
           type="text"
           placeholder="phoneNumber"
           name="phoneNumber"
@@ -116,7 +108,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   return (
     <Fragment>
       <form className="authorizingBlock" onSubmit={onSubmit}>
-        <AuthSwitchBar mode={1} />
         <div className="regFieldsBlock">
           <div className="regLeftBlock" iAmSeller={iAmSeller.toString()}>
             <div className="authField">
@@ -152,22 +143,22 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <div className="authField">
               <span className="authFieldName">Enter a your BirthDay</span>
               <div className="regBirthDaySelectDiv">
-                <select name="birthDay" className="authFieldSelect birthdaySelect birthdaySelectDay" value={birthDay} onChange={onChange}>
-                  <option>1</option>
+                {/* <select class="authFieldSelect birthdaySelect birthdaySelectDay">
+                  <option>24</option>
                 </select>
-                <select name="birthMonth" className="authFieldSelect birthdaySelect birthdaySelectMonth" value={birthMonth} onChange={onChange}>
-                  <option value="1">January</option>
+                <select class="authFieldSelect birthdaySelect birthdaySelectMonth">
+                  <option>September</option>
                 </select>
-                <select name="birthYear" className="authFieldSelect birthdaySelect birthdaySelectYear" value={birthYear} onChange={onChange}>
-                  <option>1920</option>
-                </select>
-                {/* <input
+                <select class="authFieldSelect birthdaySelect birthdaySelectYear">
+                  <option>1998</option>
+                </select> */}
+                <input
                   type="text"
                   placeholder="birthDay"
                   name="birthDay"
                   value={birthDay}
                   onChange={onChange}
-                /> */}
+                />
               </div>
             </div>
             <div className="authField">

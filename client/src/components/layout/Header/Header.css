@@ -18,12 +18,6 @@ span {
   align-items: center;
 }
 
-.headerCentre {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
 .headerLogo {
   margin-left: 28px;
   width: 194px;
@@ -61,7 +55,7 @@ span {
   color: black;
 }
 
-.headerNavigation, .headerMobileMenuList {
+.headerNavigation {
   display: none;
 }
 
@@ -129,7 +123,8 @@ span {
   margin-left: 13px;
   width: 12px;
   height: 6px;
-  background: url('../../../img1/headerUserMenuArrow.png') no-repeat center center/cover;
+  background: url('../../../img1/headerUserMenuArrow.png') no-repeat center
+    center/cover;
 }
 
 @media (max-width: 700px) {
@@ -159,6 +154,7 @@ span {
   .headerNavigation {
     text-align: center;
     display: block;
+    background-color: transparent;
     border-width: 0;
     outline: none;
     font-family: Montserrat;
@@ -167,30 +163,9 @@ span {
     font-size: 18px;
     line-height: 22px;
     color: #ffffff;
-    padding-right: 16px;
-    background: url('../../../img1/headerUserMenuArrow.png') no-repeat center right/8px;
   }
 
   .headerNavigation > option {
     color: black;
-  }
-
-
-  .headerMobileMenuList[opened="true"] {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    margin-top: 22px;
-    z-index: 100;
-    background-color: white;
-    padding: 5px;
-  }
-
-  .headerMobileMenuList > a {
-    text-decoration: none;
-    color: black;
-    font-size: 18px;
-    line-height: 22px;
-    margin-bottom: 5px;
   }
 }

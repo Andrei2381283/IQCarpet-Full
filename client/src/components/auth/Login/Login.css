@@ -18,7 +18,11 @@
   color: #5282c3;
 }
 
-.authField:nth-child(3) {
+.authField:nth-child(1) {
+  margin-top: 32px;
+}
+
+.authField:nth-child(2) {
   margin-top: 24px;
 }
 

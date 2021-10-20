@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 
-import "./Auth.css";
-
 import AuthIllustration from "../../img1/illustration.png";
 
 import Register from "./Register/Register";
 import Login from "./Login/Login";
 import PasswordRecovery from "./PasswordRecovery/PasswordRecovery";
 import NewPassword from "./NewPassword/NewPassword";
+
+import "./Auth.css";
 
 const Auth = () => {
   return (

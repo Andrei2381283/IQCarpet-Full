@@ -96,52 +96,6 @@
   height: 32px;
 }
 
-
-
-.authSwitchBar {
-  display: flex;
-  margin: 0 0 31px 35px;
-  height: 34px;
-}
-
-.authSwitchBar > a {
-  font-size: 18px;
-  line-height: 24px;
-  display: flex;
-  justify-content: center;
-  color: #7A7D80;  
-}
-
-.authSwitchBar > .selectedSwitchButton {
-  color: #000000;
-}
-
-.authSwitchBar > a:nth-child(1) {
-  width: 106px;
-}
-
-.authSwitchBar > a:nth-child(2) {
-  width: 54px;
-  margin-left: 113px;
-}
-
-.authSwitchBar > div {
-  position: absolute;
-  height: 1px;
-  background: #5282C3;
-  width: 175px;
-  margin-top: 34px;
-}
-
-.authSwitchBar[mode="1"] > div {
-  margin-left: -35px;
-}
-
-.authSwitchBar[mode="2"] > div {
-  margin-left: 154px;
-}
-
-
 @media (max-width: 700px) {
   .authField,
   .authFieldInput {
@@ -170,23 +124,5 @@
 
   .submitButtonDiv {
     margin-top: 64px;
-  }
-
-
-
-  .authSwitchBar {
-    margin: 0;
-    margin-bottom: 32px;
-    height: auto;
-    justify-content: space-around;
-  }
-  
-  .authSwitchBar > a, .authSwitchBar > a:nth-child(2) {
-    width: auto;
-    margin: 0;
-  }
-
-  .authSwitchBar > div {
-    display: none;
   }
 }

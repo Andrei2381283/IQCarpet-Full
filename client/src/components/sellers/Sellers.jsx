@@ -1,21 +1,44 @@
 // Import Engine
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getSellersCards } from "../../actions/profile";
 
-import "./Sellers.css";
-import SellerCardTestIcon from "../../img1/sellerCardTestIcon.png";
-
+// Import Components
 import SearchBlock from "../searchBlock/SearchBlock";
 import BackButton from "../backButton/BackButton";
 import Filter from "../filter/Filter";
 import SumField from "../filter/SumField";
 import FilterField from "../filter/FilterField";
 import SellerCard from "./sellerCard/SellerCard";
-import { Link } from "react-router-dom";
+import Spinner from "../layout/Spinner";
 
-const Sellers = () => {
+// Import Styles
+import "./Sellers.css";
+import SellerCardTestIcon from "../../img1/sellerCardTestIcon.png";
+
+const Sellers = ({ getSellersCards, profile: { profiles, loading } }) => {
+  useEffect(() => {
+    getSellersCards();
+  }, [getSellersCards]);
+
+  const [input, setInput] = useState("");
+
+  const onChange = (e) => {
+    e.preventDefault();
+    setInput(e.target.value);
+  };
+
+  if (input.length > 0) {
+    profiles = profiles.filter((i) => {
+      return i.companyName.toLowerCase().match(input);
+    });
+  }
+
   return (
     <Fragment>
-      <SearchBlock headerName="Sellers" />
+      <SearchBlock onChange={onChange} value={input} headerName="Sellers" />
       <BackButton />
       <span className="sellersHeader">All sellers</span>
       <div className="sellersContentDiv">
@@ -33,92 +56,26 @@ const Sellers = () => {
             params={["Rectangle", "Square", "Oval", "Circle"]}
           />
         </Filter>
-        <div className="sellersListDiv">
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-          <SellerCard
-            img={SellerCardTestIcon}
-            name="CaprePerfect"
-            country="India"
-            price="From $24 to $32"
-            link="."
-          />
-        </div>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <div className="sellersListDiv">
+            {profiles.length > 0 ? (
+              profiles.map((profile) => (
+                <SellerCard
+                  key={profile._id}
+                  img={SellerCardTestIcon}
+                  name={profile.companyName}
+                  country={profile.location}
+                  price="From $24 to $32"
+                  link={`/company/${profile.user}`}
+                />
+              ))
+            ) : (
+              <h1>No Profiles Found...</h1>
+            )}
+          </div>
+        )}
       </div>
       <div className="sellersPagesDiv">
         <Link to="">1</Link>
@@ -127,4 +84,13 @@ const Sellers = () => {
   );
 };
 
-export default Sellers;
+Sellers.propTypes = {
+  getSellersCards: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, { getSellersCards })(Sellers);
