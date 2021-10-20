@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../../actions/auth";
+import AuthSwitchBar from "../AuthSwitchBar";
 
 import "./Login.css";
 
@@ -29,6 +30,7 @@ const Login = ({ login, isAuthenticated }) => {
   return (
     <Fragment>
       <form className="authorizingBlock" onSubmit={onSubmit}>
+        <AuthSwitchBar mode={2} />
         <div className="authField">
           <span className="authFieldName">Enter your Email or Login</span>
           {/* <input

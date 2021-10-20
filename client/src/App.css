@@ -8,9 +8,19 @@
 }
 
 * {
-  box-sizing: border-box;
+  object-fit: contain;
+
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+}
+
+input[type="file"] {
+    display: none;
 }
 
 body {
@@ -36,11 +46,11 @@ img {
 
 /* Utilities */
 .container {
-  margin: auto;
+  margin: 0;
   overflow: hidden;
-  padding: 0 2rem;
-  margin-top: 6rem;
-  margin-bottom: 3rem;
+  /* padding: 0 2rem; */
+  /* margin-top: 6rem; */
+  /* margin-bottom: 3rem; */
 }
 
 /* Text Styles*/
@@ -490,7 +500,7 @@ button {
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
-    margin-top: 8rem;
+    /* margin-top: 8rem; */
   }
 
   .hide-sm {
