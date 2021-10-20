@@ -3,13 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./SellerCard.css";
 
-const SellerCard = ({
-  img = "",
-  name = "",
-  country = "",
-  price = "",
-  link = "."
-}) => {
+const SellerCard = ({ img, name, country, price, link }) => {
   return (
     <div className="sellerCardBlock">
       <img className="sellerCardImg" src={img} />

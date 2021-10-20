@@ -1,0 +1,43 @@
+.carpetCardDiv {
+    display: flex;
+    flex-direction: column;
+    background: #DAE5F6;
+    border-radius: 12px;
+    min-width: 240px;
+    margin: 0 14px;
+    text-decoration: none;
+}
+
+.carpetCardImage {
+    width: 100%;
+    height: 234px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+    background: #F3F5FB;
+}
+
+.carpetCardHeader {
+    margin: 8px 12px 0;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000000;
+}
+
+.carpetCardText {
+    margin: 8px 12px 8px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000000;
+}
+
+
+
+@media (max-width: 700px) {
+    
+}

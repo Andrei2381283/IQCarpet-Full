@@ -9,7 +9,9 @@ import {
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
   GET_REPOS,
-  NO_REPOS
+  NO_REPOS,
+  SEARCH_SELLER,
+  SEARCH_SELLER_ERROR,
 } from "./types";
 
 // Get current users profile
@@ -36,51 +38,110 @@ export const getMySellerCard = () => async (dispatch) => {
 
     dispatch({
       type: GET_PROFILE,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get all Sellers Cards
+export const getSellersCards = () => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+
+  try {
+    const res = await api.get("/seller-card/all");
+
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
 
 // Get all profiles
-export const getProfiles = () => async (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
+// export const getProfiles = () => async (dispatch) => {
+//   dispatch({ type: CLEAR_PROFILE });
 
+//   try {
+//     const res = await api.get("/profile");
+
+//     dispatch({
+//       type: GET_PROFILES,
+//       payload: res.data
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: PROFILE_ERROR,
+//       payload: { msg: err.response.statusText, status: err.response.status }
+//     });
+//   }
+// };
+
+// Get Seller Card by ID
+export const getSellerCardByUserId = (userId) => async (dispatch) => {
   try {
-    const res = await api.get("/profile");
-
-    dispatch({
-      type: GET_PROFILES,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
-
-// Get profile by ID
-export const getProfileById = (userId) => async (dispatch) => {
-  try {
-    const res = await api.get(`/profile/user/${userId}`);
+    const res = await api.get(`/seller-card/user/${userId}`);
 
     dispatch({
       type: GET_PROFILE,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
+
+// export const searchSeller = (companyName) => async (dispatch) => {
+//   try {
+//     const res = await api.get("/seller-card/all");
+
+//     res.data.filter((profile) =>
+//       profile.companyName != companyName
+//         ? dispatch({
+//             type: SEARCH_SELLER_ERROR,
+//             payload: "Error Search Seller",
+//           })
+//         : dispatch({
+//             type: SEARCH_SELLER,
+//             payload: companyName,
+//           })
+//     );
+//   } catch (err) {
+//     dispatch({
+//       type: SEARCH_SELLER_ERROR,
+//       payload: "Error Search Seller",
+//     });
+//   }
+// };
+
+// Get profile by ID
+// export const getProfileById = (userId) => async (dispatch) => {
+//   try {
+//     const res = await api.get(`/profile/user/${userId}`);
+
+//     dispatch({
+//       type: GET_PROFILE,
+//       payload: res.data,
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: PROFILE_ERROR,
+//       payload: { msg: err.response.statusText, status: err.response.status },
+//     });
+//   }
+// };
 
 // Get Github repos
 export const getGithubRepos = (username) => async (dispatch) => {
@@ -89,11 +150,11 @@ export const getGithubRepos = (username) => async (dispatch) => {
 
     dispatch({
       type: GET_REPOS,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: NO_REPOS
+      type: NO_REPOS,
     });
   }
 };
@@ -107,7 +168,7 @@ export const createProfile =
 
       dispatch({
         type: GET_PROFILE,
-        payload: res.data
+        payload: res.data,
       });
 
       dispatch(
@@ -126,7 +187,7 @@ export const createProfile =
 
       dispatch({
         type: PROFILE_ERROR,
-        payload: { msg: err.response.statusText, status: err.response.status }
+        payload: { msg: err.response.statusText, status: err.response.status },
       });
     }
   };
@@ -138,7 +199,7 @@ export const addExperience = (formData, history) => async (dispatch) => {
 
     dispatch({
       type: UPDATE_PROFILE,
-      payload: res.data
+      payload: res.data,
     });
 
     dispatch(setAlert("Experience Added", "success"));
@@ -153,7 +214,7 @@ export const addExperience = (formData, history) => async (dispatch) => {
 
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
@@ -165,7 +226,7 @@ export const addEducation = (formData, history) => async (dispatch) => {
 
     dispatch({
       type: UPDATE_PROFILE,
-      payload: res.data
+      payload: res.data,
     });
 
     dispatch(setAlert("Education Added", "success"));
@@ -180,7 +241,7 @@ export const addEducation = (formData, history) => async (dispatch) => {
 
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
@@ -192,14 +253,14 @@ export const deleteExperience = (id) => async (dispatch) => {
 
     dispatch({
       type: UPDATE_PROFILE,
-      payload: res.data
+      payload: res.data,
     });
 
     dispatch(setAlert("Experience Removed", "success"));
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
@@ -211,14 +272,14 @@ export const deleteEducation = (id) => async (dispatch) => {
 
     dispatch({
       type: UPDATE_PROFILE,
-      payload: res.data
+      payload: res.data,
     });
 
     dispatch(setAlert("Education Removed", "success"));
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
@@ -236,7 +297,7 @@ export const deleteAccount = () => async (dispatch) => {
     } catch (err) {
       dispatch({
         type: PROFILE_ERROR,
-        payload: { msg: err.response.statusText, status: err.response.status }
+        payload: { msg: err.response.statusText, status: err.response.status },
       });
     }
   }

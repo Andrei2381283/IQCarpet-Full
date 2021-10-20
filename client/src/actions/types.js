@@ -25,3 +25,7 @@ export const ADD_COMMENT = "ADD_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
 export const UPDATE_USER = "UPDATE_USER";
 export const USER_ERROR = "USER_ERROR";
+export const SEARCH_SELLER = "SEARCH_SELLER";
+export const SEARCH_SELLER_ERROR = "SEARCH_SELLER_ERROR";
+export const NEW_ORDER = "NEW_ORDER";
+export const NEW_ORDER_ERROR = "NEW_ORDER_ERROR";

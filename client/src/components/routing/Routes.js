@@ -7,8 +7,8 @@ import MyProfile from "../dashboard/MyProfile";
 // import ProfileForm from "../profile-forms/ProfileForm";
 import AddExperience from "../profile-forms/AddExperience";
 import AddEducation from "../profile-forms/AddEducation";
-import Profiles from "../profiles/Profiles";
-import Profile from "../profile/Profile";
+// import Profiles from "../profiles/Profiles";
+// import Profile from "../profile/Profile";
 import Posts from "../posts/Posts";
 import Post from "../post/Post";
 import NotFound from "../layout/NotFound";
@@ -16,9 +16,11 @@ import PrivateRoute from "./PrivateRoute";
 
 import HowItWorksPage from "../howItWorksPage/HowItWorksPage";
 import Sellers from "../sellers/Sellers";
+import Company from "../company/Company";
 import Support from "../support/Support";
 import Chats from "../chats/Chats";
 import Orders from "../orders/Orders";
+import NewOrder from "../newOrder/NewOrder";
 
 import Auth from "../auth/Auth";
 
@@ -31,14 +33,16 @@ const Routes = () => {
         <Route exact path="/login" component={Auth} />
         <Route exact path="/password_recovery" component={Auth} />
         <Route exact path="/new_password" component={Auth} />
-        <Route exact path="/profiles" component={Profiles} />
-        <Route exact path="/profile/:id" component={Profile} />
+        {/* <Route exact path="/profiles" component={Profiles} /> */}
+        {/* <Route exact path="/profile/:id" component={Profile} /> */}
         <PrivateRoute exact path="/dashboard" component={MyProfile} />
         <Route exact path="/how-it-works" component={HowItWorksPage} />
         <Route exact path="/sellers" component={Sellers} />
+        <Route exact path="/company/:id" component={Company} />
         <Route exact path="/support" component={Support} />
         <Route exact path="/chats" component={Chats} />
         <Route exact path="/orders" component={Orders} />
+        <Route exact path="/new-order/:id" component={NewOrder} />
         {/* <PrivateRoute exact path="/create-profile" component={ProfileForm} /> */}
         {/* <PrivateRoute exact path="/edit-profile" component={ProfileForm} /> */}
         <PrivateRoute exact path="/add-experience" component={AddExperience} />
