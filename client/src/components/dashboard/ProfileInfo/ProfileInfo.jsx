@@ -2,14 +2,16 @@ import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import CompanyMoreInfo from "./CompanyInfo/CompanyMoreInfo";
-import CompanyMoreInfoSettings from "./CompanyInfo/CompanyMoreInfoSettings";
+import "./ProfileInfo.css";
 
 import ProfileMoreInfo from "./ProfileMoreInfo/ProfileMoreInfo";
 import ProfileMoreInfoSettings from "./ProfileMoreInfo/ProfileMoreInfoSettings";
 import ButtonBackArrow from "../../../img1/buttonBackArrow.png";
 
-import "./ProfileInfo.css";
+import CompanyMoreInfo from "./CompanyInfo/CompanyMoreInfo";
+import CompanyMoreInfoSettings from "./CompanyInfo/CompanyMoreInfoSettings";
+import CompanyWhatMake from "../../company/CompanyWhatMake/CompanyWhatMake";
+import CompanyWhatMakeSettings from "./CompanyWhatMakeSettings.jsx";
 
 const ProfileInfo = ({
   fullname,
@@ -36,6 +38,11 @@ const ProfileInfo = ({
   const openCompanySettings = () =>
     toggleEditCompanyInfo(!displayEditCompanyInfo);
 
+  const [displayEditWhatMake, toggleEditWhatMake] = useState(false);
+
+  const openWhatMakeSettings = () =>
+    toggleEditWhatMake(!displayEditWhatMake);
+
   const editProfile = (
     <ProfileMoreInfoSettings mobileInfoHidden={mobileInfoHidden} />
   );
@@ -57,6 +64,7 @@ const ProfileInfo = ({
   const infoCompany = (
     <CompanyMoreInfo
       companyName={profileCompanyName}
+      location={location}
       emailOne={profileEmailOne}
       phoneNumberOne={profilePhoneNumberOne}
       mobileInfoHidden={mobileInfoHidden}
@@ -85,7 +93,7 @@ const ProfileInfo = ({
             </span>
             <div className="editExitButtonsDiv">
               <button onClick={openProfileSettings} className="editButton">
-                Edit
+                  {displayEditProfile ? "Cancel" : "Edit"}
               </button>
               <button onClick={logout} className="exitButton">Exit</button>
             </div>
@@ -95,7 +103,7 @@ const ProfileInfo = ({
         </div>
       </div>
       {iAmSeller && (
-        <div className="profileInfo" active={!mobileInfoHidden + ""}>
+        <div className="companyProfile" active={!mobileInfoHidden + ""}>
           <img className="profileImage" src="" />
           <div className="profileInfoContent">
             <div className="nameAndButtonsDiv">
@@ -115,16 +123,24 @@ const ProfileInfo = ({
               </span>
               <div className="editExitButtonsDiv">
                 <button onClick={openCompanySettings} className="editButton">
-                  Edit
+                  {displayEditCompanyInfo ? "Cancel" : "Edit"}
                 </button>
-                <button onClick={logout} className="exitButton">Exit</button>
+                {/* <button onClick={logout} className="exitButton">Exit</button> */}
               </div>
             </div>
-            <span className="profileLogin">{login}</span>
-            {displayEditProfile ? editCompanyInfo : infoCompany}
+            {/* <span className="profileLogin">{login}</span> */}
+            {displayEditCompanyInfo ? editCompanyInfo : infoCompany}
           </div>
         </div>
       )}
+      {iAmSeller && <div>
+        <button onClick={openWhatMakeSettings} className="editButton whatWeMakeEditButton">
+          {displayEditWhatMake ? "Cancel" : "Edit"}
+        </button>
+        {
+          displayEditWhatMake ? <CompanyWhatMakeSettings data={{country: location}} /> : <CompanyWhatMake data={{country: location}} />
+        }
+      </div>}
     </Fragment>
   );
 };

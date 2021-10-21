@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom";
 /* import Register from "../auth/Register/Register";
 import Login from "../auth/Login/Login"; */
 import Alert from "../layout/Alert";
-import MyProfile from "../dashboard/MyProfile";
 // import ProfileForm from "../profile-forms/ProfileForm";
 import AddExperience from "../profile-forms/AddExperience";
 import AddEducation from "../profile-forms/AddEducation";
@@ -17,6 +16,7 @@ import PrivateRoute from "./PrivateRoute";
 import HowItWorksPage from "../howItWorksPage/HowItWorksPage";
 import Sellers from "../sellers/Sellers";
 import Company from "../company/Company";
+import MyProfile from "../dashboard/MyProfile";
 import Support from "../support/Support";
 import Chats from "../chats/Chats";
 import Orders from "../orders/Orders";

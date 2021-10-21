@@ -110,6 +110,12 @@
   transform: matrix(0, 1, 1, 0, 0, 0);
 }
 
+.whatWeMakeEditButton {
+  position: absolute;
+  right: 93px;
+  margin: 40px 0 0;
+}
+
 @media (max-width: 700px) {
   .moreDetailsText {
     display: initial;
@@ -177,6 +183,13 @@
   }
   .exitButton {
     margin-right: 0;
+  }
+
+  
+
+  .whatWeMakeEditButton {
+    right: 31px;
+    margin: 25px 0 0;
   }
 
   .profileInfo[active="true"] {

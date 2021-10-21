@@ -106,7 +106,6 @@
 
 .submitButton {
   cursor: pointer;
-  box-sizing: border-box;
   margin-top: 24px;
   min-width: 241px;
   background: #5282c3;
@@ -119,6 +118,7 @@
   line-height: 24px;
   color: #ffffff;
   border-width: 0;
+  height: 32px;
 }
 
 .profChangePassButton {
@@ -136,6 +136,14 @@
   line-height: 24px;
   color: #ffffff;
   border-width: 0;
+}
+
+.companyInfoSubmit {
+  margin-top: auto;
+}
+
+.companyLinksBlockMoreInfo {
+  width: auto;
 }
 
 @media (max-width: 700px) {

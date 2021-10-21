@@ -3,7 +3,10 @@ import CarpetForms from "./CarpetForms/CarpetForms";
 
 import "./CompanyWhatMake.css";
 
-const CompanyWhatMake = () => {
+const CompanyWhatMake = ({ data = {} }) => {
+
+    const {binding, sizeFrom, sizeTo, category, forms, country, material, price} = data;
+
     return (
         <div className="companyWhatMakeBlock">
             <h2 className="companyWhatMakeHeader">What we make</h2>
@@ -11,38 +14,38 @@ const CompanyWhatMake = () => {
                 <div className="companyMakeDiv">
                     <div className="companyMakeCategory1">
                         <span className="companyMakeCategHeader">Type of binding</span>
-                        <span className="companyMakeCategText">Machine, manual</span>
+                        <span className="companyMakeCategText">{binding}</span>
                     </div>
                     <div className="companyMakeCategory1 companyMakeCategory2">
                         <span className="companyMakeCategHeader">Size</span>
-                        <span className="companyMakeCategText">From 40x40 to 300x300 in sm</span>
-                        <span className="companyMakeCategText">From 1,3x1,3 to 9,8x9,8 in ft</span>
+                        <span className="companyMakeCategText">{sizeFrom}</span>
+                        <span className="companyMakeCategText">{sizeTo}</span>
                     </div>
                 </div>
                 <div className="companyMakeDiv">
                     <div className="companyMakeCategory1">
                         <span className="companyMakeCategHeader">Category</span>
-                        <span className="companyMakeCategText">Modern, eastern</span>
+                        <span className="companyMakeCategText">{category}</span>
                     </div>
                     <div className="companyMakeCategory1 companyMakeCategory2">
                         <span className="companyMakeCategHeader">Form</span>
-                        <CarpetForms forms={["Rectangle", "Square", "Circle", "Oval"]} />
+                        <span className="companyMakeCategText">{forms}</span>
                     </div>
                 </div>
                 <div className="companyMakeDiv">
                     <div className="companyMakeCategory1">
                         <span className="companyMakeCategHeader">Country</span>
-                        <span className="companyMakeCategText">India</span>
+                        <span className="companyMakeCategText">{country}</span>
                     </div>
                     <div className="companyMakeCategory1 companyMakeCategory2">
                         <span className="companyMakeCategHeader">Material</span>
-                        <span className="companyMakeCategText">Wool, silk, cotton, jute</span>
+                        <span className="companyMakeCategText">{material}</span>
                     </div>
                 </div>
                 <div className="companyMakeDiv">
                     <div className="companyMakeCategory1">
                         <span className="companyMakeCategHeader">Price</span>
-                        <span className="companyMakeCategText">From $15 to $400</span>
+                        <span className="companyMakeCategText">{price}</span>
                     </div>
                     <div className="companyMakeCategory1 makeOrderDiv">
                         <button className="companyMakeOrderButton">Make an Order</button>
