@@ -52,6 +52,30 @@ export const editUserProfile = (formData) => async (dispatch) => {
   }
 };
 
+export const editUserProfileAndUploadAvatar = (data) => async (dispatch) => {
+  try {
+    const res = await api.post("/auth/settings/upload-avatar", data);
+
+    dispatch({
+      type: UPDATE_USER,
+      payload: res.data
+    });
+
+    dispatch(setAlert("User Profile Updated", "success"));
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+    }
+
+    dispatch({
+      type: USER_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
 // Register User
 export const register = (formData) => async (dispatch) => {
   try {

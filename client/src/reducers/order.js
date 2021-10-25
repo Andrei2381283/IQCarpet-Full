@@ -1,27 +1,33 @@
-import { NEW_ORDER, NEW_ORDER_ERROR } from "../actions/types";
+import { GET_ORDER, GET_ORDERS, ORDER_ERROR } from "../actions/types";
 
 const initialState = {
   order: null,
   orders: [],
   loading: true,
-  error: {},
+  error: {}
 };
 
 function profileReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case NEW_ORDER:
+    case GET_ORDER:
       return {
         ...state,
-        profile: payload,
-        loading: false,
+        order: payload,
+        loading: false
       };
-    case NEW_ORDER_ERROR:
+    case GET_ORDERS:
+      return {
+        ...state,
+        orders: payload,
+        loading: false
+      };
+    case ORDER_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false,
+        loading: false
       };
     default:
       return state;

@@ -103,29 +103,6 @@ export const getSellerCardByUserId = (userId) => async (dispatch) => {
   }
 };
 
-// export const searchSeller = (companyName) => async (dispatch) => {
-//   try {
-//     const res = await api.get("/seller-card/all");
-
-//     res.data.filter((profile) =>
-//       profile.companyName != companyName
-//         ? dispatch({
-//             type: SEARCH_SELLER_ERROR,
-//             payload: "Error Search Seller",
-//           })
-//         : dispatch({
-//             type: SEARCH_SELLER,
-//             payload: companyName,
-//           })
-//     );
-//   } catch (err) {
-//     dispatch({
-//       type: SEARCH_SELLER_ERROR,
-//       payload: "Error Search Seller",
-//     });
-//   }
-// };
-
 // Get profile by ID
 // export const getProfileById = (userId) => async (dispatch) => {
 //   try {

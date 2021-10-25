@@ -1,6 +1,6 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 import ProfileMoreInfo from "./ProfileMoreInfo/ProfileMoreInfo";
 import ProfileMoreInfoSettings from "./ProfileMoreInfo/ProfileMoreInfoSettings";
@@ -12,6 +12,7 @@ import CompanyMoreInfoSettings from "./CompanyInfo/CompanyMoreInfoSettings";
 import "./ProfileInfo.css";
 
 const ProfileInfo = ({
+  avatar,
   fullname,
   login,
   birthDay,
@@ -66,7 +67,7 @@ const ProfileInfo = ({
   return (
     <Fragment>
       <div className="profileInfo" active={!mobileInfoHidden + ""}>
-        <img className="profileImage" src="" />
+        <img className="profileImage" src={avatar?.url} alt="No Photo" />
         <div className="profileInfoContent">
           <div className="nameAndButtonsDiv">
             <div className="nameAndRoleDiv">
@@ -87,7 +88,9 @@ const ProfileInfo = ({
               <button onClick={openProfileSettings} className="editButton">
                 Edit
               </button>
-              <button onClick={logout} className="exitButton">Exit</button>
+              <button onClick={logout} className="exitButton">
+                Exit
+              </button>
             </div>
           </div>
           <span className="profileLogin">{login}</span>
@@ -117,7 +120,9 @@ const ProfileInfo = ({
                 <button onClick={openCompanySettings} className="editButton">
                   Edit
                 </button>
-                <button onClick={logout} className="exitButton">Exit</button>
+                <button onClick={logout} className="exitButton">
+                  Exit
+                </button>
               </div>
             </div>
             <span className="profileLogin">{login}</span>

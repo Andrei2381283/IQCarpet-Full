@@ -9,6 +9,7 @@ import Education from "./Education";
 // import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 // import { loadUser } from "../../actions/auth";
 import { getMySellerCard } from "../../actions/profile";
+import { getOrders } from "../../actions/order";
 import { logout } from "../../actions/auth";
 
 import BackButton from "../backButton/BackButton";
@@ -23,15 +24,23 @@ const MyProfile = ({
   // getCurrentProfile,
   // loadUser,
   getMySellerCard,
+  getOrders,
   // sellerCard: { sellerCard },
   // deleteAccount,
   auth: { user },
   profile: { profile },
+  order: { orders },
   logout
 }) => {
   useEffect(() => {
     getMySellerCard();
   }, [getMySellerCard]);
+
+  useEffect(() => {
+    getOrders();
+  }, [getOrders]);
+
+  // console.log(orders.map((order) => order.buyer));
 
   return (
     <Fragment>
@@ -41,6 +50,7 @@ const MyProfile = ({
       </div>
       <span className="profileHeader profileAboutMeText">About me1</span>
       <ProfileInfo
+        avatar={user && user.avatar}
         fullname={user && user.fullname}
         login={user && user.login}
         birthDay={user && user.birthDay}
@@ -56,37 +66,28 @@ const MyProfile = ({
       />
       {/* {user.iAmSeller && } */}
       <div className="profileHeaderDiv">
-        <span className="profOrdersText">My orders(4)</span>
+        <span className="profOrdersText">
+          My orders({orders && orders.length})
+        </span>
         <Link className="profOrdersLink" to="/orders">
           View all
         </Link>
       </div>
       <div className="profileOrdersDiv">
-        <OrderCard isSent img="" name="Favorit-Capret" />
-        <OrderCard isSent img="" name="Favorit-Capret" />
-        <OrderCard img="" name="Favorit-Capret" />
-        <OrderCard img="" name="Favorit-Capret" />
+        {orders
+          ? orders.map((order) => (
+              <OrderCard
+                iAmSeller={user && user.iAmSeller}
+                myName={user && user.fullname}
+                key={order._id}
+                isSent
+                img=""
+                sellerName={order.seller.fullname}
+                nameBuyer={order.buyer.fullname}
+              />
+            ))
+          : "Orders Not Found!"}
       </div>
-      {/* {profile !== null ? (
-        <Fragment>
-          <DashboardActions />
-          <Experience experience={profile.experience} />
-          <Education education={profile.education} />
-
-          <div className="my-2">
-            <button className="btn btn-danger" onClick={() => deleteAccount()}>
-              <i className="fas fa-user-minus" /> Delete My Account
-            </button>
-          </div>
-        </Fragment>
-      ) : (
-        <Fragment>
-          <p>You have not yet setup a profile, please add some info</p>
-          <Link to="/create-profile" className="btn btn-primary my-1">
-            Create Profile
-          </Link>
-        </Fragment>
-      )} */}
     </Fragment>
   );
 };
@@ -94,20 +95,23 @@ const MyProfile = ({
 MyProfile.propTypes = {
   // loadUser: PropTypes.func.isRequired,
   getMySellerCard: PropTypes.func.isRequired,
+  getOrders: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   // deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  order: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   // sellerCard: state.
-  profile: state.profile
+  profile: state.profile,
+  order: state.order
 });
 
 export default connect(mapStateToProps, {
   getMySellerCard,
-  getMySellerCard,
+  getOrders,
   logout
 })(MyProfile);

@@ -40,9 +40,9 @@ const Routes = () => {
         <Route exact path="/sellers" component={Sellers} />
         <Route exact path="/company/:id" component={Company} />
         <Route exact path="/support" component={Support} />
-        <Route exact path="/chats" component={Chats} />
-        <Route exact path="/orders" component={Orders} />
-        <Route exact path="/new-order/:id" component={NewOrder} />
+        <PrivateRoute exact path="/chats" component={Chats} />
+        <PrivateRoute exact path="/orders" component={Orders} />
+        <PrivateRoute exact path="/new-order/:id" component={NewOrder} />
         {/* <PrivateRoute exact path="/create-profile" component={ProfileForm} /> */}
         {/* <PrivateRoute exact path="/edit-profile" component={ProfileForm} /> */}
         <PrivateRoute exact path="/add-experience" component={AddExperience} />

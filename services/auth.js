@@ -2,16 +2,20 @@
 const config = require("config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const fs = require("fs");
 
 // Improt Models
 const UserModel = require("../models/User");
+const AvatarModel = require("../models/Avatar");
 
 // Import Validate
 const { validationResult } = require("express-validator");
 
 const getMyProfile = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.user.id).select("-password");
+    const user = await UserModel.findById(req.user.id)
+      .populate("avatar")
+      .select("-password");
     res.json(user);
   } catch (err) {
     console.error(err.message);
@@ -90,31 +94,31 @@ const myProfileSettings = async (req, res) => {
       email
     } = req.body;
 
-    // TODO: Сделать валидацию для ввода символов в fullname и дургие поля,
+    // TODO: Сделать валидацию для ввода символов в fullname и другие поля,
     // сделать валидацию на пустые строки и пробелы в форме
     if (fullname) {
       user.fullname = fullname;
     }
 
-    // TODO: Сделать валидацию для ввода символов в fullname и дургие поля,
+    // TODO: Сделать валидацию для ввода символов в fullname и другие поля,
     // сделать валидацию на пустые строки и пробелы в форме
     if (birthDay) {
       user.birthDay = birthDay;
     }
 
-    // TODO: Сделать валидацию для ввода символов в fullname и дургие поля,
+    // TODO: Сделать валидацию для ввода символов в fullname и другие поля,
     // сделать валидацию на пустые строки и пробелы в форме
     if (location) {
       user.location = location;
     }
 
-    // TODO: Сделать валидацию для ввода символов в fullname и дургие поля,
+    // TODO: Сделать валидацию для ввода символов в fullname и другие поля,
     // сделать валидацию на пустые строки и пробелы в форме
     if (phoneNumber) {
       user.phoneNumber = phoneNumber;
     }
 
-    // TODO: Сделать валидацию для ввода символов в fullname и дургие поля,
+    // TODO: Сделать валидацию для ввода символов в fullname и другие поля,
     // сделать валидацию на пустые строки и пробелы в форме
     if (email) {
       user.email = email;
@@ -137,8 +141,115 @@ const myProfileSettings = async (req, res) => {
   }
 };
 
+const myProfileSettingsUploadAvatar = async (req, res) => {
+  try {
+    const avatar = await AvatarModel.findOne({ user: req.user.id });
+
+    if (!avatar) {
+      const { file } = req;
+
+      if (!file) {
+        return res.status(400).json({
+          statusCode: 400,
+          stringStatus: "Bad Request",
+          message: "Поле с файлом не найдено!"
+        });
+      }
+
+      const ext = file.originalname.split(".").pop();
+
+      const newAvatar = await AvatarModel.create({
+        filename: file.path.split("\\").pop(),
+        ext: ext,
+        url: `${req.protocol}://${
+          req.headers.host
+        }/files/images/avatars/${file.path.split("\\").pop()}`,
+        user: req.user.id
+      });
+
+      await UserModel.updateOne(
+        { _id: req.user.id },
+        {
+          $set: {
+            avatar: newAvatar._id
+          }
+        }
+      );
+
+      const updatedUser = await UserModel.findOne({ _id: req.user.id })
+        .populate("subscriptions frineds")
+        .select("-password");
+
+      return res.status(200).json(updatedUser);
+    }
+
+    fs.unlink(
+      `./public/files/images/avatars/${avatar.filename}`,
+      function (err) {
+        if (err) {
+          console.log(err);
+          return res.status(400).json({
+            statusCode: 400,
+            stringStatus: "Bad Request",
+            message: `Something went wrong! ${err}`
+          });
+        }
+      }
+    );
+    await AvatarModel.deleteOne({ user: req.user.id });
+
+    const { file } = req;
+
+    if (!file) {
+      return res.status(400).json({
+        statusCode: 400,
+        stringStatus: "Bad Request",
+        message: "Поле с файлом не найдено!"
+      });
+    }
+
+    const ext = file.originalname.split(".").pop();
+
+    const newAvatar = await AvatarModel.create({
+      filename: file.path.split("\\").pop(),
+      ext: ext,
+      url: `${req.protocol}://${
+        req.headers.host
+      }/files/images/avatars/${file.path.split("\\").pop()}`,
+      user: req.user.id
+    });
+
+    await UserModel.updateOne(
+      { _id: req.user.id },
+      {
+        $set: {
+          avatar: newAvatar._id
+        }
+      }
+    );
+
+    const updatedUser = await UserModel.findOne({ _id: req.user.id })
+      .populate("subscriptions frineds")
+      .select("-password");
+
+    return res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json({
+      statusCode: "500",
+      stringStatus: "Error",
+      message: `Something went wrong! ${err}`
+    });
+    console.log({
+      statusCode: "500",
+      stringStatus: "Error",
+      message: `Something went wrong! ${err}`
+    });
+  }
+};
+
 module.exports = {
   getMyProfile,
   authLogin,
-  myProfileSettings
+  myProfileSettings,
+  myProfileSettingsUploadAvatar
 };

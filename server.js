@@ -10,6 +10,7 @@ connectDB();
 // Init Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 // Define Routes
 app.use("/api/users", require("./routes/api/users"));

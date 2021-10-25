@@ -8,11 +8,15 @@ const auth = require("../../middleware/auth");
 // Import Validate
 const { check } = require("express-validator");
 
+// Import Multer
+const multer = require("../../utils/multer");
+
 // Import Controllers
 const {
   getMyProfile,
   authLogin,
-  myProfileSettings
+  myProfileSettings,
+  myProfileSettingsUploadAvatar
 } = require("../../services/auth");
 
 // const User = require('../../models/User');
@@ -36,5 +40,15 @@ router.post(
 // @desc     Settings profile
 // @access   Private
 router.put("/settings", auth, myProfileSettings);
+
+// @route    POST api/auth/settings/upload-avatar
+// @desc     Settings profile Upload Avatar
+// @access   Private
+router.post(
+  "/settings/upload-avatar",
+  multer.single("file"),
+  auth,
+  myProfileSettingsUploadAvatar
+);
 
 module.exports = router;

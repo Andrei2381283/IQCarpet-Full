@@ -1,8 +1,12 @@
 // Import Engine
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { editUserProfile, loadUser } from "../../../../actions/auth";
+import {
+  editUserProfile,
+  editUserProfileAndUploadAvatar,
+  loadUser
+} from "../../../../actions/auth";
 
 // Import Styles
 import "./ProfileMoreInfo.css";
@@ -19,10 +23,13 @@ const ProfileMoreInfoSettings = ({
   auth: { user, loading },
   loadUser,
   editUserProfile,
+  editUserProfileAndUploadAvatar,
   mobileInfoHidden = true
 }) => {
   //   console.log(mobileInfoHidden);
   const [formData, setFormData] = useState(initialState);
+
+  const [avatar, setAvatar] = useState();
 
   useEffect(() => {
     if (!user) loadUser();
@@ -48,23 +55,51 @@ const ProfileMoreInfoSettings = ({
     editUserProfile(formData);
   };
 
+  // TODO: Нужно сделать автоматическую загрузку нового аватара
+  const onSubmitFile = async (e) => {
+    e.preventDefault();
+
+    const data = new FormData();
+    data.append("file", avatar);
+
+    editUserProfileAndUploadAvatar(data);
+  };
+
   return (
-    <form className="profileMoreInfo" onSubmit={onSubmit}>
-      <div className="profileMoreInfoDiv">
-        <div className="profMoreInfoBlock">
-          <span className="profInfoHeader">Fullname</span>
+    <Fragment>
+      <form onSubmit={onSubmitFile} action="#" enctype="multipart/form-data">
+        <div>
           <input
-            className="authFieldInput"
-            type="text"
-            placeholder="FullName"
-            name="fullname"
-            value={fullname}
-            onChange={onChange}
+            vaule="Change Avatar"
+            type="file"
+            id="file"
+            name="avatar"
+            accept="image/jpeg,image/png,image/gif"
+            onChange={(e) => {
+              const fileAvatar = e.target.files[0];
+              setAvatar(fileAvatar);
+              // setFormData({ ...formData, [e.target.name]: fileAvatar.url });
+            }}
           />
+          <input type="submit" value="Save" />
         </div>
-        <div className="profMoreInfoBlock">
-          <span className="profInfoHeader">Login</span>
-          {/* <input
+      </form>
+      <form className="profileMoreInfo" onSubmit={onSubmit}>
+        <div className="profileMoreInfoDiv">
+          <div className="profMoreInfoBlock">
+            <span className="profInfoHeader">Fullname</span>
+            <input
+              className="authFieldInput"
+              type="text"
+              placeholder="FullName"
+              name="fullname"
+              value={fullname}
+              onChange={onChange}
+            />
+          </div>
+          <div className="profMoreInfoBlock">
+            <span className="profInfoHeader">Login</span>
+            {/* <input
             className="authFieldInput"
             type="text"
             placeholder="login"
@@ -72,82 +107,84 @@ const ProfileMoreInfoSettings = ({
             value={login}
             onChange={onChange}
           /> */}
-        </div>
-        <div className="profMoreInfoBlock">
-          <span className="profInfoHeader">Birthday111</span>
-          <input
-            className="authFieldInput"
-            type="text"
-            placeholder="birthDay"
-            name="birthDay"
-            value={birthDay}
-            onChange={onChange}
-          />
-        </div>
-        <div
-          className="profMoreInfoBlock profMoreInfoBlock2 profMobileHiddenBlock2"
-          active={!mobileInfoHidden + ""}
-        >
-          <span className="profInfoHeader">E-mail</span>
-          <input
-            className="authFieldInput"
-            type="text"
-            placeholder="email"
-            name="email"
-            value={email}
-            onChange={onChange}
-          />
-          <div className="profEmailHowLogin">
-            <input type="checkbox" />
-            <span>Use how login</span>
+          </div>
+          <div className="profMoreInfoBlock">
+            <span className="profInfoHeader">Birthday111</span>
+            <input
+              className="authFieldInput"
+              type="text"
+              placeholder="birthDay"
+              name="birthDay"
+              value={birthDay}
+              onChange={onChange}
+            />
+          </div>
+          <div
+            className="profMoreInfoBlock profMoreInfoBlock2 profMobileHiddenBlock2"
+            active={!mobileInfoHidden + ""}
+          >
+            <span className="profInfoHeader">E-mail</span>
+            <input
+              className="authFieldInput"
+              type="text"
+              placeholder="email"
+              name="email"
+              value={email}
+              onChange={onChange}
+            />
+            <div className="profEmailHowLogin">
+              <input type="checkbox" />
+              <span>Use how login</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="profileMoreInfoDiv">
-        <div className="profMoreInfoBlock">
-          <span className="profInfoHeader">Country</span>
-          <input
-            className="authFieldInput"
-            type="text"
-            placeholder="location"
-            name="location"
-            value={location}
-            onChange={onChange}
-          />
+        <div className="profileMoreInfoDiv">
+          <div className="profMoreInfoBlock">
+            <span className="profInfoHeader">Country</span>
+            <input
+              className="authFieldInput"
+              type="text"
+              placeholder="location"
+              name="location"
+              value={location}
+              onChange={onChange}
+            />
+          </div>
+          <div
+            className="profMoreInfoBlock profMoreInfoBlock2 profMobileHiddenBlock1"
+            active={!mobileInfoHidden + ""}
+          >
+            <span className="profInfoHeader">Mobile number</span>
+            <input
+              className="authFieldInput"
+              type="text"
+              placeholder="phoneNumber"
+              name="phoneNumber"
+              value={phoneNumber}
+              onChange={onChange}
+            />
+          </div>
+          <button type="submit" className="submitButton">
+            Change Settings
+          </button>
         </div>
         <div
-          className="profMoreInfoBlock profMoreInfoBlock2 profMobileHiddenBlock1"
+          className="profileMoreInfoDiv passwordContentDiv"
           active={!mobileInfoHidden + ""}
         >
-          <span className="profInfoHeader">Mobile number</span>
-          <input
-            className="authFieldInput"
-            type="text"
-            placeholder="phoneNumber"
-            name="phoneNumber"
-            value={phoneNumber}
-            onChange={onChange}
-          />
+          <span className="profInfoHeader">Password</span>
+          <input className="passwordText" readOnly value="* * * * * * *" />
+          <button className="profChangePassButton">Change your Password</button>
         </div>
-        <button type="submit" className="submitButton">
-          Change Settings
-        </button>
-      </div>
-      <div
-        className="profileMoreInfoDiv passwordContentDiv"
-        active={!mobileInfoHidden + ""}
-      >
-        <span className="profInfoHeader">Password</span>
-        <input className="passwordText" readOnly value="* * * * * * *" />
-        <button className="profChangePassButton">Change your Password</button>
-      </div>
-    </form>
+      </form>
+    </Fragment>
   );
 };
 
 ProfileMoreInfoSettings.propTypes = {
   auth: PropTypes.object.isRequired,
   editUserProfile: PropTypes.func.isRequired,
+  editUserProfileAndUploadAvatar: PropTypes.func.isRequired,
   loadUser: PropTypes.func.isRequired
 };
 
@@ -157,5 +194,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   editUserProfile,
+  editUserProfileAndUploadAvatar,
   loadUser
 })(ProfileMoreInfoSettings);

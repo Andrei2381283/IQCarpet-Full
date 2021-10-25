@@ -15,10 +15,10 @@ import "./NewOrder.css";
 const initialState = {
   fullname: "",
   phoneNumber: "",
-  email: "",
+  email: ""
 };
 
-const NewOrder = ({ auth: { user, loading }, loadUser, newOrder }) => {
+const NewOrder = ({ auth: { user, loading }, loadUser, newOrder, history }) => {
   const { id } = useParams();
   console.log(id);
 
@@ -28,7 +28,7 @@ const NewOrder = ({ auth: { user, loading }, loadUser, newOrder }) => {
     emailBuyer: "",
     commentBuyer: "",
     buyer: "",
-    seller: "",
+    seller: ""
   });
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const NewOrder = ({ auth: { user, loading }, loadUser, newOrder }) => {
         emailBuyer: userData.email,
         commentBuyer: "",
         buyer: user._id,
-        seller: id,
+        seller: id
       });
     }
   }, [loading, loadUser, user]);
@@ -58,7 +58,7 @@ const NewOrder = ({ auth: { user, loading }, loadUser, newOrder }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    newOrder(formData);
+    newOrder(formData, history);
   };
 
   return (
@@ -106,11 +106,11 @@ const NewOrder = ({ auth: { user, loading }, loadUser, newOrder }) => {
 NewOrder.propTypes = {
   auth: PropTypes.object.isRequired,
   newOrder: PropTypes.func.isRequired,
-  loadUser: PropTypes.func.isRequired,
+  loadUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { loadUser, newOrder })(NewOrder);
