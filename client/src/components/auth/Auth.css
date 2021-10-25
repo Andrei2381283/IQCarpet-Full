@@ -142,6 +142,24 @@
 }
 
 
+
+.errorMessage {
+  position: absolute;
+  font-size: 14px;
+  line-height: 24px;
+  color: #FF004D;
+  text-align: end;
+  margin-right: 0;
+  margin-left: auto;
+  height: 0;
+}
+
+*[aria-invalid="true"] {
+  border: 1px solid #FF004D;
+}
+
+
+
 @media (max-width: 700px) {
   .authField,
   .authFieldInput {

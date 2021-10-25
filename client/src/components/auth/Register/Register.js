@@ -57,29 +57,37 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   } = formData;
 
   useEffect(() => {
-    trigger();
-  }, [iAmSeller])
+    if(Object.keys(errors).length)trigger();
+  }, [iAmSeller]);
 
-  const onChange = (e) =>
+  /* console.log(watch()); */
+  /* watch((value, { name, type }) => console.log(value, name, type)); */
+  /* const subscription = watch((value, { name, type }) => console.log(value, name, type)); */
+  /* useEffect(() => {
+    if(Object.keys(errors).length)trigger();
+    const subscription = watch((value, { name, type }) => console.log(value, name, type));
+    return () => subscription.unsubscribe();
+  }, [watch]); */
+
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    /* trigger(e.target.name); */
+  }
 
   const onSubmit = async (e) => {
-    /* e.preventDefault();
-    if (password !== password2) {
-      setAlert("Passwords do not match", "danger");
-    } else {
-      register({
-        fullname,
-        iAmSeller,
-        companyName,
-        birthDay: `${("0" + birthDay).slice(-2)}.${("0" + birthMonth).slice(-2)}.${birthYear}`,
-        location,
-        phoneNumber: phoneMask + phoneNumber,
-        login,
-        email,
-        password
-      });
-    } */
+    /* e.preventDefault(); */
+    console.log("Ok")
+    register({
+      fullname,
+      iAmSeller,
+      companyName,
+      birthDay: `${("0" + birthDay).slice(-2)}.${("0" + birthMonth).slice(-2)}.${birthYear}`,
+      location,
+      phoneNumber: phoneMask + phoneNumber,
+      login,
+      email,
+      password
+    });
   };
 
   const companyField = (
