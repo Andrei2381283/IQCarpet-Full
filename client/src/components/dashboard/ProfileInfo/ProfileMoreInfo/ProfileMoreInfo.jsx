@@ -23,10 +23,10 @@ const ProfileMoreInfo = ({
         >
           <span className="profInfoHeader">E-mail</span>
           <span className="profInfoContent">{email}</span>
-          <div className="profEmailHowLogin">
+          <label className="profEmailHowLogin">
             <input type="checkbox" />
             <span>Use how login</span>
-          </div>
+          </label>
         </div>
       </div>
       <div className="profileMoreInfoDiv">

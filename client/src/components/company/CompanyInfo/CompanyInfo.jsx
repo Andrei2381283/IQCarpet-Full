@@ -25,7 +25,7 @@ const CompanyInfo = ({ profile }) => {
             </div>
           </div>
           <div>
-            <div className="companyInfoDiv">
+            <div className="companyInfoDiv companyInfoDiv2">
               <span className="companyInfoHeader">About us</span>
               <span className="companyInfoContent">
                 {profile.about
@@ -72,7 +72,7 @@ const CompanyInfo = ({ profile }) => {
           </div>
         </div>
         <div className="companyContactBtns" active={!mobileInfoHidden + ""}>
-          <button className="companyContactBtn1">Send Message</button>
+          <Link className="companyContactBtn1">Send Message</Link>
           {/* <button className="companyContactBtn2">Make an Order</button> */}
           <Link
             to={`/new-order/${profile.user}`}

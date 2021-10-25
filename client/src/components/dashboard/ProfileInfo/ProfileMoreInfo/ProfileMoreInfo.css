@@ -50,7 +50,7 @@
     margin-top: 24px;
 } */
 
-.profInfoContent {
+.profInfoContent, .profInfoInput {
   margin-top: 4px;
   font-family: Montserrat;
   font-style: normal;
@@ -58,6 +58,14 @@
   font-size: 18px;
   line-height: 22px;
   color: #000000;
+}
+
+.profInfoInput {
+  width: 100%;
+  outline: none;
+  border-width: 0;
+  padding: 2px 10px;
+  border-radius: 13px;
 }
 
 .profEmailHowLogin {
@@ -144,7 +152,7 @@
     line-height: 20px;
   }
 
-  .profInfoContent {
+  .profInfoContent, .profInfoInput {
     font-size: 14px;
     line-height: 20px;
   }
@@ -163,6 +171,20 @@
     left: 16px;
   }
 
+  .profMobileHiddenBlock3 {
+    margin: 0;
+    position: absolute;
+    top: 400px;
+    left: 16px;
+  }
+
+  .profMobileHiddenBlock4 {
+    margin: 0;
+    position: absolute;
+    top: 480px;
+    left: 16px;
+  }
+
   .passwordContentDiv {
     margin: 0;
     position: absolute;
@@ -170,8 +192,13 @@
     left: 14px;
   }
 
+  .passwordContentDiv.displayEditProfile {
+    top: 555px;
+  }
+
   .profMoreInfoBlock[active="false"],
-  .passwordContentDiv[active="false"] {
+  .passwordContentDiv[active="false"],
+  .submitButton[active="false"] {
     display: none;
   }
 
@@ -199,5 +226,9 @@
     border: 2px solid #5282c3;
     width: 12px;
     height: 12px;
+  }
+
+  .profInfoInput {
+    background: #dae5f6;
   }
 }
