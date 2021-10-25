@@ -1,17 +1,25 @@
 // Import Engine
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../../actions/alert";
 import { register } from "../../../actions/auth";
 import PropTypes from "prop-types";
+import { useForm } from "react-hook-form";
+import AuthSwitchBar from "../AuthSwitchBar";
+import ErrorMessage from "../ErrorMessage";
 
 // Import Styles
 import "./Register.css";
 import showPasswordImage from "../../../img1/showPassword.png";
-import AuthSwitchBar from "../AuthSwitchBar";
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
+  const hookForm = useForm();
+  const {handleSubmit, trigger, watch, formState: { errors } } = hookForm;
+  const reghook = hookForm.register;
+  /* console.log(watch("fullname")) */
+  console.log(errors);
+
   const [formData, setFormData] = useState({
     fullname: "",
     iAmSeller: "",
@@ -48,11 +56,15 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     password2
   } = formData;
 
+  useEffect(() => {
+    trigger();
+  }, [iAmSeller])
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
-    e.preventDefault();
+    /* e.preventDefault();
     if (password !== password2) {
       setAlert("Passwords do not match", "danger");
     } else {
@@ -67,7 +79,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         email,
         password
       });
-    }
+    } */
   };
 
   const companyField = (
@@ -78,10 +90,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         className="authFieldInput"
         type="text"
         placeholder="companyName"
-        name="companyName"
+        /* name="companyName" */
+        aria-invalid={!!errors.companyName + ""}
+        {...reghook("companyName", { required: iAmSeller, maxLength: 30, minLength: 1, pattern: /^\w+(|\s|-)\w+$/i})}
         value={companyName}
         onChange={onChange}
       />
+      <ErrorMessage error={errors.companyName} message={"Empty field"} />
     </div>
   );
 
@@ -91,7 +106,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       <div className="phoneFieldDiv">
         <input
           className="authFieldInput phoneMask"
-          name="phoneMask"
+          /* name="phoneMask" */
+          aria-invalid={!!errors.phoneMask + ""}
+          {...reghook("phoneMask", { required: true })}
           size={phoneMask ? phoneMask.length - 1 || 1 : 1}
           value={phoneMask}
           onChange={onChange}
@@ -100,12 +117,15 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           className="authFieldInput phoneNum"
           type="text"
           placeholder="phoneNumber"
-          name="phoneNumber"
+          /* name="phoneNumber" */
+          aria-invalid={!!errors.phoneNumber + ""}
+          {...reghook("phoneNumber", { required: true, maxLength: 10, minLength: 10, pattern: /^[0-9]+$/i })}
           value={phoneNumber}
           onChange={onChange}
         />
         {/* <input className="authFieldInput phoneNum"></input> */}
       </div>
+      <ErrorMessage error={errors.phoneNumber} message={errors.phoneNumber && (errors.phoneNumber.type == "maxLength" || errors.phoneNumber.type == "minLength") ? "Length is not 10" : "Wrong"} />
     </div>
   );
 
@@ -115,7 +135,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <form className="authorizingBlock" onSubmit={onSubmit}>
+      <form className="authorizingBlock" onSubmit={handleSubmit(onSubmit)}>
         <AuthSwitchBar mode={1} />
         <div className="regFieldsBlock">
           <div className="regLeftBlock" iAmSeller={iAmSeller.toString()}>
@@ -129,9 +149,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 type="text"
                 placeholder="FullName"
                 name="fullname"
+                /* name="fullname" */
+                aria-invalid={!!errors.fullname + ""}
+                {...reghook("fullname", { required: true, maxLength: 30, minLength: 1, pattern: /^\w+(|\s|-)\w+$/i })} /* TODO: Сделать поддержку других языков  */
                 value={fullname}
                 onChange={onChange}
               />
+              <ErrorMessage error={errors.fullname} message={errors.fullname && errors.fullname.type == "maxLength" ? "Length more than 30" : "Wrong"} />
               <label className="checkBoxDiv">
                 <input
                   type="checkbox"
@@ -181,9 +205,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 type="text"
                 placeholder="location"
                 name="location"
+                /* name="location" */
+                aria-invalid={!!errors.location + ""}
+                {...reghook("location", { required: true, maxLength: 30, minLength: 1, pattern: /^\w+(|\s|-)\w+$/i})}
                 value={location}
                 onChange={onChange}
               />
+              <ErrorMessage error={errors.location} message={"Wrong"} />
             </div>
             {!iAmSeller && phoneField}
             <div className="authField">
@@ -212,6 +240,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 type="text"
                 placeholder="login"
                 name="login"
+                /* name="login" */
+                aria-invalid={!!errors.login + ""}
+                {...reghook("login", { required: true, maxLength: 30, minLength: 1, pattern: /^[a-z0-9]+$/i})}
                 value={login}
                 onChange={onChange}
               />
@@ -228,7 +259,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 className="authFieldInput"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
-                name="password"
+                /* name="password" */
+                aria-invalid={!!errors.password + ""}
+                {...reghook("password", { required: true,  minLength: 6})}
                 value={password}
                 onChange={onChange}
               />
@@ -237,6 +270,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 className="regShowPassword"
                 src={showPasswordImage}
               />
+              <ErrorMessage error={errors.password} message={"Wrong"} />
             </div>
             <div className="authField">
               <span className="authFieldName">Repeat a Password</span>
@@ -249,7 +283,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 className="authFieldInput"
                 type={showPassword2 ? "text" : "password"}
                 placeholder="Confirm Password"
-                name="password2"
+                /* name="password2" */
+                aria-invalid={!!errors.password2 + ""}
+                {...reghook("password2", { required: true, validate: () => password == password2})}
                 value={password2}
                 onChange={onChange}
               />
@@ -258,6 +294,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 className="regShowPassword"
                 src={showPasswordImage}
               />
+              <ErrorMessage error={errors.password2} message={errors.password2 && errors.password2.type == "validate" ? "Passwords do not match" : "Wrong"} />
             </div>
             <div className="authField">
               <span className="authFieldName">Enter your Email</span>
@@ -266,10 +303,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 className="authFieldInput"
                 type="email"
                 placeholder="Email Address"
-                name="email"
+                /* name="email" */
+                aria-invalid={!!errors.email + ""}
+                {...reghook("email", { required: true, maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$/i})}
                 value={email}
                 onChange={onChange}
               />
+              <ErrorMessage error={errors.email} message={"Wrong"} />
               <label className="checkBoxDiv">
                 <input type="checkbox" />
                 <span>Use how login</span>

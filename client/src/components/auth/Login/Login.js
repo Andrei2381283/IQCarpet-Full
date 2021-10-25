@@ -4,10 +4,17 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../../actions/auth";
 import AuthSwitchBar from "../AuthSwitchBar";
+import { useForm } from "react-hook-form";
+import ErrorMessage from "../ErrorMessage";
 
 import "./Login.css";
 
 const Login = ({ login, isAuthenticated }) => {
+  const hookForm = useForm();
+  const {handleSubmit, trigger, watch, formState: { errors } } = hookForm;
+  const reghook = hookForm.register;
+
+
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -19,7 +26,7 @@ const Login = ({ login, isAuthenticated }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
-    e.preventDefault();
+    /* e.preventDefault(); */
     login(email, password);
   };
 
@@ -29,7 +36,7 @@ const Login = ({ login, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <form className="authorizingBlock" onSubmit={onSubmit}>
+      <form className="authorizingBlock" onSubmit={handleSubmit(onSubmit)}>
         <AuthSwitchBar mode={2} />
         <div className="authField">
           <span className="authFieldName">Enter your Email or Login</span>
@@ -39,13 +46,15 @@ const Login = ({ login, isAuthenticated }) => {
           ></input> */}
           <input
             className="authFieldInput"
-            type="email"
+            type="text"
             placeholder="Email Address"
-            name="email"
+            /* name="email" */
+            aria-invalid={!!errors.email + ""}
+            {...reghook("email", { required: true, maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i})}
             value={email}
             onChange={onChange}
-            required
           />
+          <ErrorMessage error={errors.email} message={"Wrong"} />
         </div>
         <div className="authField">
           <span className="authFieldName">Repeat a Password</span>
@@ -54,11 +63,13 @@ const Login = ({ login, isAuthenticated }) => {
             className="authFieldInput"
             type="password"
             placeholder="Password"
-            name="password"
+            /* name="password" */
+            aria-invalid={!!errors.password + ""}
+            {...reghook("password", { required: true,  minLength: 6})}
             value={password}
             onChange={onChange}
-            minLength="6"
           />
+          <ErrorMessage error={errors.password} message={"Wrong"} />
           <div className="loginLastField">
             <label className="checkBoxDiv">
               <input type="checkbox" />
