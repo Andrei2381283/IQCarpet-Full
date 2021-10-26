@@ -15,11 +15,11 @@ import showPasswordImage from "../../../img1/showPassword.png";
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const hookForm = useForm();
-  const {handleSubmit, trigger, watch, formState: { errors } } = hookForm;
+  const {handleSubmit, trigger, setValue, getValues, watch, formState: { errors } } = hookForm;
   const reghook = hookForm.register;
   /* console.log(watch("fullname")) */
-  console.log(errors);
-
+  /* console.log(errors); */
+  
   const [formData, setFormData] = useState({
     fullname: "",
     iAmSeller: "",
@@ -33,7 +33,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     login: "",
     email: "",
     password: "",
-    password2: ""
+    password2: "",
+    useHowLogin: false
   });
 
   // const [iAmSeller, setiAmSeller] = useState(false);
@@ -53,30 +54,25 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     login,
     email,
     password,
-    password2
+    password2,
+    useHowLogin
   } = formData;
 
   useEffect(() => {
     if(Object.keys(errors).length)trigger();
   }, [iAmSeller]);
-
-  /* console.log(watch()); */
-  /* watch((value, { name, type }) => console.log(value, name, type)); */
-  /* const subscription = watch((value, { name, type }) => console.log(value, name, type)); */
-  /* useEffect(() => {
-    if(Object.keys(errors).length)trigger();
-    const subscription = watch((value, { name, type }) => console.log(value, name, type));
-    return () => subscription.unsubscribe();
-  }, [watch]); */
-
+  
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    /* trigger(e.target.name); */
+    console.log(e.target.name + " : " + e.target.value)
+    setValue(e.target.name, e.target.value);
+    trigger(e.target.name);
   }
 
   const onSubmit = async (e) => {
     /* e.preventDefault(); */
-    console.log("Ok")
+    if(useHowLogin) login = email;
+    console.log("Ok");
     register({
       fullname,
       iAmSeller,
@@ -93,7 +89,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const companyField = (
     <div className="authField">
       <span className="authFieldName">Enter a Company's name</span>
-      {/* <input className="authFieldInput" placeholder="Company's name"></input> */}
       <input
         className="authFieldInput"
         type="text"
@@ -151,7 +146,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <span className="authFieldName">
                 Enter a your surname&name&patronymic
               </span>
-              {/* <input className="authFieldInput" placeholder="Name"></input> */}
               <input
                 className="authFieldInput"
                 type="text"
@@ -193,13 +187,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 <select name="birthYear" className="authFieldSelect birthdaySelect birthdaySelectYear" value={birthYear} onChange={onChange}>
                   <option>1920</option>
                 </select>
-                {/* <input
-                  type="text"
-                  placeholder="birthDay"
-                  name="birthDay"
-                  value={birthDay}
-                  onChange={onChange}
-                /> */}
               </div>
             </div>
             <div className="authField">
@@ -242,18 +229,18 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <span className="authFieldSubName">
                 Latin letters and numbers without spaces
               </span>
-              {/* <input className="authFieldInput" placeholder="Login"></input> */}
               <input
                 className="authFieldInput"
                 type="text"
                 placeholder="login"
-                name="login"
                 /* name="login" */
                 aria-invalid={!!errors.login + ""}
-                {...reghook("login", { required: true, maxLength: 30, minLength: 1, pattern: /^[a-z0-9]+$/i})}
-                value={login}
+                {...reghook("login", useHowLogin ? {required: true, maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$/i} : { required: true, maxLength: 30, minLength: 1, pattern: /^[a-z0-9]+$/i})}
+                value={useHowLogin ? email : login}
+                disabled={useHowLogin}
                 onChange={onChange}
               />
+              <ErrorMessage error={errors.login} message={"Wrong"} />
             </div>
             <div className="authField">
               <span className="authFieldName">Make a your Password</span>
@@ -315,11 +302,22 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 aria-invalid={!!errors.email + ""}
                 {...reghook("email", { required: true, maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$/i})}
                 value={email}
-                onChange={onChange}
+                onChange={(e) => {
+                  onChange(e);
+                  if(useHowLogin){
+                    setValue("login", e.target.value);
+                    trigger("login");
+                  }
+                }}
               />
               <ErrorMessage error={errors.email} message={"Wrong"} />
               <label className="checkBoxDiv">
-                <input type="checkbox" />
+                <input type="checkbox"
+                  name="useHowLogin"
+                  onChange={(e) => {
+                    setFormData({ ...formData, useHowLogin: e.target.checked });
+                  }}
+                />
                 <span>Use how login</span>
               </label>
             </div>
