@@ -11,7 +11,7 @@ import "./Login.css";
 
 const Login = ({ login, isAuthenticated }) => {
   const hookForm = useForm();
-  const {handleSubmit, trigger, watch, formState: { errors } } = hookForm;
+  const {handleSubmit, trigger, setValue, formState: { errors } } = hookForm;
   const reghook = hookForm.register;
 
 
@@ -22,8 +22,11 @@ const Login = ({ login, isAuthenticated }) => {
 
   const { email, password } = formData;
 
-  const onChange = (e) =>
+  const onChange = (e) =>{
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setValue(e.target.name, e.target.value);
+    trigger(e.target.name);
+  }
 
   const onSubmit = (e) => {
     /* e.preventDefault(); */
