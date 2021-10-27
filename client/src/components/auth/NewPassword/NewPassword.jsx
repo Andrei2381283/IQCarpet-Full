@@ -51,7 +51,7 @@ const NewPassword = () => {
           placeholder="Password"
           value={password2}
           aria-invalid={!!errors.password2 + ""}
-          {...reghook("password2", { required: true,  minLength: 6})}
+          {...reghook("password2", { required: true, validate: (value) => password == value})}
           onChange={onChange}
         />
       </div>
