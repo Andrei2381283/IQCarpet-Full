@@ -9,7 +9,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   UPDATE_USER,
-  USER_ERROR
+  USER_ERROR,
+  AUTH_GET_CODE
 } from "./types";
 
 // Load User
@@ -121,6 +122,28 @@ export const login = (email, password) => async (dispatch) => {
 
     dispatch({
       type: LOGIN_FAIL
+    });
+  }
+};
+
+// Reset Password Send Code
+export const resetPasswordSendCode = (formData) => async (dispatch) => {
+  try {
+    const res = await api.post("/auth/reset-password-send-code", formData);
+
+    dispatch({
+      type: AUTH_GET_CODE,
+      payload: res.data
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+    }
+
+    dispatch({
+      type: AUTH_ERROR
     });
   }
 };
