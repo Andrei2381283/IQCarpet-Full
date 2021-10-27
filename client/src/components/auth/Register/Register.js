@@ -265,6 +265,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                   onClick={() => {
                     console.log(value);
                     setFormData({...formData, country: value, location: value, phoneMask: countries[value].code});
+                    setValue("phoneMask", countries[value].code);
+                    setValue("location", value);
                     setCountryListVisible(false);
                   }}>
                     {value}
