@@ -18,8 +18,8 @@ const Auth = () => {
         <Switch>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/password_recovery" component={PasswordRecovery} />
-          <Route exact path="/new_password" component={NewPassword} />
+          <Route exact path="/password-recovery" component={PasswordRecovery} />
+          <Route exact path="/new-password" component={NewPassword} />
         </Switch>
       </div>
     </Fragment>

@@ -24,7 +24,9 @@ const PasswordRecovery = ({
     trigger,
     formState: { errors }
   } = hookForm;
-  const reghook = hookForm.register;
+  const reghook = (ref, options) => {
+    return {...hookForm.register(ref, options), maxLength: (options.maxLength && (options.maxLength.value || options.maxLength)) || -1};
+  }
 
   const codeSended = false;
 
@@ -69,9 +71,15 @@ const PasswordRecovery = ({
         <input
           onChange={onChange}
           value={code}
-          name="code"
           className="authFieldInput confirmCodeInput"
           placeholder="Code"
+          aria-invalid={!!errors.code + ""}
+          {...reghook("code", {
+            required: "Empty field",
+            maxLength: 4,
+            minLength: 4,
+            pattern: /^[0-9]+$/i
+          })}
         ></input>
         <span className="repeatSending" sended={codeSended.toString()}>
           Repeat sending
@@ -97,9 +105,9 @@ const PasswordRecovery = ({
           <input
             className="authFieldInput"
             placeholder="Login or Email"
-            aria-invalid={!!errors.login + ""}
+            aria-invalid={!!errors.email + ""}
             {...reghook("email", {
-              required: true,
+              required: "Empty field",
               maxLength: 320,
               minLength: 1,
               pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i
@@ -107,13 +115,13 @@ const PasswordRecovery = ({
             value={email}
             onChange={onChange}
           />
-          <ErrorMessage error={errors.login} message={"Wrong"} />
+          <ErrorMessage error={errors.email} message={"Wrong"} />
         </div>
         <span className="passRecInfoCode">
           We will send to you a confirmation code
         </span>
         <div className="submitButtonDiv">
-          <button className="submitButton">Confirm</button>
+          <button type="submit" className="submitButton">Confirm</button>
         </div>
       </form>
       {authConfirmCode ? formConfirmCode : null}

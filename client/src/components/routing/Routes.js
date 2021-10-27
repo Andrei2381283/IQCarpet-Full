@@ -31,8 +31,8 @@ const Routes = () => {
       <Switch>
         <Route exact path="/register" component={Auth} />
         <Route exact path="/login" component={Auth} />
-        <Route exact path="/password_recovery" component={Auth} />
-        <Route exact path="/new_password" component={Auth} />
+        <Route exact path="/password-recovery" component={Auth} />
+        <Route exact path="/new-password" component={Auth} />
         {/* <Route exact path="/profiles" component={Profiles} /> */}
         {/* <Route exact path="/profile/:id" component={Profile} /> */}
         <PrivateRoute exact path="/dashboard" component={MyProfile} />

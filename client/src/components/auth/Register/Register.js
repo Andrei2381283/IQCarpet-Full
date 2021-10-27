@@ -12,13 +12,35 @@ import ErrorMessage from "../ErrorMessage";
 // Import Styles
 import "./Register.css";
 import showPasswordImage from "../../../img1/showPassword.png";
+import selectArrow from "../../../img1/selectArrow.png";
+
+const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+const countries = {
+  Russia: {
+    cities: [],
+    code: "+7"
+  },
+  USA: {
+    cities: [],
+    code: "+1"
+  },
+  Ukraine: {
+    cities: [],
+    code: "+380"
+  }
+}
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const hookForm = useForm();
-  const {handleSubmit, trigger, setValue, getValues, watch, formState: { errors } } = hookForm;
-  const reghook = hookForm.register;
+  const {handleSubmit, trigger, setValue, formState: { touchedFields, errors } } = hookForm;
+  const reghook = (ref, options) => {
+    return {...hookForm.register(ref, options), maxLength: (options.maxLength && (options.maxLength.value || options.maxLength)) || -1};
+  }
   /* console.log(watch("fullname")) */
-  /* console.log(errors); */
+  console.log(errors);
+
+  const [countryListVisible, setCountryListVisible] = useState(false);
   
   const [formData, setFormData] = useState({
     fullname: "",
@@ -26,8 +48,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     companyName: "",
     birthDay: "1",
     birthMonth: "1",
-    birthYear: "1920",
+    birthYear: "2021",
     location: "",
+    country: "",
+    city: "",
     phoneMask: "",
     phoneNumber: "",
     login: "",
@@ -49,6 +73,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     birthMonth,
     birthYear,
     location,
+    country,
+    city,
     phoneMask,
     phoneNumber,
     login,
@@ -59,12 +85,20 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   } = formData;
 
   useEffect(() => {
-    if(Object.keys(errors).length)trigger();
+    trigger(Object.keys(touchedFields));
   }, [iAmSeller]);
+
+  useEffect(() => {
+    if(touchedFields.login){
+      setValue("login", useHowLogin ? email : login);
+      trigger("login");
+    }
+  }, [useHowLogin])
   
   const onChange = (e) => {
+    console.log(e.target.name);
+    /* if(errors[e.target.name] && errors[e.target.name].type == "maxLength") return; */
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(e.target.name + " : " + e.target.value)
     setValue(e.target.name, e.target.value);
     trigger(e.target.name);
   }
@@ -95,11 +129,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         placeholder="companyName"
         /* name="companyName" */
         aria-invalid={!!errors.companyName + ""}
-        {...reghook("companyName", { required: iAmSeller, maxLength: 30, minLength: 1, pattern: /^\w+(|\s|-)\w+$/i})}
+        {...reghook("companyName", { required: {value: iAmSeller, message: "Empty field"}, maxLength: {value: 320, message: "Company name greater than 320"}, minLength: 1, pattern: /^\w+(|\s|-)(|\w+)$/i})}
         value={companyName}
         onChange={onChange}
       />
-      <ErrorMessage error={errors.companyName} message={"Empty field"} />
+      <ErrorMessage error={errors.companyName} message={errors.phoneNumber && errors.phoneNumber.message} />
     </div>
   );
 
@@ -111,7 +145,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           className="authFieldInput phoneMask"
           /* name="phoneMask" */
           aria-invalid={!!errors.phoneMask + ""}
-          {...reghook("phoneMask", { required: true })}
+          {...reghook("phoneMask", { required: "Empty field" })}
           size={phoneMask ? phoneMask.length - 1 || 1 : 1}
           value={phoneMask}
           onChange={onChange}
@@ -122,13 +156,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           placeholder="phoneNumber"
           /* name="phoneNumber" */
           aria-invalid={!!errors.phoneNumber + ""}
-          {...reghook("phoneNumber", { required: true, maxLength: 10, minLength: 10, pattern: /^[0-9]+$/i })}
+          {...reghook("phoneNumber", { required: "Empty field", maxLength: {value: 10, message: "Length is not 10"}, minLength: {value: 10, message: "Length is not 10"}, pattern: /^[0-9]+$/i })}
           value={phoneNumber}
           onChange={onChange}
         />
         {/* <input className="authFieldInput phoneNum"></input> */}
       </div>
-      <ErrorMessage error={errors.phoneNumber} message={errors.phoneNumber && (errors.phoneNumber.type == "maxLength" || errors.phoneNumber.type == "minLength") ? "Length is not 10" : "Wrong"} />
+      <ErrorMessage error={errors.phoneNumber} message={errors.phoneNumber && errors.phoneNumber.message} />
     </div>
   );
 
@@ -153,11 +187,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 name="fullname"
                 /* name="fullname" */
                 aria-invalid={!!errors.fullname + ""}
-                {...reghook("fullname", { required: true, maxLength: 30, minLength: 1, pattern: /^\w+(|\s|-)\w+$/i })} /* TODO: Сделать поддержку других языков  */
+                {...reghook("fullname", { required: "Empty field", maxLength: {value: 30, message: "Length more than 30"}, minLength: 1, pattern: /^\w+(|\s|-)(|\w+)$/i })} /* TODO: Сделать поддержку других языков  */
                 value={fullname}
                 onChange={onChange}
               />
-              <ErrorMessage error={errors.fullname} message={errors.fullname && errors.fullname.type == "maxLength" ? "Length more than 30" : "Wrong"} />
+              <ErrorMessage error={errors.fullname} message={errors.fullname && errors.fullname.message} />
               <label className="checkBoxDiv">
                 <input
                   type="checkbox"
@@ -179,13 +213,27 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <span className="authFieldName">Enter a your BirthDay</span>
               <div className="regBirthDaySelectDiv">
                 <select name="birthDay" className="authFieldSelect birthdaySelect birthdaySelectDay" value={birthDay} onChange={onChange}>
-                  <option>1</option>
+                  {
+                    [...(function*(){
+                      for(var k = 1; k <= new Date(birthYear, birthMonth, 0).getDate(); k++){
+                        yield <option key={k}>{k}</option>;
+                      }
+                    })()]
+                  }
                 </select>
                 <select name="birthMonth" className="authFieldSelect birthdaySelect birthdaySelectMonth" value={birthMonth} onChange={onChange}>
-                  <option value="1">January</option>
+                  {
+                    monthList.map((value, index) => <option value={index + 1} key={index}>{value}</option>)
+                  }
                 </select>
                 <select name="birthYear" className="authFieldSelect birthdaySelect birthdaySelectYear" value={birthYear} onChange={onChange}>
-                  <option>1920</option>
+                  {
+                    [...(function*(){
+                      for(var k = new Date().getFullYear(); k >= 1920; k--){
+                        yield <option key={k}>{k}</option>;
+                      }
+                    })()]
+                  }
                 </select>
               </div>
             </div>
@@ -202,11 +250,30 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 name="location"
                 /* name="location" */
                 aria-invalid={!!errors.location + ""}
-                {...reghook("location", { required: true, maxLength: 30, minLength: 1, pattern: /^\w+(|\s|-)\w+$/i})}
+                {...reghook("location", { required: "Empty field", maxLength: 30, minLength: 1, pattern: /^\w+(|\s|-)(|\w+)$/i})}
                 value={location}
-                onChange={onChange}
+                onChange={(e) => {
+                  onChange(e);
+                  setCountryListVisible(true);
+                }}
+                onClick={() => setCountryListVisible(!countryListVisible)}
               />
-              <ErrorMessage error={errors.location} message={"Wrong"} />
+              <ErrorMessage error={errors.location} message={errors.location && errors.location.message} />
+              <div className={`datalistOfCountries ${countryListVisible ? "" : "hidden"}`}>
+                {
+                  Object.keys(countries).map((value, index) => <div className="datalistSelect" key={index} 
+                  onClick={() => {
+                    console.log(value);
+                    setFormData({...formData, country: value});
+                    setFormData({...formData, location: value});
+                    setFormData({...formData, phoneMask: countries[value].code});
+                    setCountryListVisible(false);
+                  }}>
+                    {value}
+                    <img className="countriesSelectArrow" src={selectArrow}></img>
+                  </div>)
+                }
+              </div>
             </div>
             {!iAmSeller && phoneField}
             <div className="authField">
@@ -235,12 +302,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 placeholder="login"
                 /* name="login" */
                 aria-invalid={!!errors.login + ""}
-                {...reghook("login", useHowLogin ? {required: true, maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$/i} : { required: true, maxLength: 30, minLength: 1, pattern: /^[a-z0-9]+$/i})}
+                {...reghook("login", useHowLogin ? {required: "Empty field", maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$/i} : { required: "Empty field", maxLength: 30, minLength: 1, pattern: /^[a-z0-9]+$/i})}
                 value={useHowLogin ? email : login}
                 disabled={useHowLogin}
                 onChange={onChange}
               />
-              <ErrorMessage error={errors.login} message={"Wrong"} />
+              <ErrorMessage error={errors.login} message={errors.login && errors.login.message} />
             </div>
             <div className="authField">
               <span className="authFieldName">Make a your Password</span>
@@ -256,7 +323,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 placeholder="Password"
                 /* name="password" */
                 aria-invalid={!!errors.password + ""}
-                {...reghook("password", { required: true,  minLength: 6})}
+                {...reghook("password", { required: "Empty field",  minLength: {value: 6, message: "Password less than 6"}})}
                 value={password}
                 onChange={onChange}
               />
@@ -265,7 +332,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 className="regShowPassword"
                 src={showPasswordImage}
               />
-              <ErrorMessage error={errors.password} message={"Wrong"} />
+              <ErrorMessage error={errors.password} message={errors.password && errors.password.message} />
             </div>
             <div className="authField">
               <span className="authFieldName">Repeat a Password</span>
@@ -280,7 +347,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 placeholder="Confirm Password"
                 /* name="password2" */
                 aria-invalid={!!errors.password2 + ""}
-                {...reghook("password2", { required: true, validate: (value) => password == value})}
+                {...reghook("password2", { required: "Empty field", 
+                  validate: {
+                    value: (value) => password == value || "Password mismatch"
+                  }
+                })
+                }
                 value={password2}
                 onChange={onChange}
               />
@@ -289,7 +361,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 className="regShowPassword"
                 src={showPasswordImage}
               />
-              <ErrorMessage error={errors.password2} message={errors.password2 && errors.password2.type == "validate" ? "Passwords do not match" : "Wrong"} />
+              <ErrorMessage error={errors.password2} message={errors.password2 && errors.password2.message} />
             </div>
             <div className="authField">
               <span className="authFieldName">Enter your Email</span>
@@ -300,7 +372,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 placeholder="Email Address"
                 /* name="email" */
                 aria-invalid={!!errors.email + ""}
-                {...reghook("email", { required: true, maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$/i})}
+                {...reghook("email", { required: "Empty field", maxLength: {value: 320, message: "Email greater than 320"}, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$/i})}
                 value={email}
                 onChange={(e) => {
                   onChange(e);
@@ -310,12 +382,16 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                   }
                 }}
               />
-              <ErrorMessage error={errors.email} message={"Wrong"} />
+              <ErrorMessage error={errors.email} message={errors.email && errors.email.message} />
               <label className="checkBoxDiv">
                 <input type="checkbox"
                   name="useHowLogin"
                   onChange={(e) => {
                     setFormData({ ...formData, useHowLogin: e.target.checked });
+                    /* if(touchedFields.login){
+                      setValue("login", email);
+                      trigger("login");
+                    } */
                   }}
                 />
                 <span>Use how login</span>

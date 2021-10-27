@@ -19,7 +19,9 @@ const NewPassword = ({
     trigger,
     formState: { errors }
   } = hookForm;
-  const reghook = hookForm.register;
+  const reghook = (ref, options) => {
+    return {...hookForm.register(ref, options), maxLength: (options.maxLength && (options.maxLength.value || options.maxLength)) || -1};
+  }
 
   const [formData, setFormData] = useState({
     password: "",
@@ -59,7 +61,7 @@ const NewPassword = ({
           placeholder="Password"
           value={password}
           aria-invalid={!!errors.password + ""}
-          {...reghook("password", { required: true, minLength: 6 })}
+          {...reghook("password", { required: "Empty field", minLength: 6 })}
           onChange={onChange}
         />
       </div>
@@ -72,7 +74,7 @@ const NewPassword = ({
           value={password2}
           aria-invalid={!!errors.password2 + ""}
           {...reghook("password2", {
-            required: true,
+            required: "Empty field",
             validate: (value) => password == value
           })}
           onChange={onChange}

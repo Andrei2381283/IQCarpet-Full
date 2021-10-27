@@ -12,7 +12,9 @@ import "./Login.css";
 const Login = ({ login, isAuthenticated }) => {
   const hookForm = useForm();
   const {handleSubmit, trigger, setValue, formState: { errors } } = hookForm;
-  const reghook = hookForm.register;
+  const reghook = (ref, options) => {
+    return {...hookForm.register(ref, options), maxLength: (options.maxLength && (options.maxLength.value || options.maxLength)) || -1};
+  }
 
 
   const [formData, setFormData] = useState({
@@ -53,7 +55,7 @@ const Login = ({ login, isAuthenticated }) => {
             placeholder="Email Address"
             /* name="email" */
             aria-invalid={!!errors.email + ""}
-            {...reghook("email", { required: true, maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i})}
+            {...reghook("email", { required: "Empty field", maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i})}
             value={email}
             onChange={onChange}
           />
@@ -68,17 +70,13 @@ const Login = ({ login, isAuthenticated }) => {
             placeholder="Password"
             /* name="password" */
             aria-invalid={!!errors.password + ""}
-            {...reghook("password", { required: true,  minLength: 6})}
+            {...reghook("password", { required: "Empty field",  minLength: 6})}
             value={password}
             onChange={onChange}
           />
           <ErrorMessage error={errors.password} message={"Wrong"} />
           <div className="loginLastField">
-            <label className="checkBoxDiv">
-              <input type="checkbox" />
-              <span>Im a Seller</span>
-            </label>
-            <Link to="password_recovery" className="forgotPassword">
+            <Link to="password-recovery" className="forgotPassword">
               Forgot your Password?
             </Link>
           </div>
