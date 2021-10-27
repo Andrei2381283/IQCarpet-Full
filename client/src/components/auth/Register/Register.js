@@ -264,9 +264,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                   Object.keys(countries).map((value, index) => <div className="datalistSelect" key={index} 
                   onClick={() => {
                     console.log(value);
-                    setFormData({...formData, country: value});
-                    setFormData({...formData, location: value});
-                    setFormData({...formData, phoneMask: countries[value].code});
+                    setFormData({...formData, country: value, location: value, phoneMask: countries[value].code});
                     setCountryListVisible(false);
                   }}>
                     {value}
