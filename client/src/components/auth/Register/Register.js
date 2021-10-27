@@ -267,6 +267,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                     setFormData({...formData, country: value, location: value, phoneMask: countries[value].code});
                     setValue("phoneMask", countries[value].code);
                     setValue("location", value);
+                    trigger(Object.keys(touchedFields));
                     setCountryListVisible(false);
                   }}>
                     {value}
