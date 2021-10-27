@@ -280,7 +280,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 placeholder="Confirm Password"
                 /* name="password2" */
                 aria-invalid={!!errors.password2 + ""}
-                {...reghook("password2", { required: true, validate: () => password == password2})}
+                {...reghook("password2", { required: true, validate: (value) => password == value})}
                 value={password2}
                 onChange={onChange}
               />

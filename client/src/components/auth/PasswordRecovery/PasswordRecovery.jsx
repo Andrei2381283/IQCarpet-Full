@@ -1,12 +1,22 @@
 import React, { Fragment } from "react";
+import { useForm } from "react-hook-form";
+import ErrorMessage from "../ErrorMessage";
 
 import "./PasswordRecovery.css";
 
 const PasswordRecovery = () => {
+  const hookForm = useForm();
+  const {handleSubmit, setValue, trigger, formState: { errors } } = hookForm;
+  const reghook = hookForm.register;
+
   const codeSended = false;
 
+  const onSubmit = () => {
+
+  }
+
   return (
-    <Fragment>
+    <form  onSubmit={handleSubmit(onSubmit)}>
       <div className="authorizingBlock">
         <span className="passRecoveryHeader">Password Recovery</span>
         <div className="authField">
@@ -14,7 +24,15 @@ const PasswordRecovery = () => {
           <input
             className="authFieldInput"
             placeholder="Login or Email"
-          ></input>
+            aria-invalid={!!errors.login + ""}
+            {...reghook("login", { required: true, maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i})}
+            onChange={(e) => {
+              /* setFormData({ ...formData, [e.target.name]: e.target.value }); */
+              setValue(e.target.name, e.target.value);
+              trigger(e.target.name);
+            }}
+          />
+          <ErrorMessage error={errors.login} message={"Wrong"} />
         </div>
         <span className="passRecInfoCode">
           We will send to you a confirmation code
@@ -38,10 +56,10 @@ const PasswordRecovery = () => {
           </span>
         </div>
         <div className="submitButtonDiv">
-          <button className="submitButton">Confirm</button>
+          <button type="submit" className="submitButton">Confirm</button>
         </div>
       </div>
-    </Fragment>
+    </form>
   );
 };
 
