@@ -9,14 +9,15 @@ import {
   ACCOUNT_DELETED,
   UPDATE_USER,
   USER_ERROR,
-  AUTH_GET_CODE
+  AUTH_GET_CODE,
+  AUTH_CONFIRM_CODE
 } from "../actions/types";
 
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   authConfirmCode: false,
-  dataFormForResetPassword: null,
+  dataFormForResetPassword: {},
   loading: true,
   user: null
 };
@@ -38,6 +39,15 @@ function authReducer(state = initialState, action) {
         user: payload,
         loading: false
       };
+    case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        ...payload,
+        isAuthenticated: true,
+        dataFormForResetPassword: null,
+        loading: false
+      };
     case AUTH_GET_CODE:
       return {
         ...state,
@@ -45,12 +55,11 @@ function authReducer(state = initialState, action) {
         dataFormForResetPassword: payload,
         loading: false
       };
-    case REGISTER_SUCCESS:
-    case LOGIN_SUCCESS:
+    case AUTH_CONFIRM_CODE:
       return {
         ...state,
-        ...payload,
-        isAuthenticated: true,
+        authConfirmCode: false,
+        dataFormForResetPassword: payload,
         loading: false
       };
     case USER_ERROR:

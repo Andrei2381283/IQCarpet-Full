@@ -16,6 +16,7 @@ const {
   getMyProfile,
   authLogin,
   resetPasswordSendCode,
+  resetPasswordConfirmCode,
   resetPassword,
   myProfileSettings,
   myProfileSettingsUploadAvatar
@@ -47,14 +48,27 @@ router.post(
   resetPasswordSendCode
 );
 
+// @route    POST api/auth/reset-password-confirm-code
+// @desc     User reset password confirm code
+// @access   Public
+router.post(
+  "/reset-password-confirm-code",
+  check("email", "Please include a valid email").isEmail(),
+  check("code", "Please include a valid email").isLength({ min: 4, max: 4 }),
+  resetPasswordConfirmCode
+);
+
 // @route    POST api/auth/reset-password
 // @desc     User reset password
 // @access   Public
 router.post(
   "/reset-password",
   check("email", "Please include a valid email").isEmail(),
-  check("newPassword", "Password is required").exists(),
   check("code", "Please include a valid email").isLength({ min: 4, max: 4 }),
+  check(
+    "newPassword",
+    "Please enter a password with 6 or more characters"
+  ).isLength({ min: 6 }),
   resetPassword
 );
 

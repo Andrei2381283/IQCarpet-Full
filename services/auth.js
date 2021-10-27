@@ -114,7 +114,74 @@ const resetPasswordSendCode = async (req, res) => {
       existingUser.emailVerifyCode
     );
 
-    return res.status(200).json({ user: existingUser.email });
+    return res.status(200).json({ email: existingUser.email });
+  } catch (err) {
+    res.status(500).json({
+      statusCode: 500,
+      stringStatus: "Error",
+      message: `Something went wrong! ${err}`
+    });
+    console.log({
+      statusCode: 500,
+      stringStatus: "Error",
+      message: `Something went wrong! ${err}`
+    });
+  }
+};
+
+const resetPasswordConfirmCode = async (req, res) => {
+  try {
+    const { email, code } = req.body;
+
+    const user = await UserModel.findOne({ email: email });
+
+    if (!user) {
+      return res.status(404).json({
+        statusCode: 404,
+        stringStatus: "Not Found",
+        message:
+          "Пользовательне найден! Пожалуйста, проверьте правильность запроса!"
+      });
+    }
+
+    // TODO: Сделать валидацию для проверки пароля
+    // TODO: Сделать шифрование паролей
+
+    if (user.emailVerifyCode === code && user.emailVerifyCode !== "") {
+      // await UserModel.updateOne(
+      //   { _id: user._id, email: email },
+      //   {
+      //     $set: {
+      //       emailVerifyCode: ""
+      //     }
+      //   }
+      // );
+
+      // Возвращаем Успешный статус 200 OK, Success
+      return res
+        .status(200)
+        .json({ email: user.email, code: user.emailVerifyCode });
+    } else if (user.emailVerifyCode !== code && user.emailVerifyCode !== "") {
+      return res.status(400).json({
+        statusCode: 400,
+        stringStatus: "Bad Request",
+        message:
+          "Код введен неверно! Пожалуйста, попробуйте еще раз ввести код!"
+      });
+    } else if ((user.emailVerifyCode === "" && code === "") || code || !code) {
+      return res.status(400).json({
+        statusCode: 400,
+        stringStatus: "Bad Request",
+        message: "Пожалуйста, проверьте правильность запроса!"
+      });
+    } else {
+      return res.status(400).json({
+        statusCode: 400,
+        stringStatus: "Bad Request",
+        message:
+          "Что-то пошло не так! Пожалуйста, проверьте правильность запроса!"
+      });
+    }
   } catch (err) {
     res.status(500).json({
       statusCode: 500,
@@ -144,19 +211,19 @@ const resetPassword = async (req, res) => {
       });
     }
 
-    // TODO: Сделать валидацию для проверки пароля
+    // TODO: Сделать валидацию для проверкт пароля
     // TODO: Сделать шифрование паролей
 
     if (user.emailVerifyCode === code && user.emailVerifyCode !== "") {
-      const salt = await bcrypt.genSalt(10);
-
-      const hashNewPassword = await bcrypt.hash(newPassword, salt);
       // Обновляем модель пользователя, находим пользователя по его _id, email и выполняем это обновление,
       // если у пользователя верный код подтверждения для смены пароля
       // На место поля emailVerifyCode, где ддолжен быть код для смены пароля, мы ставим пустую строку.
       // Это нужно для безопасности пользователя, чтобы никто не мог сменить пароль по старому коду для подтверждения смены пароля
       // На место поля password у пользователя мы ставим новый пароль, который пользователь придумал и отправил вместе с кодом и email
       // через поле тела запроса newPassword
+      const salt = await bcrypt.genSalt(10);
+      const hashNewPassword = await bcrypt.hash(newPassword, salt);
+
       await UserModel.updateOne(
         { _id: user._id, email: email },
         {
@@ -396,6 +463,7 @@ module.exports = {
   getMyProfile,
   authLogin,
   resetPasswordSendCode,
+  resetPasswordConfirmCode,
   resetPassword,
   myProfileSettings,
   myProfileSettingsUploadAvatar
