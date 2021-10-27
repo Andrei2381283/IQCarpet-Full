@@ -67,7 +67,7 @@ const Sellers = ({ getSellersCards, profile: { profiles, loading } }) => {
                   img={SellerCardTestIcon}
                   name={profile.companyName}
                   country={profile.location}
-                  price="From $24 to $32"
+                  profilePrice={profile.carpets.length}
                   link={`/company/${profile.user}`}
                 />
               ))
@@ -86,11 +86,11 @@ const Sellers = ({ getSellersCards, profile: { profiles, loading } }) => {
 
 Sellers.propTypes = {
   getSellersCards: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.profile,
+  profile: state.profile
 });
 
 export default connect(mapStateToProps, { getSellersCards })(Sellers);

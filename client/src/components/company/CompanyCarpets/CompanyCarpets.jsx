@@ -8,7 +8,7 @@ import CarpetsSwipeRightImage from "../../../img1/carpetsSwipeRight.png";
 import CarpetCard from "../../carpetCard/CarpetCard";
 import { Link } from "react-router-dom";
 
-const CompanyCarpets = () => {
+const CompanyCarpets = ({ carpets }) => {
   return (
     <div className="companyCarpetsBlock">
       <div className="companyCarpetsHeaderDiv">
@@ -27,15 +27,13 @@ const CompanyCarpets = () => {
         </button>
         <div className="carpetList">
           <div className="moreInfoCarpets">
+            {carpets.map((carpet) => (
+              <CarpetCard about={carpet.nameCarpet} key={carpet._id} />
+            ))}
             {/* moreInfoCarpets.scroll(268*(elementIndex - 0.5) - moreInfoCarpets.width/2, 0) */}
-            <CarpetCard about="Machine, 500x250 sm(16,4x8,20 ft), modern, wool, rectangular, $145" />
-            <CarpetCard about="Machine, 500x250 sm(16,4x8,20 ft), modern, wool, rectangular, $145" />
-            <CarpetCard about="Machine, 500x250 sm(16,4x8,20 ft), modern, wool, rectangular, $145" />
-            <CarpetCard about="Machine, 500x250 sm(16,4x8,20 ft), modern, wool, rectangular, $145" />
-            <CarpetCard about="Machine, 500x250 sm(16,4x8,20 ft), modern, wool, rectangular, $145" />
           </div>
           <div className="carpetsImages">
-            <Link to="" className="carpetImage">
+            {/* <Link to="" className="carpetImage">
               <img src="images/carpetImage3.png" />
             </Link>
             <Link to="" className="carpetImage">
@@ -73,7 +71,7 @@ const CompanyCarpets = () => {
             </Link>
             <Link to="" className="carpetImage">
               <img src="images/carpetImage3.png" />
-            </Link>
+            </Link> */}
           </div>
         </div>
         <button className="carpetsSwipeButton carpetsSwipeButtonR">

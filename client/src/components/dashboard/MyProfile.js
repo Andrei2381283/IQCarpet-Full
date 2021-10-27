@@ -10,11 +10,13 @@ import Education from "./Education";
 // import { loadUser } from "../../actions/auth";
 import { getMySellerCard } from "../../actions/profile";
 import { getOrders } from "../../actions/order";
+import { getMyCarpets } from "../../actions/carpet";
 import { logout } from "../../actions/auth";
 
 import BackButton from "../backButton/BackButton";
 import ChatsButton from "../chatsButton/ChatsButton";
 import OrderCard from "../orderCard/OrderCard";
+import CarpetCard from "../carpetCard/CarpetCard";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 // Import Styles
@@ -25,11 +27,13 @@ const MyProfile = ({
   // loadUser,
   getMySellerCard,
   getOrders,
+  getMyCarpets,
   // sellerCard: { sellerCard },
   // deleteAccount,
   auth: { user },
   profile: { profile },
   order: { orders },
+  carpet: { carpets },
   logout
 }) => {
   useEffect(() => {
@@ -39,6 +43,10 @@ const MyProfile = ({
   useEffect(() => {
     getOrders();
   }, [getOrders]);
+
+  useEffect(() => {
+    getMyCarpets();
+  }, [getMyCarpets]);
 
   // console.log(orders.map((order) => order.buyer));
 
@@ -88,6 +96,11 @@ const MyProfile = ({
             ))
           : "Orders Not Found!"}
       </div>
+      <div className="profileOrdersDiv">
+        {carpets
+          ? carpets.map((carpet) => <CarpetCard about={carpet} />)
+          : "Orders Not Found!"}
+      </div>
     </Fragment>
   );
 };
@@ -96,6 +109,7 @@ MyProfile.propTypes = {
   // loadUser: PropTypes.func.isRequired,
   getMySellerCard: PropTypes.func.isRequired,
   getOrders: PropTypes.func.isRequired,
+  getMyCarpets: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   // deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
@@ -107,11 +121,13 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   // sellerCard: state.
   profile: state.profile,
-  order: state.order
+  order: state.order,
+  carpet: state.carpet
 });
 
 export default connect(mapStateToProps, {
   getMySellerCard,
   getOrders,
+  getMyCarpets,
   logout
 })(MyProfile);

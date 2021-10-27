@@ -32,3 +32,6 @@ export const SEARCH_SELLER_ERROR = "SEARCH_SELLER_ERROR";
 export const GET_ORDER = "GET_ORDER";
 export const GET_ORDERS = "GET_ORDERS";
 export const ORDER_ERROR = "ORDER_ERROR";
+export const GET_CARPET = "GET_CARPET";
+export const GET_CARPETS = "GET_CARPETS";
+export const CARPET_ERROR = "CARPET_ERROR";

@@ -4,7 +4,7 @@ const getMySellerCard = async (req, res) => {
   try {
     const sellerCard = await SellerCardModel.findOne({
       user: req.user.id,
-      iAmSeller: true,
+      iAmSeller: true
     }).populate("user", ["name", "avatar"]);
 
     if (!sellerCard) {
@@ -18,24 +18,27 @@ const getMySellerCard = async (req, res) => {
     res.status(500).json({
       statusCode: 500,
       stringStatus: "Error",
-      message: `Something went wrong! ${err}`,
+      message: `Something went wrong! ${err}`
     });
     console.log({
       statusCode: 500,
       stringStatus: "Error",
-      message: `Something went wrong! ${err}`,
+      message: `Something went wrong! ${err}`
     });
   }
 };
 
 const getSellersCards = async (req, res) => {
   try {
-    const sellersCards = await SellerCardModel.find({});
+    const sellersCards = await SellerCardModel.find({}).populate(
+      "carpets",
+      "nameCarpet price seller"
+    );
 
     if (!sellersCards) {
       return res.status(404).json({
         statusCode: 404,
-        stringStatus: "Not Found",
+        stringStatus: "Not Found"
       });
     }
 
@@ -44,12 +47,12 @@ const getSellersCards = async (req, res) => {
     res.status(500).json({
       statusCode: 500,
       stringStatus: "Error",
-      message: `Something went wrong! ${err}`,
+      message: `Something went wrong! ${err}`
     });
     console.log({
       statusCode: 500,
       stringStatus: "Error",
-      message: `Something went wrong! ${err}`,
+      message: `Something went wrong! ${err}`
     });
   }
 };
@@ -57,13 +60,13 @@ const getSellersCards = async (req, res) => {
 const getSellerCardByUserId = async (req, res) => {
   try {
     const sellerCard = await SellerCardModel.findOne({
-      user: req.params.user_id,
-    });
+      user: req.params.user_id
+    }).populate("carpets", "nameCarpet price seller");
 
     if (!sellerCard) {
       return res.status(404).json({
         statusCode: 404,
-        stringStatus: "Not Found",
+        stringStatus: "Not Found"
       });
     }
 
@@ -72,12 +75,12 @@ const getSellerCardByUserId = async (req, res) => {
     res.status(500).json({
       statusCode: 500,
       stringStatus: "Error",
-      message: `Something went wrong! ${err}`,
+      message: `Something went wrong! ${err}`
     });
     console.log({
       statusCode: 500,
       stringStatus: "Error",
-      message: `Something went wrong! ${err}`,
+      message: `Something went wrong! ${err}`
     });
   }
 };
@@ -85,5 +88,5 @@ const getSellerCardByUserId = async (req, res) => {
 module.exports = {
   getMySellerCard,
   getSellersCards,
-  getSellerCardByUserId,
+  getSellerCardByUserId
 };

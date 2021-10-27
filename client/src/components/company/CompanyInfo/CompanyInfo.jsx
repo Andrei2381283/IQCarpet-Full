@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // Import Styles
 import "./CompanyInfo.css";
 import ButtonBackArrow from "../../../img1/buttonBackArrow.png";
+import NoPhoto from "../../../img11/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg";
 
 const CompanyInfo = ({ profile }) => {
   const [mobileInfoHidden, setMobileInfoHidden] = useState(true);
@@ -12,7 +13,15 @@ const CompanyInfo = ({ profile }) => {
   return (
     <div className="companyProfile">
       <div className="companyMainInfoDiv">
-        <img className="companyImg" src="images/sellerProfileImage.png" />
+        {profile.avatar == null ? (
+          <img className="profileImage" src={NoPhoto} alt="No Photo" />
+        ) : (
+          <img
+            className="profileImage"
+            src="../../img11/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg"
+            alt="No Photo"
+          />
+        )}
         <div className="companyInfoBlock">
           <h1 className="companyName">{profile.companyName}</h1>
           <div

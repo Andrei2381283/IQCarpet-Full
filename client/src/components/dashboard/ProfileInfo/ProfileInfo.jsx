@@ -74,7 +74,15 @@ const ProfileInfo = ({
   return (
     <Fragment>
       <div className="profileInfo" active={!mobileInfoHidden + ""}>
-        <img className="profileImage" src={avatar?.url} alt="No Photo" />
+        {avatar ? (
+          <img className="profileImage" src={avatar?.url} alt="No Photo" />
+        ) : (
+          <img
+            className="profileImage"
+            src="../../img11/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg"
+            alt="No Photo"
+          />
+        )}
         <div className="profileInfoContent">
           <div className="nameAndButtonsDiv">
             <div className="nameAndRoleDiv">

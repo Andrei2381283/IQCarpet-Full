@@ -17,7 +17,7 @@ import "./Company.css";
 const CompanyProfile = ({
   getSellerCardByUserId,
   profile: { profile },
-  match,
+  match
 }) => {
   useEffect(() => {
     getSellerCardByUserId(match.params.id);
@@ -32,7 +32,7 @@ const CompanyProfile = ({
           <BackButton link="/sellers" />
           <CompanyInfo profile={profile} />
           <CompanyWhatMake profile={profile} />
-          <CompanyCarpets />
+          <CompanyCarpets carpets={profile.carpets} />
         </Fragment>
       )}
     </Fragment>
@@ -41,11 +41,11 @@ const CompanyProfile = ({
 
 CompanyProfile.propTypes = {
   getSellerCardByUserId: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.profile,
+  profile: state.profile
 });
 
 export default connect(mapStateToProps, { getSellerCardByUserId })(
