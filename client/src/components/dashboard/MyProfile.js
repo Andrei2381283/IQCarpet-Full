@@ -17,7 +17,7 @@ import BackButton from "../backButton/BackButton";
 import ChatsButton from "../chatsButton/ChatsButton";
 import OrderCard from "../orderCard/OrderCard";
 import CarpetCard from "../carpetCard/CarpetCard";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import Profile from "./Profile/Profile";
 
 // Import Styles
 import "./MyProfile.css";
@@ -56,8 +56,8 @@ const MyProfile = ({
         <BackButton />
         <ChatsButton />
       </div>
-      <span className="profileHeader profileAboutMeText">About me1</span>
-      <ProfileInfo
+      <span className="profileHeader profileAboutMeText">About me</span>
+      <Profile
         avatar={user && user.avatar}
         fullname={user && user.fullname}
         login={user && user.login}

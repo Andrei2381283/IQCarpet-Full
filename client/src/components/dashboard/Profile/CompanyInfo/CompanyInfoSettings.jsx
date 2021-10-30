@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { editUserProfile, loadUser } from "../../../../actions/auth";
 
 // Import Styles
-import "./CompanyMoreInfo.css";
+import "./CompanyInfo.css";
 
 const initialState = {
   fullname: "",
@@ -17,7 +17,7 @@ const initialState = {
   phoneNumber: ""
 };
 
-const CompanyMoreInfoSettings = ({
+const CompanyInfoSettings = ({
   auth: { user, loading },
   loadUser,
   editUserProfile,
@@ -201,7 +201,7 @@ const CompanyMoreInfoSettings = ({
   );
 };
 
-CompanyMoreInfoSettings.propTypes = {
+CompanyInfoSettings.propTypes = {
   auth: PropTypes.object.isRequired,
   editUserProfile: PropTypes.func.isRequired,
   loadUser: PropTypes.func.isRequired
@@ -214,4 +214,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   editUserProfile,
   loadUser
-})(CompanyMoreInfoSettings);
+})(CompanyInfoSettings);

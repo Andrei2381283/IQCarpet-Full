@@ -15,8 +15,8 @@ import PrivateRoute from "./PrivateRoute";
 
 import HowItWorksPage from "../howItWorksPage/HowItWorksPage";
 import Sellers from "../sellers/Sellers";
-import Company from "../company/Company";
 import MyProfile from "../dashboard/MyProfile";
+import Company from "../company/Company";
 import Support from "../support/Support";
 import Chats from "../chats/Chats";
 import Orders from "../orders/Orders";

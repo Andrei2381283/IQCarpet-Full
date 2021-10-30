@@ -567,62 +567,32 @@ button {
     /* margin-top: 8rem; */
   }
 
-  .contactsLinkImage1_32 {
+  .contactsLinkImage1_32, .contactsLinkImage1_20 {
     background: url("./img1/contactsLinkImage1M.png") no-repeat center
       center/cover;
   }
 
-  .contactsLinkImage2_32 {
+  .contactsLinkImage2_32, .contactsLinkImage2_20 {
     background: url("./img1/contactsLinkImage2M.png") no-repeat center
       center/cover;
   }
 
-  .contactsLinkImage3_32 {
+  .contactsLinkImage3_32, .contactsLinkImage3_20 {
     background: url("./img1/contactsLinkImage3M.png") no-repeat center
       center/cover;
   }
 
-  .contactsLinkImage4_32 {
+  .contactsLinkImage4_32, .contactsLinkImage4_20 {
     background: url("./img1/contactsLinkImage4M.png") no-repeat center
       center/cover;
   }
 
-  .contactsLinkImage5_32 {
+  .contactsLinkImage5_32, .contactsLinkImage5_20 {
     background: url("./img1/contactsLinkImage5M.png") no-repeat center
       center/cover;
   }
 
-  .contactsLinkImage6_32 {
-    background: url("./img1/contactsLinkImage6M.png") no-repeat center
-      center/cover;
-  }
-
-  .contactsLinkImage1_20 {
-    background: url("./img1/contactsLinkImage1M.png") no-repeat center
-      center/cover;
-  }
-
-  .contactsLinkImage2_20 {
-    background: url("./img1/contactsLinkImage2M.png") no-repeat center
-      center/cover;
-  }
-
-  .contactsLinkImage3_20 {
-    background: url("./img1/contactsLinkImage3M.png") no-repeat center
-      center/cover;
-  }
-
-  .contactsLinkImage4_20 {
-    background: url("./img1/contactsLinkImage4M.png") no-repeat center
-      center/cover;
-  }
-
-  .contactsLinkImage5_20 {
-    background: url("./img1/contactsLinkImage5M.png") no-repeat center
-      center/cover;
-  }
-
-  .contactsLinkImage6_20 {
+  .contactsLinkImage6_32, .contactsLinkImage6_20 {
     background: url("./img1/contactsLinkImage6M.png") no-repeat center
       center/cover;
   }

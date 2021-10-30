@@ -56,6 +56,12 @@
   width: 353px;
   height: 32px;
   justify-content: space-between;
+  box-sizing: initial;
+  border-radius: 16px;
+}
+
+.regBirthDayError {
+  width: 355px;
 }
 
 .birthdaySelect {
@@ -78,6 +84,11 @@
 
 .birthdaySelectYear {
   width: 28%;
+}
+
+.regLocSelect[opened="true"] {
+  border-radius: 16px 16px 0 0;
+  background-image: url("../../../img1/reverseSelectArrow.png");
 }
 
 .phoneFieldDiv {
@@ -262,6 +273,18 @@
 
 
 @media (max-width: 700px) {
+  .regBirthDayError {
+    width: auto;
+    right: 37px;
+    left: 37px;
+  }
+
+  .datalistOfCountries {
+    width: auto;
+    right: 37px;
+    left: 37px;
+  }
+
   .regFieldsBlock {
     flex-direction: column;
   }

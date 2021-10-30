@@ -7,6 +7,7 @@ import {
   resetPasswordSendCode,
   resetPasswordConfirmCode
 } from "../../../actions/auth";
+import ErrorInput from "../ErrorInput";
 
 import "./PasswordRecovery.css";
 
@@ -39,7 +40,6 @@ const PasswordRecovery = ({
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(e.target.name + " : " + e.target.value);
     setValue(e.target.name, e.target.value);
     trigger(e.target.name);
   };
@@ -68,19 +68,20 @@ const PasswordRecovery = ({
     >
       <div className="authField confirmCodeField">
         <span className="authFieldName">Enter a confirmation code</span>
-        <input
+        <ErrorInput
           onChange={onChange}
           value={code}
           className="authFieldInput confirmCodeInput"
           placeholder="Code"
           aria-invalid={!!errors.code + ""}
           {...reghook("code", {
-            required: "Empty field",
-            maxLength: 4,
-            minLength: 4,
+            required: authConfirmCode ? "Empty field" : false,
+            maxLength: {value: 4, message: "Code great than 6"},
+            minLength: {value: 4, message: "Code less than 6"},
             pattern: /^[0-9]+$/i
           })}
-        ></input>
+          error={errors.code}
+        />
         <span className="repeatSending" sended={codeSended.toString()}>
           Repeat sending
         </span>
@@ -102,7 +103,7 @@ const PasswordRecovery = ({
         <span className="passRecoveryHeader">Password Recovery</span>
         <div className="authField">
           <span className="authFieldName">Enter Your Login or Email </span>
-          <input
+          <ErrorInput
             className="authFieldInput"
             placeholder="Login or Email"
             aria-invalid={!!errors.email + ""}
@@ -110,12 +111,12 @@ const PasswordRecovery = ({
               required: "Empty field",
               maxLength: 320,
               minLength: 1,
-              pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i
+              pattern: /^[a-z0-9\.\$\%\#\,\-\+\=\_\(\)\{\}\!\"\'\|\;\:\<\>]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i
             })}
             value={email}
             onChange={onChange}
+            error={errors.email}
           />
-          <ErrorMessage error={errors.email} message={"Wrong"} />
         </div>
         <span className="passRecInfoCode">
           We will send to you a confirmation code

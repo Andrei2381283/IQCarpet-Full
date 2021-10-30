@@ -27,7 +27,12 @@ function HomePageIntroBlock({ isAuthenticated, auth: { user } }) {
               <Link to="/register" className="registerBuyer">
                 Register as a buyer
               </Link>
-              <Link to="/register" className="registerSeller">
+              <Link 
+              to={{
+                pathname: "/register",
+                search: "?isseller=true"
+              }} 
+              className="registerBuyer">
                 Register as a seller
               </Link>
             </Fragment>

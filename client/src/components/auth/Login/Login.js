@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { login } from "../../../actions/auth";
 import AuthSwitchBar from "../AuthSwitchBar";
 import { useForm } from "react-hook-form";
-import ErrorMessage from "../ErrorMessage";
+import ErrorInput from "../ErrorInput";
 
 import "./Login.css";
 
@@ -49,22 +49,22 @@ const Login = ({ login, isAuthenticated }) => {
             className="authFieldInput"
             placeholder="Email or Login"
           ></input> */}
-          <input
+          <ErrorInput
             className="authFieldInput"
             type="text"
             placeholder="Email Address"
             /* name="email" */
             aria-invalid={!!errors.email + ""}
-            {...reghook("email", { required: "Empty field", maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i})}
+            {...reghook("email", { required: "Empty field", maxLength: 320, minLength: 1, pattern: /^[a-z0-9\.\$\%\#\,\-\+\=\_\(\)\{\}\!\"\'\|\;\:\<\>]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i})}
             value={email}
             onChange={onChange}
+            error={errors.email}
           />
-          <ErrorMessage error={errors.email} message={"Wrong"} />
         </div>
         <div className="authField">
           <span className="authFieldName">Repeat a Password</span>
           {/* <input className="authFieldInput" placeholder=" Password"></input> */}
-          <input
+          <ErrorInput
             className="authFieldInput"
             type="password"
             placeholder="Password"
@@ -73,8 +73,8 @@ const Login = ({ login, isAuthenticated }) => {
             {...reghook("password", { required: "Empty field",  minLength: 6})}
             value={password}
             onChange={onChange}
+            error={errors.password}
           />
-          <ErrorMessage error={errors.password} message={"Wrong"} />
           <div className="loginLastField">
             <Link to="password-recovery" className="forgotPassword">
               Forgot your Password?

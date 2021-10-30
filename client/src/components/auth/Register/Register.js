@@ -1,7 +1,7 @@
 // Import Engine
-import React, { Fragment, useEffect, useState } from "react";
+import React, { createRef, Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import { setAlert } from "../../../actions/alert";
 import { register } from "../../../actions/auth";
 import PropTypes from "prop-types";
@@ -13,6 +13,7 @@ import ErrorMessage from "../ErrorMessage";
 import "./Register.css";
 import showPasswordImage from "../../../img1/showPassword.png";
 import selectArrow from "../../../img1/selectArrow.png";
+import ErrorInput from "../ErrorInput";
 
 const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -31,9 +32,13 @@ const countries = {
   }
 }
 
+const currentYear = (new Date()).getFullYear();
+
 const Register = ({ setAlert, register, isAuthenticated }) => {
-  const hookForm = useForm();
-  const {handleSubmit, trigger, setValue, formState: { touchedFields, errors } } = hookForm;
+  const query = new URLSearchParams(useLocation().search);
+
+  const hookForm = useForm({mode: "all"});
+  const {handleSubmit, trigger, setValue, formState: { submitCount, touchedFields, errors, dirtyFields } } = hookForm;
   const reghook = (ref, options) => {
     return {...hookForm.register(ref, options), maxLength: (options.maxLength && (options.maxLength.value || options.maxLength)) || -1};
   }
@@ -41,10 +46,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   console.log(errors);
 
   const [countryListVisible, setCountryListVisible] = useState(false);
-  
+  const [dateDivTouched, setDateTouched] = useState(false);
+
   const [formData, setFormData] = useState({
     fullname: "",
-    iAmSeller: "",
+    iAmSeller: !!query.get("isseller"),
     companyName: "",
     birthDay: "1",
     birthMonth: "1",
@@ -52,7 +58,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     location: "",
     country: "",
     city: "",
-    phoneMask: "",
+    phoneMask: "+7",
     phoneNumber: "",
     login: "",
     email: "",
@@ -85,27 +91,25 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   } = formData;
 
   useEffect(() => {
-    trigger(Object.keys(touchedFields));
+    trigger(submitCount > 0 ? undefined : Object.keys(touchedFields));
   }, [iAmSeller]);
 
   useEffect(() => {
-    if(touchedFields.login){
+    if(touchedFields.login || dirtyFields.login){
       setValue("login", useHowLogin ? email : login);
       trigger("login");
     }
   }, [useHowLogin])
   
   const onChange = (e) => {
-    console.log(e.target.name);
-    /* if(errors[e.target.name] && errors[e.target.name].type == "maxLength") return; */
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setValue(e.target.name, e.target.value);
+    /* setValue(e.target.name, e.target.value);
     trigger(e.target.name);
+    touchedFields[e.target.name] = true; */
   }
 
   const onSubmit = async (e) => {
     /* e.preventDefault(); */
-    if(useHowLogin) login = email;
     console.log("Ok");
     register({
       fullname,
@@ -114,7 +118,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       birthDay: `${("0" + birthDay).slice(-2)}.${("0" + birthMonth).slice(-2)}.${birthYear}`,
       location,
       phoneNumber: phoneMask + phoneNumber,
-      login,
+      login: !useHowLogin ? login : email,
       email,
       password
     });
@@ -123,17 +127,22 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const companyField = (
     <div className="authField">
       <span className="authFieldName">Enter a Company's name</span>
-      <input
+      <ErrorInput
         className="authFieldInput"
         type="text"
-        placeholder="companyName"
+        placeholder="Company's name"
         /* name="companyName" */
         aria-invalid={!!errors.companyName + ""}
-        {...reghook("companyName", { required: {value: iAmSeller, message: "Empty field"}, maxLength: {value: 320, message: "Company name greater than 320"}, minLength: 1, pattern: /^\w+(|\s|-)(|\w+)$/i})}
+        {...reghook("companyName", { 
+          required: {value: iAmSeller, message: "Empty field"}, 
+          maxLength: {value: 320, message: "Company name greater than 320"}, 
+          minLength: 1, 
+          pattern: /^[a-z0-9]+(|\s([a-z0-9]+)|-([a-z0-9]+))$/i,
+          onChange: onChange
+        })}
         value={companyName}
-        onChange={onChange}
+        error={errors.companyName}
       />
-      <ErrorMessage error={errors.companyName} message={errors.phoneNumber && errors.phoneNumber.message} />
     </div>
   );
 
@@ -145,20 +154,27 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           className="authFieldInput phoneMask"
           /* name="phoneMask" */
           aria-invalid={!!errors.phoneMask + ""}
-          {...reghook("phoneMask", { required: "Empty field" })}
+          {...reghook("phoneMask", { 
+            required: "Empty field",
+            onChange: onChange
+          })}
           size={phoneMask ? phoneMask.length - 1 || 1 : 1}
           value={phoneMask}
-          onChange={onChange}
         ></input>
         <input
           className="authFieldInput phoneNum"
           type="text"
-          placeholder="phoneNumber"
+          placeholder=""
           /* name="phoneNumber" */
           aria-invalid={!!errors.phoneNumber + ""}
-          {...reghook("phoneNumber", { required: "Empty field", maxLength: {value: 10, message: "Length is not 10"}, minLength: {value: 10, message: "Length is not 10"}, pattern: /^[0-9]+$/i })}
+          {...reghook("phoneNumber", { 
+            required: "Empty field", 
+            maxLength: {value: 10, message: "Length is not 10"}, 
+            minLength: {value: 10, message: "Length is not 10"}, 
+            pattern: /^[0-9]+$/i,
+            onChange: onChange
+          })}
           value={phoneNumber}
-          onChange={onChange}
         />
         {/* <input className="authFieldInput phoneNum"></input> */}
       </div>
@@ -180,22 +196,27 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <span className="authFieldName">
                 Enter a your surname&name&patronymic
               </span>
-              <input
+              <ErrorInput
                 className="authFieldInput"
                 type="text"
-                placeholder="FullName"
-                name="fullname"
+                placeholder="Name"
                 /* name="fullname" */
                 aria-invalid={!!errors.fullname + ""}
-                {...reghook("fullname", { required: "Empty field", maxLength: {value: 30, message: "Length more than 30"}, minLength: 1, pattern: /^\w+(|\s|-)(|\w+)$/i })} /* TODO: Сделать поддержку других языков  */
+                {...reghook("fullname", { 
+                  required: "Empty field", 
+                  maxLength: {value: 30, message: "Length more than 30"}, 
+                  minLength: 1, 
+                  pattern: /^[a-z0-9]+(|\s([a-z0-9]+)|-([a-z0-9]+))$/i,
+                  onChange: onChange
+                })} /* TODO: Сделать поддержку других языков  */
                 value={fullname}
-                onChange={onChange}
+                error={errors.fullname}
               />
-              <ErrorMessage error={errors.fullname} message={errors.fullname && errors.fullname.message} />
-              <label className="checkBoxDiv">
+              <div className="checkBoxDiv">
                 <input
                   type="checkbox"
                   name="iAmSeller"
+                  defaultChecked={iAmSeller}
                   onChange={(event) => {
                     setFormData({
                       ...formData,
@@ -206,12 +227,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                   }}
                 />
                 <span>I am seller</span>
-              </label>
+              </div>
             </div>
             {iAmSeller && companyField}
             <div className="authField">
               <span className="authFieldName">Enter a your BirthDay</span>
-              <div className="regBirthDaySelectDiv">
+              <div className="regBirthDaySelectDiv" aria-invalid={(currentYear - birthYear < 18 && (submitCount > 0 || dateDivTouched)) + ""} onClick={() => setDateTouched(true)} >
                 <select name="birthDay" className="authFieldSelect birthdaySelect birthdaySelectDay" value={birthDay} onChange={onChange}>
                   {
                     [...(function*(){
@@ -236,29 +257,31 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                   }
                 </select>
               </div>
+              <ErrorMessage className="regBirthDayError" error={(currentYear - birthYear < 18 && (submitCount > 0 || dateDivTouched)) ? {} : null} message={currentYear - birthYear < 18 && (submitCount > 0 || dateDivTouched) && "You must be 18 years old"} />
             </div>
             <div className="authField">
               <span className="authFieldName">Choose a your location</span>
-              {/* <input
-                className="authFieldInput authFieldSelect"
-                placeholder="Name"
-              ></input> */}
-              <input
-                className="authFieldInput authFieldSelect"
+              <ErrorInput
+                className="authFieldInput authFieldSelect regLocSelect"
+                opened={countryListVisible + ""}
                 type="text"
-                placeholder="location"
-                name="location"
+                placeholder="Sity & Country"
                 /* name="location" */
                 aria-invalid={!!errors.location + ""}
-                {...reghook("location", { required: "Empty field", maxLength: 30, minLength: 1, pattern: /^\w+(|\s|-)(|\w+)$/i})}
+                {...reghook("location", { 
+                  required: "Empty field", 
+                  maxLength: 30, 
+                  minLength: 1, 
+                  pattern: /^[a-z0-9]+(|\s([a-z0-9]+)|-([a-z0-9]+))$/i,
+                  onChange: (e) => {
+                    onChange(e);
+                    setCountryListVisible(true);
+                  }
+                })}
                 value={location}
-                onChange={(e) => {
-                  onChange(e);
-                  setCountryListVisible(true);
-                }}
                 onClick={() => setCountryListVisible(!countryListVisible)}
+                error={errors.location}
               />
-              <ErrorMessage error={errors.location} message={errors.location && errors.location.message} />
               <div className={`datalistOfCountries ${countryListVisible ? "" : "hidden"}`}>
                 {
                   Object.keys(countries).map((value, index) => <div className="datalistSelect" key={index} 
@@ -297,36 +320,45 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <span className="authFieldSubName">
                 Latin letters and numbers without spaces
               </span>
-              <input
+              <ErrorInput
                 className="authFieldInput"
                 type="text"
-                placeholder="login"
+                placeholder="Login"
                 /* name="login" */
                 aria-invalid={!!errors.login + ""}
-                {...reghook("login", useHowLogin ? {required: "Empty field", maxLength: 320, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$/i} : { required: "Empty field", maxLength: 30, minLength: 1, pattern: /^[a-z0-9]+$/i})}
+                {...reghook("login", useHowLogin ? {
+                  required: "Empty field", 
+                  maxLength: 320, 
+                  minLength: 1, 
+                  pattern: /.+/gi/* /^[a-z0-9\.\$\%\#\,\-\+\=\_\(\)\{\}\!\"\'\|\;\:\<\>]+@[a-z0-9]+\.[a-z0-9]+$/i */,
+                  onChange: onChange
+                } : { 
+                  required: "Empty field", 
+                  maxLength: 30, 
+                  minLength: 1, 
+                  pattern: /^[a-z0-9]+$/i,
+                  onChange: onChange
+                })}
                 value={useHowLogin ? email : login}
                 disabled={useHowLogin}
-                onChange={onChange}
+                error={errors.login}
               />
-              <ErrorMessage error={errors.login} message={errors.login && errors.login.message} />
             </div>
             <div className="authField">
               <span className="authFieldName">Make a your Password</span>
               <span className="authFieldSubName">At least 6 characters</span>
-              {/* <input
-                className="authFieldInput"
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-              ></input> */}
               <input
                 className="authFieldInput"
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 /* name="password" */
                 aria-invalid={!!errors.password + ""}
-                {...reghook("password", { required: "Empty field",  minLength: {value: 6, message: "Password less than 6"}})}
+                {...reghook("password", { 
+                  required: "Empty field", 
+                  minLength: {value: 6, message: "Password less than 6"},
+                  onChange: onChange
+                })}
                 value={password}
-                onChange={onChange}
               />
               <img
                 onClick={() => setShowPassword(!showPassword)}
@@ -337,25 +369,21 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             </div>
             <div className="authField">
               <span className="authFieldName">Repeat a Password</span>
-              {/* <input
-                className="authFieldInput"
-                type={showPassword2 ? "text" : "password"}
-                placeholder="Password"
-              ></input> */}
               <input
                 className="authFieldInput"
                 type={showPassword2 ? "text" : "password"}
-                placeholder="Confirm Password"
+                placeholder="Password"
                 /* name="password2" */
                 aria-invalid={!!errors.password2 + ""}
-                {...reghook("password2", { required: "Empty field", 
+                {...reghook("password2", { 
+                  required: "Empty field", 
                   validate: {
                     value: (value) => password == value || "Password mismatch"
-                  }
+                  },
+                  onChange: onChange
                 })
                 }
                 value={password2}
-                onChange={onChange}
               />
               <img
                 onClick={() => setShowPassword2(!showPassword2)}
@@ -367,36 +395,37 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <div className="authField">
               <span className="authFieldName">Enter your Email</span>
               {/* <input className="authFieldInput" placeholder="Email"></input> */}
-              <input
+              <ErrorInput
                 className="authFieldInput"
                 type="email"
-                placeholder="Email Address"
+                placeholder="Email"
                 /* name="email" */
                 aria-invalid={!!errors.email + ""}
-                {...reghook("email", { required: "Empty field", maxLength: {value: 320, message: "Email greater than 320"}, minLength: 1, pattern: /^[a-z0-9]+@[a-z0-9]+\.[a-z0-9]+$/i})}
-                value={email}
-                onChange={(e) => {
-                  onChange(e);
-                  if(useHowLogin){
-                    setValue("login", e.target.value);
-                    trigger("login");
+                {...reghook("email", { 
+                  required: "Empty field", 
+                  maxLength: {value: 320, message: "Email greater than 320"}, 
+                  minLength: 1, 
+                  pattern: /^[a-z0-9\.\$\%\#\,\-\+\=\_\(\)\{\}\!\"\'\|\;\:\<\>]+@[a-z0-9]+\.[a-z0-9]+$/i,
+                  onChange: (e) => {
+                    onChange(e);
+                    if(useHowLogin){
+                      setValue("login", e.target.value);
+                      trigger("login");
+                    }
                   }
-                }}
+                })}
+                value={email}
+                error={errors.email}
               />
-              <ErrorMessage error={errors.email} message={errors.email && errors.email.message} />
-              <label className="checkBoxDiv">
+              <div className="checkBoxDiv">
                 <input type="checkbox"
                   name="useHowLogin"
                   onChange={(e) => {
                     setFormData({ ...formData, useHowLogin: e.target.checked });
-                    /* if(touchedFields.login){
-                      setValue("login", email);
-                      trigger("login");
-                    } */
                   }}
                 />
                 <span>Use how login</span>
-              </label>
+              </div>
             </div>
           </div>
         </div>

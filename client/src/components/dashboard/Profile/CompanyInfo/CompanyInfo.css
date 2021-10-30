@@ -1,0 +1,272 @@
+.companyProfile {
+  display: flex;
+  background: #f3f5fb;
+  border-radius: 24px;
+  padding: 32px;
+  margin: 32px 40px 0;
+}
+
+.companyMainInfoDiv {
+  display: flex;
+}
+
+.companyImg {
+  border-radius: 12px;
+  width: 228px;
+  height: 228px;
+}
+
+.companyInfoBlock {
+  width: 100%;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.companyName {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 44px;
+  color: #000000;
+}
+
+.companyInfoHeader {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #7a7d80;
+}
+
+.companyInfoContent {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  margin-top: 4px;
+  font-size: 18px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.companyInfoDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .companyInfoDiv:nth-child(3) {
+  margin-top: 12px;
+} */
+.companyInfoDiv2 {
+  margin-top: 12px;
+}
+
+.companyLinksBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 78px;
+  margin-right: 63px;
+  justify-content: center;
+}
+
+.companyLinksHeader {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #7a7d80;
+}
+
+.companyLinkDiv {
+  display: flex;
+  margin-top: 13px;
+}
+
+.companyLinkImg {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.companyLinkPhone {
+  background: url("../../../../img1/phoneLinkImage.png") no-repeat center
+    center/cover;
+}
+
+.contactLinkImage2 {
+  margin-left: 35px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #5282c3;
+}
+
+.contactLinkText {
+  margin: 0 0 0 12px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.companyContactBtns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 44px;
+}
+
+.companyContactBtn1 {
+  text-align: center;
+  min-width: 45%;
+  background: #f3f5fb;
+  border: 2px solid #5282c3;
+  box-sizing: border-box;
+  border-radius: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #5282c3;
+}
+
+.companyContactBtn2 {
+  text-align: center;
+  min-width: 45%;
+  background: #5282c3;
+  border-radius: 16px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #ffffff;
+  border-width: 0;
+}
+
+.companyMoreDetailsText {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #5282c3;
+  display: none;
+  height: 24px;
+}
+
+.companyMoreDetailsText > img {
+  width: 4px;
+  height: 8px;
+  margin-left: 8px;
+  transform: rotate(-90deg);
+}
+
+.companyMoreDetailsText[active="true"] > img {
+  transform: matrix(0, 1, 1, 0, 0, 0);
+}
+
+.companyInfoSubmit {
+  margin-top: auto;
+}
+
+.companyLinksBlockMoreInfo {
+  width: auto !important; 
+}
+
+@media (max-width: 700px) {
+  .companyLinkPhone {
+    background: url("../../../../img1/phoneLinkImageM.png") no-repeat center
+      center/cover;
+  }
+
+  .companyMoreDetailsText {
+    display: block;
+    margin-top: 12px;
+  }
+
+  .companyImg {
+    width: 120px;
+    height: 120px;
+  }
+
+  .companyProfile {
+    flex-direction: column;
+    background: transparent;
+    padding: 0;
+    margin: 80px 16px 0;
+  }
+
+  .companyName {
+    font-size: 24px;
+    line-height: 24px;
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 140px;
+    text-align: center;
+  }
+
+  .companyInfoMobileHideDiv[active="false"] {
+    display: none;
+  }
+
+  .companyInfoBlock {
+    margin-left: 11px;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+
+  /* .companyInfoDiv:nth-child(3) {
+    margin-top: 0;
+  }
+ */
+  .companyInfoHeader {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .companyInfoContent {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .companyInfoMobileHideDiv1 {
+    height: 50px;
+    margin-top: 20px;
+  }
+
+  .companyCountryMobileHideDiv > .companyInfoHeader,
+  .companyCountryMobileHideDiv > .companyInfoContent {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .companyCountryMobileHideDiv {
+    position: absolute;
+    left: 16px;
+  }
+
+  .companyInfoMobileHideDiv2 {
+    margin-top: 16px;
+  }
+
+  .companyLinksBlock {
+    margin: -8px 0 0;
+  }
+
+  .companyContactBtns {
+    margin-top: 32px;
+  }
+}

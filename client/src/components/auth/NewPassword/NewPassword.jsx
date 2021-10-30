@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { resetPassword } from "../../../actions/auth";
+import ErrorInput from "../ErrorInput";
 
 import "./NewPassword.css";
 
@@ -55,19 +56,20 @@ const NewPassword = ({
       <span className="newPassHeader">Password Recovery</span>
       <div className="authField newPassBlock1">
         <span className="authFieldName">Make a new Password</span>
-        <input
+        <ErrorInput
           className="authFieldInput"
           type="password"
           placeholder="Password"
           value={password}
           aria-invalid={!!errors.password + ""}
-          {...reghook("password", { required: "Empty field", minLength: 6 })}
+          {...reghook("password", { required: "Empty field", minLength: {value: 6, message: "Password less than 6"} })}
           onChange={onChange}
+          error={errors.password}
         />
       </div>
       <div className="authField newPassBlock2">
         <span className="authFieldName">Repeat a new Password</span>
-        <input
+        <ErrorInput
           className="authFieldInput"
           type="password"
           placeholder="Password"
@@ -75,9 +77,10 @@ const NewPassword = ({
           aria-invalid={!!errors.password2 + ""}
           {...reghook("password2", {
             required: "Empty field",
-            validate: (value) => password == value
+            validate: (value) => password == value || "Password mismatch"
           })}
           onChange={onChange}
+          error={errors.password2}
         />
       </div>
       <div className="submitButtonDiv">

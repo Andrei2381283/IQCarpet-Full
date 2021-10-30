@@ -2,9 +2,9 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import "./CompanyMoreInfo.css";
+import "./CompanyInfo.css";
 
-const CompanyMoreInfo = ({
+const CompanyInfo = ({
   companyName,
   emailOne,
   location,
@@ -80,4 +80,4 @@ const CompanyMoreInfo = ({
   );
 };
 
-export default CompanyMoreInfo;
+export default CompanyInfo;

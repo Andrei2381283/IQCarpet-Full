@@ -2,18 +2,18 @@ import React, { useState, Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect, useDispatch } from "react-redux";
 
-import "./ProfileInfo.css";
-
-import ProfileMoreInfo from "./ProfileMoreInfo/ProfileMoreInfo";
-import ProfileMoreInfoSettings from "./ProfileMoreInfo/ProfileMoreInfoSettings";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import ProfileInfoSettings from "./ProfileInfo/ProfileInfoSettings";
 import ButtonBackArrow from "../../../img1/buttonBackArrow.png";
 
-import CompanyMoreInfo from "./CompanyInfo/CompanyMoreInfo";
-import CompanyMoreInfoSettings from "./CompanyInfo/CompanyMoreInfoSettings";
+import CompanyInfo from "./CompanyInfo/CompanyInfo";
+import CompanyInfoSettings from "./CompanyInfo/CompanyInfoSettings";
 import CompanyWhatMake from "../../company/CompanyWhatMake/CompanyWhatMake";
 import CompanyWhatMakeSettings from "./CompanyWhatMakeSettings.jsx";
 
-const ProfileInfo = ({
+import "./Profile.css";
+
+const Profile = ({
   avatar,
   fullname,
   login,
@@ -28,6 +28,8 @@ const ProfileInfo = ({
   profilePhoneNumberOne,
   logout
 }) => {
+  console.log(avatar);
+
   const [mobileInfoHidden, setMobileInfoHidden] = useState(false);
 
   const [displayEditProfile, toggleEditProfile] = useState(false);
@@ -44,25 +46,40 @@ const ProfileInfo = ({
   const openWhatMakeSettings = () => toggleEditWhatMake(!displayEditWhatMake);
 
   const editProfile = (
-    <ProfileMoreInfoSettings mobileInfoHidden={mobileInfoHidden} />
+    <ProfileInfoSettings 
+      setMobileInfoHidden={setMobileInfoHidden}
+      mobileInfoHidden={mobileInfoHidden} 
+      logout={logout}
+      iAmSeller={iAmSeller}
+      openProfileSettings={openProfileSettings}
+      displayEditProfile={displayEditProfile}
+    />
   );
 
   const editCompanyInfo = (
-    <CompanyMoreInfoSettings mobileInfoHidden={mobileInfoHidden} />
+    <CompanyInfoSettings mobileInfoHidden={mobileInfoHidden} />
   );
 
   const myProfile = (
-    <ProfileMoreInfo
+    <ProfileInfo
+      avatar={avatar}
+      fullname={fullname}
+      iAmSeller={iAmSeller}
+      openProfileSettings={openProfileSettings}
+      displayEditProfile={displayEditProfile}
+      setMobileInfoHidden={setMobileInfoHidden}
+      mobileInfoHidden={mobileInfoHidden}
+      logout={logout}
+      login={login}
       birthDay={birthDay}
       email={email}
       location={location}
       phoneNumber={phoneNumber}
-      mobileInfoHidden={mobileInfoHidden}
     />
   );
 
   const infoCompany = (
-    <CompanyMoreInfo
+    <CompanyInfo
       companyName={profileCompanyName}
       location={location}
       emailOne={profileEmailOne}
@@ -73,45 +90,7 @@ const ProfileInfo = ({
 
   return (
     <Fragment>
-      <div className="profileInfo" active={!mobileInfoHidden + ""}>
-        {avatar ? (
-          <img className="profileImage" src={avatar?.url} alt="No Photo" />
-        ) : (
-          <img
-            className="profileImage"
-            src="../../img11/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg"
-            alt="No Photo"
-          />
-        )}
-        <div className="profileInfoContent">
-          <div className="nameAndButtonsDiv">
-            <div className="nameAndRoleDiv">
-              <span className="profileNameText">{fullname}</span>
-              <span className="profileRoleText">
-                {iAmSeller === false ? "Buyer" : "Seller"}
-              </span>
-            </div>
-            <span
-              className="moreDetailsText"
-              active={!mobileInfoHidden + ""}
-              onClick={() => setMobileInfoHidden(!mobileInfoHidden)}
-            >
-              More details
-              <img src={ButtonBackArrow} />
-            </span>
-            <div className="editExitButtonsDiv">
-              <button onClick={openProfileSettings} className="editButton">
-                {displayEditProfile ? "Cancel" : "Edit"}
-              </button>
-              <button onClick={logout} className="exitButton">
-                Exit
-              </button>
-            </div>
-          </div>
-          <span className="profileLogin">{login}</span>
-          {displayEditProfile ? editProfile : myProfile}
-        </div>
-      </div>
+      {displayEditProfile ? editProfile : myProfile}
       {iAmSeller && (
         <div className="companyProfile" active={!mobileInfoHidden + ""}>
           <img className="profileImage" src="" />
@@ -164,4 +143,4 @@ const ProfileInfo = ({
   );
 };
 
-export default ProfileInfo;
+export default Profile;
