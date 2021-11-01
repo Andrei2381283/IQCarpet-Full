@@ -18,3 +18,17 @@ IQCarpet-Full - it is a full project with API and Client
 ### To use the file system, create folders like this:
 
 - **public / files / images / avatars**
+
+# Server
+
+##### /
+
+- **npm i**
+- **npm run server**
+
+##### /client
+
+# Client
+
+- **npm i**
+- **npm start**
