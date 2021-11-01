@@ -16,4 +16,4 @@ IQCarpet-Full - it is a full project with API and Client
 
 ### To use the file system, create folders like this:
 
-- **public / files / images / avatars.**
+- **public / files / images / avatars**
