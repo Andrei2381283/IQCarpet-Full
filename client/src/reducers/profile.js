@@ -4,18 +4,14 @@ import {
   CLEAR_PROFILE,
   UPDATE_PROFILE,
   GET_PROFILES,
-  GET_REPOS,
-  NO_REPOS,
-  SEARCH_SELLER,
-  SEARCH_SELLER_ERROR,
+  SEARCH_SELLER
 } from "../actions/types";
 
 const initialState = {
   profile: null,
   profiles: [],
-  repos: [],
   loading: true,
-  error: {},
+  error: {}
 };
 
 function profileReducer(state = initialState, action) {
@@ -27,43 +23,32 @@ function profileReducer(state = initialState, action) {
       return {
         ...state,
         profile: payload,
-        loading: false,
+        loading: false
       };
     case GET_PROFILES:
       return {
         ...state,
         profiles: payload,
-        loading: false,
+        loading: false
       };
     case SEARCH_SELLER:
       return {
         ...state,
         profiles: payload,
-        loading: false,
+        loading: false
       };
     case PROFILE_ERROR:
       return {
         ...state,
         error: payload,
         loading: false,
-        profile: null,
+        profile: null
       };
     case CLEAR_PROFILE:
       return {
         ...state,
         profile: null,
-        repos: [],
-      };
-    case GET_REPOS:
-      return {
-        ...state,
-        repos: payload,
-        loading: false,
-      };
-    case NO_REPOS:
-      return {
-        ...state,
-        repos: [],
+        repos: []
       };
     default:
       return state;

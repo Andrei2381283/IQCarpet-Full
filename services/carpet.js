@@ -4,6 +4,9 @@
 const CarpetModel = require("../models/Carpet");
 const SellerCardModel = require("../models/SellerCard");
 
+// @route    GET api/carpets
+// @desc     Get all carpets
+// @access   Private
 const getMyCarpets = async (req, res) => {
   try {
     const carpets = await CarpetModel.find({ seller: req.user.id });
@@ -31,6 +34,9 @@ const getMyCarpets = async (req, res) => {
   }
 };
 
+// @route    POST api/carpets/create
+// @desc     Create new carpet
+// @access   Private
 const createCarpet = async (req, res) => {
   try {
     const carpet = await CarpetModel.findOne({
@@ -65,10 +71,6 @@ const createCarpet = async (req, res) => {
         }
       }
     );
-
-    // const updatedSellerCard = await SellerCardModel.findOne({
-    //   user: req.user.id
-    // }).populate("carpets", "nameCarpet price seller");
 
     return res.status(200).json(newCarpet);
   } catch (err) {

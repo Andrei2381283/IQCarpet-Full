@@ -73,10 +73,6 @@
     #ffffff;
 }
 
-/* select.authFieldSelect:focus {
-  background-image: url(../../img1/reverseSelectArrow.png);
-} */
-
 .submitButtonDiv {
   cursor: pointer;
   margin-top: 32px;
@@ -100,8 +96,6 @@
   height: 32px;
 }
 
-
-
 .authSwitchBar {
   display: flex;
   margin: 0 0 31px 35px;
@@ -113,7 +107,7 @@
   line-height: 24px;
   display: flex;
   justify-content: center;
-  color: #7A7D80;  
+  color: #7a7d80;
 }
 
 .authSwitchBar > .selectedSwitchButton {
@@ -132,7 +126,7 @@
 .authSwitchBar > div {
   position: absolute;
   height: 1px;
-  background: #5282C3;
+  background: #5282c3;
   width: 175px;
   margin-top: 34px;
 }
@@ -145,22 +139,18 @@
   margin-left: 154px;
 }
 
-
-
 .errorMessage {
   position: absolute;
   font-size: 14px;
   line-height: 24px;
-  color: #FF004D;
+  color: #ff004d;
   text-align: end;
   height: 0;
 }
 
 *[aria-invalid="true"] {
-  border: 1px solid #FF004D;
+  border: 1px solid #ff004d;
 }
-
-
 
 @media (max-width: 700px) {
   .authField,
@@ -192,16 +182,15 @@
     margin-top: 64px;
   }
 
-
-
   .authSwitchBar {
     margin: 0;
     margin-bottom: 32px;
     height: auto;
     justify-content: space-around;
   }
-  
-  .authSwitchBar > a, .authSwitchBar > a:nth-child(2) {
+
+  .authSwitchBar > a,
+  .authSwitchBar > a:nth-child(2) {
     width: auto;
     margin: 0;
   }

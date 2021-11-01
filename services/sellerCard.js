@@ -1,5 +1,9 @@
+// Import Models
 const SellerCardModel = require("../models/SellerCard");
 
+// @route    GET api/seller-card/me
+// @desc     Get current users Seller Card
+// @access   Private
 const getMySellerCard = async (req, res) => {
   try {
     const sellerCard = await SellerCardModel.findOne({
@@ -28,6 +32,9 @@ const getMySellerCard = async (req, res) => {
   }
 };
 
+// @route    GET api/seller-card/all
+// @desc     Get all sellers cards
+// @access   Public
 const getSellersCards = async (req, res) => {
   try {
     const sellersCards = await SellerCardModel.find({}).populate(
@@ -57,6 +64,9 @@ const getSellersCards = async (req, res) => {
   }
 };
 
+// @route    GET api/seller-card/user/:user_id
+// @desc     Get seller card by user ID
+// @access   Public
 const getSellerCardByUserId = async (req, res) => {
   try {
     const sellerCard = await SellerCardModel.findOne({

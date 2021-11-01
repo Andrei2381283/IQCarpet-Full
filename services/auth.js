@@ -17,6 +17,9 @@ const AvatarModel = require("../models/Avatar");
 // Import Validate
 const { validationResult } = require("express-validator");
 
+// @route    GET api/auth
+// @desc     Get user by token
+// @access   Private
 const getMyProfile = async (req, res) => {
   try {
     const user = await UserModel.findById(req.user.id)
@@ -29,19 +32,19 @@ const getMyProfile = async (req, res) => {
   }
 };
 
+// @route    POST api/auth
+// @desc     Authenticate user & get token
+// @access   Public
 const authLogin = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-
-  // const { email, password } = req.body;
   // Получаем email и login из тела запроса
   // TODO: Исправить поле для проверки login и email на одно поле login или username
   const { email, login, password } = req.body;
 
   try {
-    // let user = await User.findOne({ email });
     // Находим пользователя по email или login из тела запроса,
     // чтобы установить правильность ввода данных
     const user = await UserModel.findOne({
@@ -79,6 +82,9 @@ const authLogin = async (req, res) => {
   }
 };
 
+// @route    POST api/auth/reset-password-send-code
+// @desc     User reset password send code
+// @access   Public
 const resetPasswordSendCode = async (req, res) => {
   try {
     const { email } = req.body;
@@ -129,6 +135,9 @@ const resetPasswordSendCode = async (req, res) => {
   }
 };
 
+// @route    POST api/auth/reset-password-confirm-code
+// @desc     User reset password confirm code
+// @access   Public
 const resetPasswordConfirmCode = async (req, res) => {
   try {
     const { email, code } = req.body;
@@ -148,15 +157,6 @@ const resetPasswordConfirmCode = async (req, res) => {
     // TODO: Сделать шифрование паролей
 
     if (user.emailVerifyCode === code && user.emailVerifyCode !== "") {
-      // await UserModel.updateOne(
-      //   { _id: user._id, email: email },
-      //   {
-      //     $set: {
-      //       emailVerifyCode: ""
-      //     }
-      //   }
-      // );
-
       // Возвращаем Успешный статус 200 OK, Success
       return res
         .status(200)
@@ -196,6 +196,9 @@ const resetPasswordConfirmCode = async (req, res) => {
   }
 };
 
+// @route    POST api/auth/reset-password
+// @desc     User reset password
+// @access   Public
 const resetPassword = async (req, res) => {
   try {
     const { email, code, newPassword } = req.body;
@@ -285,6 +288,9 @@ const resetPassword = async (req, res) => {
   }
 };
 
+// @route    PUT api/auth/settings
+// @desc     Settings profile
+// @access   Private
 const myProfileSettings = async (req, res) => {
   try {
     const user = await UserModel.findOne({ _id: req.user.id });
@@ -353,6 +359,9 @@ const myProfileSettings = async (req, res) => {
   }
 };
 
+// @route    POST api/auth/settings/upload-avatar
+// @desc     Settings profile Upload Avatar
+// @access   Private
 const myProfileSettingsUploadAvatar = async (req, res) => {
   try {
     const avatar = await AvatarModel.findOne({ user: req.user.id });

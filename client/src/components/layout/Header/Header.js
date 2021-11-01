@@ -14,20 +14,9 @@ import "./Header.css";
 const Header = ({ auth: { isAuthenticated, user }, logout }) => {
   const authLinks = (
     <Link className="headerUserMenu" to="/dashboard">
-      {/* <Link to="/profiles">Developers</Link> */}
-      {/* <Link to="/dashboard">
-        <i className="fas fa-user" /> <span className="hide-sm">Dashboard</span>
-      </Link> */}
-      {/* <Link to="/posts">Posts</Link> */}
-      {/* <Link className="headerUserMenu" to="/dashboard"> */}
-        <span className="headerUserName">{user && user.login}</span>
-        <img className="headerUserImage" src="" />
-        <div className="headerUserArrow" src="" />
-      {/* </Link> */}
-      {/* <a onClick={logout} href="#!">
-        <i className="fas fa-sign-out-alt" /> //{" "}
-        <span className="hide-sm">Logout</span>{" "}
-      </a> */}
+      <span className="headerUserName">{user && user.login}</span>
+      <img className="headerUserImage" src="" />
+      <div className="headerUserArrow" src="" />
     </Link>
   );
 
@@ -45,14 +34,6 @@ const Header = ({ auth: { isAuthenticated, user }, logout }) => {
   );
 
   return (
-    // <nav className="navbar bg-dark">
-    //   <h1>
-    //     <Link to="/">
-    //       <i className="fas fa-code" /> DevConnector
-    //     </Link>
-    //   </h1>
-    //   <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
-    // </nav>
     <nav className="header">
       <div className="headerLeftSide">
         <img className="headerLogo" src={iQcarpetLogo} />

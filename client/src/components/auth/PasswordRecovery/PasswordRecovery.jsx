@@ -26,8 +26,13 @@ const PasswordRecovery = ({
     formState: { errors }
   } = hookForm;
   const reghook = (ref, options) => {
-    return {...hookForm.register(ref, options), maxLength: (options.maxLength && (options.maxLength.value || options.maxLength)) || -1};
-  }
+    return {
+      ...hookForm.register(ref, options),
+      maxLength:
+        (options.maxLength && (options.maxLength.value || options.maxLength)) ||
+        -1
+    };
+  };
 
   const codeSended = false;
 
@@ -45,7 +50,6 @@ const PasswordRecovery = ({
   };
 
   const onSubmit = async (e) => {
-    /* e.preventDefault(); */
     console.log("Ok");
     resetPasswordSendCode({
       email
@@ -53,7 +57,6 @@ const PasswordRecovery = ({
   };
 
   const onSubmitCode = async (e) => {
-    /* e.preventDefault(); */
     console.log("Ok");
     resetPasswordConfirmCode(
       { email: dataFormForResetPassword.email, code },
@@ -76,8 +79,8 @@ const PasswordRecovery = ({
           aria-invalid={!!errors.code + ""}
           {...reghook("code", {
             required: authConfirmCode ? "Empty field" : false,
-            maxLength: {value: 4, message: "Code great than 6"},
-            minLength: {value: 4, message: "Code less than 6"},
+            maxLength: { value: 4, message: "Code great than 6" },
+            minLength: { value: 4, message: "Code less than 6" },
             pattern: /^[0-9]+$/i
           })}
           error={errors.code}
@@ -111,7 +114,8 @@ const PasswordRecovery = ({
               required: "Empty field",
               maxLength: 320,
               minLength: 1,
-              pattern: /^[a-z0-9\.\$\%\#\,\-\+\=\_\(\)\{\}\!\"\'\|\;\:\<\>]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i
+              pattern:
+                /^[a-z0-9\.\$\%\#\,\-\+\=\_\(\)\{\}\!\"\'\|\;\:\<\>]+@[a-z0-9]+\.[a-z0-9]+$|^[a-z0-9]+$/i
             })}
             value={email}
             onChange={onChange}
@@ -122,7 +126,9 @@ const PasswordRecovery = ({
           We will send to you a confirmation code
         </span>
         <div className="submitButtonDiv">
-          <button type="submit" className="submitButton">Confirm</button>
+          <button type="submit" className="submitButton">
+            Confirm
+          </button>
         </div>
       </form>
       {authConfirmCode ? formConfirmCode : null}

@@ -11,6 +11,9 @@ const SellerCardModel = require("../models/SellerCard");
 // Import Validate
 const { validationResult } = require("express-validator");
 
+// @route    POST api/users
+// @desc     Register user
+// @access   Public
 const registration = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

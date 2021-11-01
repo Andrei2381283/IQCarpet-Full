@@ -12,6 +12,7 @@ const CarpetSchema = new Schema(
     // formCarpet: { type: Schema.Types.ObjectId, ref: "FormCarpet" },
     // price: { type: String, required: true },
     // photos: [{ type: Schema.Types.ObjectId, ref: "Photos" }]
+    // Temporary Solution
     nameCarpet: { type: String, required: true },
     seller: { type: Schema.Types.ObjectId, ref: "User" },
     workCarpet: { type: String },
