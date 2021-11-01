@@ -26,9 +26,9 @@ IQCarpet-Full - it is a full project with API and Client
 - **npm i**
 - **npm run server**
 
-##### /client
-
 # Client
+
+##### /client
 
 - **npm i**
 - **npm start**
