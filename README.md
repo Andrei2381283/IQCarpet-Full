@@ -11,8 +11,7 @@ IQCarpet-Full - it is a full project with API and Client
 ```js
 {
   "mongoURI": "mongodb+srv://userDBCarpet:<password>@carpetdatabase.c6een.mongodb.net/CarpetDataBase?retryWrites=true&w=majority",
-  "jwtSecret": "secret",
-  "githubToken": "<yoursecrectaccesstoken>"
+  "jwtSecret": "secret"
 }
 ```
 
