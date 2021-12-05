@@ -1,0 +1,5 @@
+{
+  "mongoURI": "mongodb+srv://rootCarpet:rootCarpetPassword@carpetdatabase.c6een.mongodb.net/CarpetDataBase111?retryWrites=true&w=majority",
+  "jwtSecret": "secret",
+  "githubToken": "<yoursecrectaccesstoken>"
+}
