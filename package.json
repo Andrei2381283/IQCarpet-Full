@@ -29,9 +29,5 @@
     "nodemailer": "^6.7.0",
     "normalize-url": "^5.3.0",
     "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "concurrently": "^5.3.0",
-    "nodemon": "^2.0.6"
   }
 }
